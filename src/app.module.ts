@@ -8,6 +8,7 @@ import { UsuarioPermisoModule } from './usuarios_permisos/usuario_permisos.modul
 import { PermisoModule } from './permisos/permisos.module'
 import { EmailCodeModule } from './mail-codes/mail-codes.module'
 import { NotificacionModule } from './notificaciones/notificaciones.module'
+import { ClienteModule } from './clientes/clientes.module';
 
 @Module({
   imports: [
@@ -39,7 +40,14 @@ import { NotificacionModule } from './notificaciones/notificaciones.module'
       },
     }),
 
-    UsuariosModule,RolModule,RolPermisoModule,UsuarioPermisoModule,PermisoModule,EmailCodeModule, NotificacionModule,
+    UsuariosModule,
+    RolModule,
+    RolPermisoModule,
+    UsuarioPermisoModule,
+    PermisoModule,
+    EmailCodeModule, 
+    NotificacionModule, 
+    ClienteModule,
   ],
 })
 export class AppModule {}
