@@ -9,6 +9,7 @@ import { PermisoModule } from './permisos/permisos.module'
 import { EmailCodeModule } from './mail-codes/mail-codes.module'
 import { NotificacionModule } from './notificaciones/notificaciones.module'
 import { ClienteModule } from './clientes/clientes.module';
+import { ProgramaFormacionModule } from './programas-formacion/programas-formacion.module'
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { ClienteModule } from './clientes/clientes.module';
     EmailCodeModule, 
     NotificacionModule, 
     ClienteModule,
+    ProgramaFormacionModule,
   ],
 })
 export class AppModule {}
