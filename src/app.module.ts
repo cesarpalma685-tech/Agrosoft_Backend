@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { RolModule} from './roles/roles.module'
+import { RolPermisoModule } from './rol_permisos/rol_permisos.module'
 
 @Module({
   imports: [
@@ -34,7 +35,7 @@ import { RolModule} from './roles/roles.module'
       },
     }),
 
-    UsuariosModule,RolModule,
+    UsuariosModule,RolModule,RolPermisoModule ,
   ],
 })
 export class AppModule {}
