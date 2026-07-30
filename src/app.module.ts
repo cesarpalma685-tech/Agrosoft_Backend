@@ -6,6 +6,7 @@ import { RolModule} from './roles/roles.module'
 import { RolPermisoModule } from './rol_permisos/rol_permisos.module'
 import { UsuarioPermisoModule } from './usuarios_permisos/usuario_permisos.module'
 import { PermisoModule } from './permisos/permisos.module'
+import { EmailCodeModule } from './mail-codes/mail-codes.module'
 
 @Module({
   imports: [
@@ -37,7 +38,7 @@ import { PermisoModule } from './permisos/permisos.module'
       },
     }),
 
-    UsuariosModule,RolModule,RolPermisoModule,UsuarioPermisoModule,PermisoModule,
+    UsuariosModule,RolModule,RolPermisoModule,UsuarioPermisoModule,PermisoModule,EmailCodeModule,
   ],
 })
 export class AppModule {}
