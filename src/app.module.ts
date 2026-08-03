@@ -7,6 +7,10 @@ import { WikiTipoEpaModule } from './wiki-tipo-epa/wiki-tipo-epa.module';
 import { TipoCultivoWikiModule } from './tipo-cultivo-wiki/tipo-cultivo-wiki.module';
 import { EpaModule } from './epa/epa.module';
 import { CultivoModule } from './cultivo/cultivo.module';
+import { CultivoHistorialModule } from './cultivo-historial/cultivo-historial.module';
+import { ActividadModule } from './actividad/actividad.module';
+import { LoteProduccionModule } from './lote-produccion/lote-produccion.module';
+import { MovimientoProduccionModule } from './movimiento-produccion/movimiento-produccion.module';
 
 @Module({
   imports: [
@@ -28,6 +32,10 @@ import { CultivoModule } from './cultivo/cultivo.module';
     TipoCultivoWikiModule,
     EpaModule,
     CultivoModule,
+    CultivoHistorialModule,
+    ActividadModule,
+    LoteProduccionModule,
+    MovimientoProduccionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
