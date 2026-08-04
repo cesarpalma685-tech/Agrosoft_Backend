@@ -3,6 +3,8 @@ import { InventarioModule } from './inventario/inventario.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ComercialModule } from './comercial/comercial.module';
+import { IdentidadModule } from './identidad/identidad.module';
+import { FormaciónModule } from './formación/formación.module';
 @Module({
   imports:[
     ConfigModule.forRoot(),
@@ -17,7 +19,9 @@ import { ComercialModule } from './comercial/comercial.module';
       synchronize: true,
     }),
     InventarioModule,
-    ComercialModule
+    ComercialModule,
+    IdentidadModule,
+    FormaciónModule
   ],
   controllers: [],
   providers: [],

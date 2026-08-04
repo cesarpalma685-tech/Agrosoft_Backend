@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Post, Param, Put, Delete, ParseIntPipe 
 } from '@nestjs/common';
-import { CrearInsumoUseCase } from '../../aplication/use-cases/crear-insumo.use-case';
-import { CrearInsumoDto } from '../../aplication/dto/crear-insumo.dto';
-import { ListarInsumosUseCase } from '../../aplication/use-cases/listar-insumos.use-case';
-import { ObtenerInsumoPorIdUseCase } from '../../aplication/use-cases/obtener-insumo.use-case';
-import { ActualizarInsumoUseCase } from '../../aplication/use-cases/actualizar-insumo.use-case';
-import { EliminarInsumoUseCase } from '../../aplication/use-cases/eliminar-insumo.use-case';
+import { CrearInsumoUseCase } from '../../application/use-cases/crear-insumo.use-case';
+import { CrearInsumoDto } from '../../application/dto/crear-insumo.dto';
+import { ListarInsumosUseCase } from '../../application/use-cases/listar-insumos.use-case';
+import { ObtenerInsumoPorIdUseCase } from '../../application/use-cases/obtener-insumo.use-case';
+import { ActualizarInsumoUseCase } from '../../application/use-cases/actualizar-insumo.use-case';
+import { EliminarInsumoUseCase } from '../../application/use-cases/eliminar-insumo.use-case';
 @Controller('insumos')
 export class InsumoController {
   constructor(

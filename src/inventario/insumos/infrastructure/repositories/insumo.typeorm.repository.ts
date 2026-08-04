@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InsumoOrmEntity } from "../persistence/insumo.orm-entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { InsumoRepositoryPort } from "../../aplication/ports/insumo.repository.port";
+import { InsumoRepositoryPort } from "../../application/ports/insumo.repository.port";
 import { Insumo } from "../../domain/entities/crear-insumo.dto";
 
 @Injectable()
