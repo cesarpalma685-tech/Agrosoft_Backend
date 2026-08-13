@@ -10,6 +10,7 @@ import { EmailCodeModule } from './mail-codes/mail-codes.module'
 import { NotificacionModule } from './notificaciones/notificaciones.module'
 import { ClienteModule } from './clientes/clientes.module';
 import { ProgramaFormacionModule } from './programas-formacion/programas-formacion.module'
+import { TiposFormacionModule } from './tipos-formacion/tipos-formacion.module'
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { ProgramaFormacionModule } from './programas-formacion/programas-formaci
     NotificacionModule, 
     ClienteModule,
     ProgramaFormacionModule,
+    TiposFormacionModule,
   ],
 })
 export class AppModule {}
