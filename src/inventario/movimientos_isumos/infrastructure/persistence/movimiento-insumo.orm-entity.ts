@@ -11,6 +11,7 @@ import {
 import { TipoMovimientoInsumoEnum } from '../../domain/enum/tipo-movimiento-insumo.enum';
 import { AlmacenOrmEntity } from 'src/inventario/almacenes/infrastructure/persistence/almacen.orm-entity';
 import { InsumoOrmEntity } from 'src/inventario/insumos/infrastructure/persistence/insumo.orm-entity';
+import { UsuarioOrmEntity } from 'src/identidad/usuarios/infrastructure/persistence/usuario.orm-entity';
 
 
 @Entity('movimientos_insumos')
@@ -81,4 +82,10 @@ export class MovimientoInsumoOrmEntity {
   @ManyToOne(() => InsumoOrmEntity, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'insumo_id' })
   insumo!: InsumoOrmEntity;
+
+  @ManyToOne(() => UsuarioOrmEntity, (usuario) => usuario.movimientosInsumos, {
+    onDelete: 'RESTRICT', // o 'NO ACTION' / 'SET NULL' según tu lógica
+  })
+  @JoinColumn({ name: 'usuario_id' })
+  usuario!: UsuarioOrmEntity;
 }

@@ -1,4 +1,6 @@
-import {Entity,PrimaryGeneratedColumn,Column,CreateDateColumn,UpdateDateColumn,DeleteDateColumn,
+import { MovimientoInsumoOrmEntity } from 'src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity';
+import { MovimientoProduccionOrmEntity } from 'src/producción/movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity';
+import {Entity,PrimaryGeneratedColumn,Column,CreateDateColumn,UpdateDateColumn,DeleteDateColumn, OneToMany,
 } from 'typeorm';
 
 @Entity('usuarios')
@@ -47,4 +49,10 @@ export class UsuarioOrmEntity {
 
   @DeleteDateColumn()
   deleted_at!: Date;
+
+  @OneToMany(() => MovimientoInsumoOrmEntity, (movimiento) => movimiento.usuario)
+  movimientosInsumos!: MovimientoInsumoOrmEntity[];
+
+  @OneToMany(()=>MovimientoProduccionOrmEntity,(movimiento)=>movimiento.usuario)
+  movimientosProduccion!:MovimientoProduccionOrmEntity[];
 }
