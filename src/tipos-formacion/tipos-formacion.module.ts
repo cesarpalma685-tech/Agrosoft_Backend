@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TipoFormacionOrmEntity } from './infrastructure/persistence/tipo-formacion.orm-entity';
-import { TipoFormacionTypeOrmRepository } from './infrastructure/persistence/tipo-formacion-typeorm.repository';
-import { TIPO_FORMACION_REPOSITORY } from './domain/tipo-formacion.repository';
-import { TiposFormacionController } from './infrastructure/http/tipos-formacion.controller';
-import { CrearTipoFormacionUseCase } from './application/use-cases/crear-tipo-formacion.usecase';
-import { ActualizarTipoFormacionUseCase } from './application/use-cases/actualizar-tipo-formacion.usecase';
-import { EliminarTipoFormacionUseCase } from './application/use-cases/eliminar-tipo-formacion.usecase';
+import { TipoFormacionOrmEntity } from '../../src/tipos-formacion/infraestructure/persistence/tipo-formacion.orm-entity';
+import { TipoFormacionTypeOrmRepository } from '../../src/tipos-formacion/infraestructure/repositories/tipo-formacion-typeorm.repository';
+import { TIPO_FORMACION_REPOSITORY } from './aplication/ports/tipo-formacion.repository';
+import { TiposFormacionController } from '../../src/tipos-formacion/infraestructure/controllers/tipos-formacion.controller';
+
+import { CrearTipoFormacionUseCase } from './aplication/use-cases/crear-tipo-formacion.usecase';
+import { ActualizarTipoFormacionUseCase } from './aplication/use-cases/actualizar-tipo-formacion.usecase';
+import { EliminarTipoFormacionUseCase } from './aplication/use-cases/eliminar-tipo-formacion.usecase';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TipoFormacionOrmEntity])],

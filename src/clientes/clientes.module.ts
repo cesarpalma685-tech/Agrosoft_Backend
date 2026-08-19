@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { ClienteOrmEntity } from './infrastructure/persistence/cliente.orm-entity';
-import { ClienteTypeOrmRepository } from './infrastructure/persistence/cliente-typeorm.repository';
+import { ClienteOrmEntity } from '../../src/clientes/infraestructure/persistence/cliente.orm-entity';
+import { ClienteTypeOrmRepository } from '../clientes/infraestructure/repositories/cliente-typeorm.repository';
 
-import { ClienteRepository } from './domain/cliente.repository';
+import { ClienteRepository } from '../../src/clientes/aplication/ports/cliente.repository';
 
-import { ClientesController } from './infrastructure/clientes.controller';
+import { ClientesController } from '../../src/clientes/infraestructure/controllers/clientes.controller';
 
-import { CrearClienteUseCase } from './application/use-cases/crear-cliente.usecase';
-import { ActualizarClienteUseCase } from './application/use-cases/actualizar-cliente.usecase';
-import { EliminarClienteUseCase } from './application/use-cases/eliminar-cliente.usecase';
+import { CrearClienteUseCase } from '../../src/clientes/aplication/use-cases/crear-cliente.usecase';
+import { ActualizarClienteUseCase } from '../../src/clientes/aplication/use-cases/actualizar-cliente.usecase';
+import { EliminarClienteUseCase } from '../../src/clientes/aplication/use-cases/eliminar-cliente.usecase';
 
 @Module({
   imports: [

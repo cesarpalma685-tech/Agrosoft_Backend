@@ -3,8 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { RolModule} from './roles/roles.module'
-import { RolPermisoModule } from './rol_permisos/rol_permisos.module'
-import { UsuarioPermisoModule } from './usuarios_permisos/usuario_permisos.module'
+import { RolPermisoModule } from './rol-permisos/rol-permisos.module'
+import { UsuarioPermisoModule } from './usuarios-permisos/usuarios-permisos.module'
 import { PermisoModule } from './permisos/permisos.module'
 import { EmailCodeModule } from './mail-codes/mail-codes.module'
 import { NotificacionModule } from './notificaciones/notificaciones.module'

@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { EmailCodeOrmEntity } from './infrastructure/persistence/mail-codes.orm-entity';
-import { EmailCodeTypeOrmRepository } from './infrastructure/persistence/mail-codes-typeorm.repository';
+import { EmailCodeOrmEntity } from './infraestructure/persistence/mail-codes.orm-entity';
+import { EmailCodeTypeOrmRepository } from './infraestructure/repositories/mail-codes-typeorm.repository';
 
-import { EmailCodeRepository } from './domain/mail-codes.repository';
+import { EmailCodeRepository } from './aplication/ports/mail-codes.repository';
 
-import { EmailCodesController } from './infrastructure/http/mail-codes.controller';
+import { EmailCodesController } from './infraestructure/controllers/mail-codes.controller';
 
-import { CrearEmailCodeUseCase } from './application/use-cases/crear-mail-codes.usecase';
-import { ActualizarEmailCodeUseCase } from './application/use-cases/actualizar-mail-codes.usecase';
-import { EliminarEmailCodeUseCase } from './application/use-cases/eliminar-mail-codes.usecase';
+import { CrearEmailCodeUseCase } from './aplication/use-cases/crear-mail-codes.usecase';
+import { ActualizarEmailCodeUseCase } from './aplication/use-cases/actualizar-mail-codes.usecase';
+import { EliminarEmailCodeUseCase } from './aplication/use-cases/eliminar-mail-codes.usecase';
 
 @Module({
 imports: [
