@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn,} from 'typeorm';
+import { UsuarioOrmEntity } from '../../../usuarios/infraestructure/persistence/usuario.orm-entity';
 
 @Entity('email_codes')
 export class EmailCodeOrmEntity {
@@ -22,4 +23,8 @@ usedAt!: Date | null;
 
 @CreateDateColumn()
 created_at!: Date;
+
+@ManyToOne(() => UsuarioOrmEntity, { onDelete: 'CASCADE' })
+@JoinColumn({ name: 'usuarioId' })
+usuario!: UsuarioOrmEntity;
 }
