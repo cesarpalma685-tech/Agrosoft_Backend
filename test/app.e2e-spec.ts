@@ -23,10 +23,16 @@ describe('AppController (e2e)', () => {
       .expect('Hello World!');
   });
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/maicol_dev
 
   afterEach(async () => {
     await app.close();
   });
+<<<<<<< HEAD
 >>>>>>> origin/cesar_dev
+=======
+>>>>>>> origin/maicol_dev
 });

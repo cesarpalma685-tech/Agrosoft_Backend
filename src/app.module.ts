@@ -5,7 +5,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ComercialModule } from './comercial/comercial.module';
 import { IdentidadModule } from './identidad/identidad.module';
 import { FormaciónModule } from './formación/formación.module';
-import { LoteProduccionModule } from './producción/lote-produccion/lote-produccion.module';
 import { ProducciónModule } from './producción/producción.module';
 import { WikiAgronómiaModule } from './wiki-agronómia/wiki-agronómia.module';
 @Module({
@@ -26,7 +25,7 @@ import { WikiAgronómiaModule } from './wiki-agronómia/wiki-agronómia.module';
     IdentidadModule,
     FormaciónModule,
     ProducciónModule,
-    WikiAgronómiaModule
+    WikiAgronómiaModule,
   ],
   controllers: [],
   providers: [],
