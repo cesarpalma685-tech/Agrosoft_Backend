@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UsuarioPermisoRepository } from '../../domain/usuarios_permisos.repository';
+import { UsuarioPermisoRepository } from '../ports/usuarios_permisos.repository';
 
 @Injectable()
 export class EliminarUsuarioPermisoUseCase {

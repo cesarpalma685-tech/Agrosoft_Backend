@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { ClienteRepository } from '../../domain/cliente.repository';
+import { ClienteRepository } from '../ports/cliente.repository';
 
 @Injectable()
 export class EliminarClienteUseCase {

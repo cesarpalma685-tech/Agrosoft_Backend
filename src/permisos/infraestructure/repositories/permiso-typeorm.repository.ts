@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Permiso } from '../../../../src/permisos/domain/entities/permisos.entity';
+import { Permiso } from '../../domain/entities/permisos.entity';
 import { PermisoRepository } from '../../aplication/ports/permisos.repository';
-import { PermisoOrmEntity } from '../../../../src/permisos/infraestructure/persistence/permiso.orm-entity';
+import { PermisoOrmEntity } from '../../infraestructure/persistence/permiso.orm-entity';
 
 @Injectable()
 export class PermisoTypeOrmRepository extends PermisoRepository {

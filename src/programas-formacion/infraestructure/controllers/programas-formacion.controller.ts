@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Param, ParseIntPipe, Patch, Post,} from '@nestjs/common';
 
-import { CrearProgramaFormacionUseCase } from '../../../../src/programas-formacion/aplication/use-cases/crear-programa-formacion.usecase';
-import { ActualizarProgramaFormacionUseCase } from '../../../../src/programas-formacion/aplication/use-cases/actualizar-programa-formacion.usecase';
-import { EliminarProgramaFormacionUseCase } from '../../../../src/programas-formacion/aplication/use-cases/eliminar-programa-formacion.usecase';
+import { CrearProgramaFormacionUseCase } from '../../aplication/use-cases/crear-programa-formacion.usecase';
+import { ActualizarProgramaFormacionUseCase } from '../../aplication/use-cases/actualizar-programa-formacion.usecase';
+import { EliminarProgramaFormacionUseCase } from '../../aplication/use-cases/eliminar-programa-formacion.usecase';
 
-import { CreateProgramaFormacionDto } from '../../../../src/programas-formacion/aplication/dto/create-programa-formacion.dto';
-import { UpdateProgramaFormacionDto } from '../../../../src/programas-formacion/aplication/dto/update-programa-formacion.dto';
+import { CreateProgramaFormacionDto } from '../../aplication/dto/create-programa-formacion.dto';
+import { UpdateProgramaFormacionDto } from '../../aplication/dto/update-programa-formacion.dto';
 
 
 @Controller('programas-formacion')

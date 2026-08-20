@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TipoFormacionOrmEntity } from '../../src/tipos-formacion/infraestructure/persistence/tipo-formacion.orm-entity';
-import { TipoFormacionTypeOrmRepository } from '../../src/tipos-formacion/infraestructure/repositories/tipo-formacion-typeorm.repository';
+import { TipoFormacionOrmEntity } from './infraestructure/persistence/tipo-formacion.orm-entity';
+import { TipoFormacionTypeOrmRepository } from './infraestructure/repositories/tipo-formacion-typeorm.repository';
 import { TIPO_FORMACION_REPOSITORY } from './aplication/ports/tipo-formacion.repository';
-import { TiposFormacionController } from '../../src/tipos-formacion/infraestructure/controllers/tipos-formacion.controller';
+import { TiposFormacionController } from './infraestructure/controllers/tipos-formacion.controller';
 
 import { CrearTipoFormacionUseCase } from './aplication/use-cases/crear-tipo-formacion.usecase';
 import { ActualizarTipoFormacionUseCase } from './aplication/use-cases/actualizar-tipo-formacion.usecase';

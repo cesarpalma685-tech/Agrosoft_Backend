@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { UsuarioPermisoOrmEntity } from '../../src/usuarios-permisos/infraestructure/persistence/usuario_permisos.orm-entity';
-import { UsuarioPermisoTypeOrmRepository } from '../../src/usuarios-permisos/infraestructure/repositories/usuario_permisos-typeorm.repository';
+import { UsuarioPermisoOrmEntity } from './infraestructure/persistence/usuario_permisos.orm-entity';
+import { UsuarioPermisoTypeOrmRepository } from './infraestructure/repositories/usuario_permisos-typeorm.repository';
 
 import { UsuarioPermisoRepository } from './aplication/ports/usuarios_permisos.repository';
 
-import { UsuarioPermisosController } from '../../src/usuarios-permisos/infraestructure/controllers/usuario_permisos.controller';
+import { UsuarioPermisosController } from './infraestructure/controllers/usuario_permisos.controller';
 
 import { CrearUsuarioPermisoUseCase } from './aplication/use-cases/crear-usuario_permisos.usecase';
 import { ActualizarUsuarioPermisoUseCase } from './aplication/use-cases/actualizar-usuario_permisos.usecase';

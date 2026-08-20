@@ -8,12 +8,12 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { CrearPermisoUseCase } from '../../../../src/permisos/aplication/use-cases/crear-permiso.usecase';
-import { ActualizarPermisoUseCase } from '../../../../src/permisos/aplication/use-cases/actualizar-permiso.usecase';
-import { EliminarPermisoUseCase } from '../../../../src/permisos/aplication/use-cases/eliminar-permiso.usecase';
+import { CrearPermisoUseCase } from '../../aplication/use-cases/crear-permiso.usecase';
+import { ActualizarPermisoUseCase } from '../../aplication/use-cases/actualizar-permiso.usecase';
+import { EliminarPermisoUseCase } from '../../aplication/use-cases/eliminar-permiso.usecase';
 
-import { CreatePermisoDto } from '../../../../src/permisos/aplication/dto/create-permiso.dto';
-import { UpdatePermisoDto } from '../../../../src/permisos/aplication/dto/update-permiso.dto'
+import { CreatePermisoDto } from '../../aplication/dto/create-permiso.dto';
+import { UpdatePermisoDto } from '../../aplication/dto/update-permiso.dto'
 
 
 

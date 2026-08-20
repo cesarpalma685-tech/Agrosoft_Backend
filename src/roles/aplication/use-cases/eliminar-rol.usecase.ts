@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { RolRepository } from '../../domain/rol.repository';
-
+import { RolRepository } from '../../aplication/ports/rol.repository';
 
 @Injectable()
 export class EliminarRolUseCase {

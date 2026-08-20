@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Cliente } from '../../domain/cliente.entity';
-import { ClienteRepository } from '../../domain/cliente.repository';
+import { Cliente } from '../../domain/entities/cliente.entity';
+import { ClienteRepository } from '../ports/cliente.repository';
 
 export interface CrearClienteInput {
   nombre: string;

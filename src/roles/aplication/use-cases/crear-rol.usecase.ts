@@ -1,6 +1,6 @@
 import { Injectable, ConflictException } from '@nestjs/common';
-import { RolRepository } from '../../domain/rol.repository';
-import { Rol } from '../../domain/rol.entity';
+import { RolRepository } from '../../aplication/ports/rol.repository';
+import { Rol } from '../../domain/entities/rol.entity';
 
 export interface CrearRolInput {
   nombre: string;

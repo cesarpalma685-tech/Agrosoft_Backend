@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { RolPermisoOrmEntity } from '../../src/rol-permisos/infraestructure/persistence/rol_permisos.orm-entity';
-import { RolPermisoTypeOrmRepository } from '../../src/rol-permisos/infraestructure/repositories/rol_permisos-typeorm.repository';
+import { RolPermisoOrmEntity } from './infraestructure/persistence/rol_permisos.orm-entity';
+import { RolPermisoTypeOrmRepository } from './infraestructure/repositories/rol_permisos-typeorm.repository';
 import { RolPermisoRepository } from './aplication/ports/rol_permisos.repository';
 
 @Module({

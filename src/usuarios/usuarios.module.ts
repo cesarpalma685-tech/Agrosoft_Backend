@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsuarioOrmEntity } from '../../src/usuarios/infraestructure/persistence/usuario.orm-entity';
-import { UsuarioTypeOrmRepository } from '../../src/usuarios/infraestructure/repositories/usuario-typeorm.repository';
+import { UsuarioOrmEntity } from './infraestructure/persistence/usuario.orm-entity';
+import { UsuarioTypeOrmRepository } from './infraestructure/repositories/usuario-typeorm.repository';
 import { UsuarioRepository } from './aplication/ports/usuario.repository';
-import { UsuariosController } from '../../src/usuarios/infraestructure/controllers/usuarios.controller';
-import { CrearUsuarioUseCase } from '../../src/usuarios/aplication/use-cases/crear-usuario.usecase';
-import { ActualizarUsuarioUseCase } from '../../src/usuarios/aplication/use-cases/actualizar-usuario.usecase';
-import { EliminarUsuarioUseCase } from '../../src/usuarios/aplication/use-cases/eliminar-usuario.usecase';
+import { UsuariosController } from './infraestructure/controllers/usuarios.controller';
+import { CrearUsuarioUseCase } from './aplication/use-cases/crear-usuario.usecase';
+import { ActualizarUsuarioUseCase } from './aplication/use-cases/actualizar-usuario.usecase';
+import { EliminarUsuarioUseCase } from './aplication/use-cases/eliminar-usuario.usecase';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UsuarioOrmEntity])],

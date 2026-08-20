@@ -1,6 +1,6 @@
 import { Injectable, ConflictException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { UsuarioRepository } from '../../domain/usuario.repository';
+import { UsuarioRepository } from '../ports/usuario.repository';
 import { Usuario } from '../../domain/entities/usuario.entity';
 
 export interface CrearUsuarioInput {

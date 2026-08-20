@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Param, ParseIntPipe, Patch, Post,} from '@nestjs/common';
 
-import { CrearNotificacionUseCase } from '../../../../src/notificaciones/aplication/use-cases/crear-notificaciones.usecase';
-import { ActualizarNotificacionUseCase } from '../../../../src/notificaciones/aplication/use-cases/actualizar-notificaciones.usecase';
-import { EliminarNotificacionUseCase } from '../../../../src/notificaciones/aplication/use-cases/eliminar-notificaciones.usecase';
+import { CrearNotificacionUseCase } from '../../aplication/use-cases/crear-notificaciones.usecase';
+import { ActualizarNotificacionUseCase } from '../../aplication/use-cases/actualizar-notificaciones.usecase';
+import { EliminarNotificacionUseCase } from '../../aplication/use-cases/eliminar-notificaciones.usecase';
 
-import { CreateNotificacionDto } from '../../../../src/notificaciones/aplication/dto/create-notificaciones.dto';
-import { UpdateNotificacionDto } from '../../../../src/notificaciones/aplication/dto/update-notificaciones.dto';
+import { CreateNotificacionDto } from '../../aplication/dto/create-notificaciones.dto';
+import { UpdateNotificacionDto } from '../../aplication/dto/update-notificaciones.dto';
 
 @Controller('notificaciones')
 export class NotificacionesController {

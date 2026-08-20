@@ -1,4 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { RolOrmEntity } from '../../../roles/infraestructure/persistence/rol.orm-entity';
+import { ProgramaFormacionOrmEntity } from '../../../programas-formacion/infraestructure/persistence/programa-formacion.orm-entity';
 
 @Entity('usuarios')
 export class UsuarioOrmEntity {
@@ -47,4 +49,13 @@ export class UsuarioOrmEntity {
   @DeleteDateColumn()
   deleted_at!: Date;
 
+  @ManyToOne(() => RolOrmEntity)
+  @JoinColumn({ name: 'rolId' })
+  rol!: RolOrmEntity;
+
+  @ManyToOne(() => ProgramaFormacionOrmEntity )
+  @JoinColumn({ name: 'programaFormacionId' })
+  programaFormacion!: ProgramaFormacionOrmEntity;
+
+  
 }

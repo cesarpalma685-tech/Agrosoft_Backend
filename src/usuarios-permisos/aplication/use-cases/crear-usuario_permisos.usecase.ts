@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { UsuarioPermiso } from '../../domain/usuarios_permisos.entity';
-import { UsuarioPermisoRepository } from '../../domain/usuarios_permisos.repository';
+import { UsuarioPermiso } from '../../domain/entities/usuarios_permisos.entity';
+import { UsuarioPermisoRepository } from '../ports/usuarios_permisos.repository';
 
 export interface CrearUsuarioPermisoInput {
   usuarioId: number;

@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn,} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany,} from 'typeorm';
+import { RolPermisoOrmEntity } from '../../../rol-permisos/infraestructure/persistence/rol_permisos.orm-entity';
+import { UsuarioOrmEntity } from '../../../usuarios/infraestructure/persistence/usuario.orm-entity';
 
 @Entity('roles')
 export class RolOrmEntity {
@@ -38,4 +40,12 @@ export class RolOrmEntity {
   @DeleteDateColumn()
   deleted_at!: Date | null;
 
+
+  @OneToMany(() => UsuarioOrmEntity, (usuario) => usuario.rol)
+  usuarios!: UsuarioOrmEntity[];
+
+  @OneToMany(() => RolPermisoOrmEntity, (rp) => rp.rol)
+  rolPermisos!: RolPermisoOrmEntity[];
+
+  
 }
