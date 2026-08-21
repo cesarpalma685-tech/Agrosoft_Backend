@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { FormacionModule } from './formacion/formacion.module';
+import { IdentidadModule } from './identidad/identidad.module';
 
 @Module({
   imports:[
@@ -14,7 +16,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true,
-    }),],
+    }),
+    FormacionModule,
+    IdentidadModule,],
   controllers: [],
   providers: [],
 })
