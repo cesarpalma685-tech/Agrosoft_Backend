@@ -1,4 +1,5 @@
 services:
+<<<<<<< HEAD
   db:
     image: postgres:16
     restart: always
@@ -10,3 +11,31 @@ services:
     container_name: agrosoft_v2
     volumes:
       - ./postgres:/var/lib/postgresql/data
+=======
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: agrosoft_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+>>>>>>> origin/cesar_dev
