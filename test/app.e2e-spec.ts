@@ -24,15 +24,21 @@ describe('AppController (e2e)', () => {
   });
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> origin/maicol_dev
+=======
+>>>>>>> origin/yonatan_dev
 
   afterEach(async () => {
     await app.close();
   });
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/cesar_dev
 =======
 >>>>>>> origin/maicol_dev
+=======
+>>>>>>> origin/yonatan_dev
 });

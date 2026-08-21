@@ -1,4 +1,5 @@
 services:
+<<<<<<< HEAD
   db:
     image: postgres:16
     restart: always
@@ -10,3 +11,20 @@ services:
     container_name: agrosoft_v2
     volumes:
       - ./postgres:/var/lib/postgresql/data
+=======
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: postgres_lotes
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: agro_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+>>>>>>> origin/yonatan_dev
