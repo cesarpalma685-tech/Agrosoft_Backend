@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import { AppModule } from '../src/app.module';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,4 +19,5 @@ async function bootstrap() {
   await app.listen(port);
   console.log(`Servidor corriendo en http://localhost:${port}`);
 }
+
 bootstrap();
