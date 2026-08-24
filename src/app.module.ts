@@ -5,6 +5,9 @@ import { FormacionModule } from './formacion/formacion.module';
 import { IdentidadModule } from './identidad/identidad.module';
 import { ProduccionModule } from './produccion/produccion.module';
 import { WikiAgronomiaModule } from './wiki_agronomia/wiki_agronomia.module';
+import { CatalogosModule } from './catalogos/catalogos.module';
+import { IotModule } from './iot/iot.module';
+import { TerritorioModule } from './territorio/territorio.module';
 
 @Module({
   imports:[
@@ -22,7 +25,11 @@ import { WikiAgronomiaModule } from './wiki_agronomia/wiki_agronomia.module';
     FormacionModule,
     IdentidadModule,
     ProduccionModule,
-    WikiAgronomiaModule,],
+    WikiAgronomiaModule,
+    CatalogosModule,
+    IotModule,
+    TerritorioModule
+  ],
   controllers: [],
   providers: [],
 })

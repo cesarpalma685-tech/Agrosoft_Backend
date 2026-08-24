@@ -1,0 +1,16 @@
+import { Injectable } from '@nestjs/common';
+import { ProductosAgroDto } from '../dto/crear-productos_agro.dto';
+import { ProductosAgroRepositoryPort } from '../ports/productos_agro-repository.port';
+
+@Injectable()
+export class CrearProductosAgroUseCase {
+  constructor(
+    private readonly repository: ProductosAgroRepositoryPort,
+  ) {}
+
+  async ejecutar(
+    producto: ProductosAgroDto,
+  ): Promise<ProductosAgroDto> {
+    return this.repository.crear(producto);
+  }
+}
