@@ -5,10 +5,14 @@
     "resolvePackageJsonExports": true,
     "esModuleInterop": true,
 <<<<<<< HEAD
+<<<<<<< HEAD
     "isolatedModules": false,
 =======
     "isolatedModules": true,
 >>>>>>> origin/yonatan_dev
+=======
+    "isolatedModules": true,
+>>>>>>> origin/maicol_dev
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -18,9 +22,13 @@
     "sourceMap": true,
     "outDir": "./dist",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "baseUrl": "./",
 =======
 >>>>>>> origin/yonatan_dev
+=======
+    "baseUrl": "./",
+>>>>>>> origin/maicol_dev
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,

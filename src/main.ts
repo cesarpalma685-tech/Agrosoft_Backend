@@ -7,9 +7,15 @@ async function bootstrap() {
 
   app.useGlobalPipes(
     new ValidationPipe({
+<<<<<<< HEAD
       whitelist: true,          // elimina campos no declarados en el DTO
       forbidNonWhitelisted: true, // rechaza el request si vienen campos extra
       transform: true,           // convierte tipos automáticamente (ej. "5" → 5)
+=======
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+>>>>>>> origin/maicol_dev
     }),
   );
 
@@ -19,4 +25,9 @@ async function bootstrap() {
   await app.listen(port);
   console.log(`Servidor corriendo en http://localhost:${port}`);
 }
+<<<<<<< HEAD
 bootstrap();
+=======
+
+bootstrap();
+>>>>>>> origin/maicol_dev
