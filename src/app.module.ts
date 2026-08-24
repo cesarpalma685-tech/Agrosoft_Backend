@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { FormacionModule } from './formacion/formacion.module';
 import { IdentidadModule } from './identidad/identidad.module';
 import { ProduccionModule } from './produccion/produccion.module';
 import { WikiAgronomiaModule } from './wiki_agronomia/wiki_agronomia.module';
-import { CatalogosModule } from './catalogos/catalogos.module';
 import { IotModule } from './iot/iot.module';
 import { TerritorioModule } from './territorio/territorio.module';
+import { ComercialModule } from './comercial/comercial.module';
+import { InventarioModule } from './inventario/inventario.module';
+import { FormacionModule } from './formacion/formacion.module';
+import { CatalogosModule } from './catalogos/catalogos.module';
 
 @Module({
   imports:[
@@ -28,7 +30,9 @@ import { TerritorioModule } from './territorio/territorio.module';
     WikiAgronomiaModule,
     CatalogosModule,
     IotModule,
-    TerritorioModule
+    TerritorioModule,
+    ComercialModule,
+    InventarioModule
   ],
   controllers: [],
   providers: [],
