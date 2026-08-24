@@ -1,11 +1,11 @@
-export class ActividadInsumoUso {
+export class ActividadInsumo {
   id!: number;
   actividadId!: number;
   insumoId!: number;
-  cantidadUso!: number;
-  costoUnitarioUso!: number;
+  cantidadUsada!: number;
+  unidad!: string;
+  costoUnitario!: number;
   costoTotal!: number;
-  movimientoInsumoId!: number;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;

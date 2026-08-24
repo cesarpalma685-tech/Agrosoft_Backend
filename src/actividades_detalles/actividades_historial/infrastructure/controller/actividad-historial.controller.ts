@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { CrearActividadHistorialUseCase } from '../../application/use-cases/registrar-historial.use-case';
 import { ListarActividadesHistorialUseCase } from '../../application/use-cases/listar-historial-por-actividad.use-case';
 import { CrearActividadHistorialDto } from '../../application/dto/actividad_historial.dto';

@@ -1,7 +1,13 @@
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsOptional, Min } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Min,
+} from 'class-validator';
 
-export class CrearActividadInsumoUsoDto {
+export class CrearActividadInsumoDto {
   @Type(() => Number)
   @IsNumber()
   @IsOptional()
@@ -15,15 +21,14 @@ export class CrearActividadInsumoUsoDto {
   @Type(() => Number)
   @IsNumber()
   @Min(0.01)
-  cantidadUso!: number;
+  cantidadUsada!: number;
+
+  @IsString()
+  @IsNotEmpty()
+  unidad!: string;
 
   @Type(() => Number)
   @IsNumber()
   @Min(0)
-  costoUnitarioUso!: number;
-
-  @Type(() => Number)
-  @IsNumber()
-  @IsNotEmpty()
-  movimientoInsumoId!: number;
+  costoUnitario!: number;
 }

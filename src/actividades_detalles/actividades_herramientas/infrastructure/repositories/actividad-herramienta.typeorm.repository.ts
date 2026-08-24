@@ -25,9 +25,8 @@ export class ActividadHerramientaTypeOrmRepository extends ActividadHerramientaR
     return saved;
   }
 
-  async findByActividadId(actividadId: number): Promise<ActividadHerramienta[]> {
+  async findAll(): Promise<ActividadHerramienta[]> {
     const entities = await this.actividadHerramientaRepository.find({
-      where: { actividadId },
       order: {
         createdAt: 'DESC',
       },

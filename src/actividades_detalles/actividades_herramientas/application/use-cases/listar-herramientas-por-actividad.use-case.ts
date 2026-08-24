@@ -3,12 +3,12 @@ import { ActividadHerramientaRepositoryPort } from '../ports/actividad-herramien
 import { ActividadHerramienta } from '../../domain/entities/actividad-herramienta.entity';
 
 @Injectable()
-export class ListarHerramientasPorActividadUseCase {
+export class ListarActividadHerramientasUseCase {
   constructor(
     private readonly actividadHerramientaRepository: ActividadHerramientaRepositoryPort,
   ) {}
 
-  async execute(actividadId: number): Promise<ActividadHerramienta[]> {
-    return await this.actividadHerramientaRepository.findByActividadId(actividadId);
+  async execute(): Promise<ActividadHerramienta[]> {
+    return await this.actividadHerramientaRepository.findAll();
   }
 }

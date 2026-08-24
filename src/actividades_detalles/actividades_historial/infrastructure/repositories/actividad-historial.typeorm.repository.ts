@@ -16,22 +16,13 @@ export class ActividadHistorialTypeOrmRepository extends ActividadHistorialRepos
   }
 
   async save(historial: ActividadHistorial): Promise<ActividadHistorial> {
-    const entity = this.actividadHistorialRepository.create({
-      ...historial,
-    });
-
-    const saved = await this.actividadHistorialRepository.save(entity);
-
-    return saved;
+    const entity = this.actividadHistorialRepository.create({ ...historial });
+    return await this.actividadHistorialRepository.save(entity);
   }
 
   async findAll(): Promise<ActividadHistorial[]> {
-    const entities = await this.actividadHistorialRepository.find({
-      order: {
-        createdAt: 'DESC',
-      },
+    return await this.actividadHistorialRepository.find({
+      order: { createdAt: 'DESC' },
     });
-
-    return entities;
   }
 }

@@ -1,26 +1,33 @@
-import { AsignarHerramientaUseCase } from '../../application/use-cases/asignar-herramienta.use-case';
-import { ListarHerramientasPorActividadUseCase } from '../../application/use-cases/listar-herramientas-por-actividad.use-case';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
+import { CrearActividadHerramientaUseCase } from '../../application/use-cases/registrar-herramienta.use-case';
+import { ListarActividadHerramientasUseCase } from '../../application/use-cases/listar-herramientas-por-actividad.use-case';
 import { AsignarActividadHerramientaDto } from '../../application/dto/actividad_herramienta.dto';
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 
 @Controller('actividades/:actividadId/herramientas')
 export class ActividadHerramientaController {
   constructor(
-    private readonly asignarUseCase: AsignarHerramientaUseCase,
-    private readonly listarUseCase: ListarHerramientasPorActividadUseCase,
+    private readonly crearUseCase: CrearActividadHerramientaUseCase,
+    private readonly listarUseCase: ListarActividadHerramientasUseCase,
   ) {}
 
   @Post()
   async save(
     @Param('actividadId', ParseIntPipe) actividadId: number,
     @Body() dto: AsignarActividadHerramientaDto,
-  ) {
+  ): Promise<any> {
     dto.actividadId = actividadId;
-    return await this.asignarUseCase.execute(dto);
+    return await this.crearUseCase.execute(dto);
   }
 
   @Get()
-  async obtenerPorActividad(@Param('actividadId', ParseIntPipe) actividadId: number) {
-    return await this.listarUseCase.execute(actividadId);
+  async obtenerTodos(): Promise<any[]> {
+    return await this.listarUseCase.execute();
   }
 }

@@ -3,8 +3,6 @@ export class ActividadInsumoReserva {
   actividadId!: number;
   insumoId!: number;
   cantidadReservada!: number;
-  estado?: string;
-  observaciones?: string;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;

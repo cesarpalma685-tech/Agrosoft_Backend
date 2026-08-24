@@ -4,16 +4,16 @@ import { ActividadHerramientaOrmEntity } from './infrastructure/persistence/acti
 
 import { ActividadHerramientaRepositoryPort } from './application/ports/actividad-herramienta.repository.port';
 import { ActividadHerramientaTypeOrmRepository } from './infrastructure/repositories/actividad-herramienta.typeorm.repository';
-import { AsignarHerramientaUseCase } from './application/use-cases/asignar-herramienta.use-case';
-import { ListarHerramientasPorActividadUseCase } from './application/use-cases/listar-herramientas-por-actividad.use-case';
+import { CrearActividadHerramientaUseCase } from './application/use-cases/registrar-herramienta.use-case';
+import { ListarActividadHerramientasUseCase } from './application/use-cases/listar-herramientas-por-actividad.use-case';
 import { ActividadHerramientaController } from './infrastructure/controller/actividad-herramienta.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ActividadHerramientaOrmEntity])],
   controllers: [ActividadHerramientaController],
   providers: [
-    AsignarHerramientaUseCase,
-    ListarHerramientasPorActividadUseCase,
+    CrearActividadHerramientaUseCase,
+    ListarActividadHerramientasUseCase,
     {
       provide: ActividadHerramientaRepositoryPort,
       useClass: ActividadHerramientaTypeOrmRepository,

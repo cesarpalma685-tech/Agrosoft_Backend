@@ -15,24 +15,14 @@ export class ActividadInsumoUsoTypeOrmRepository extends ActividadInsumoUsoRepos
     super();
   }
 
-  async save(insumoUso: ActividadInsumoUso): Promise<ActividadInsumoUso> {
-    const entity = this.actividadInsumoUsoRepository.create({
-      ...insumoUso,
-    });
-
-    const saved = await this.actividadInsumoUsoRepository.save(entity);
-
-    return saved;
+  async save(uso: ActividadInsumoUso): Promise<ActividadInsumoUso> {
+    const entity = this.actividadInsumoUsoRepository.create({ ...uso });
+    return await this.actividadInsumoUsoRepository.save(entity);
   }
 
-  async findByActividadId(actividadId: number): Promise<ActividadInsumoUso[]> {
-    const entities = await this.actividadInsumoUsoRepository.find({
-      where: { actividadId },
-      order: {
-        createdAt: 'DESC',
-      },
+  async findAll(): Promise<ActividadInsumoUso[]> {
+    return await this.actividadInsumoUsoRepository.find({
+      order: { createdAt: 'DESC' },
     });
-
-    return entities;
   }
 }

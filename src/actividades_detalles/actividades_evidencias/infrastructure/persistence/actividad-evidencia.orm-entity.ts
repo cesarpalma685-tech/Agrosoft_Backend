@@ -12,17 +12,22 @@ export class ActividadEvidenciaOrmEntity {
   @PrimaryGeneratedColumn({ type: 'integer' })
   id!: number;
 
-  @Column({ name: 'actividad_id', type: 'integer' })
+  @Column({ name: 'actividadId', type: 'integer' })
   actividadId!: number;
 
-  @Column({ name: 'archivo_url', type: 'varchar', length: 255 })
-  archivoUrl!: string;
+  @Column({ type: 'text' })
+  descripcion!: string;
 
-  @Column({ name: 'tipo_archivo', type: 'varchar', length: 100, nullable: true })
-  tipoArchivo?: string;
-
-  @Column({ type: 'text', nullable: true })
-  descripcion?: string;
+  @Column({
+    type: 'text',
+    nullable: true,
+    transformer: {
+      to: (value?: string[]): string => JSON.stringify(value ?? []),
+      from: (value: string): string[] =>
+        value ? (JSON.parse(value) as string[]) : [],
+    },
+  })
+  imagenes?: string[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;

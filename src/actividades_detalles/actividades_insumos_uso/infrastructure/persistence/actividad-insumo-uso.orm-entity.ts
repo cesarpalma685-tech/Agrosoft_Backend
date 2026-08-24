@@ -12,17 +12,23 @@ export class ActividadInsumoUsoOrmEntity {
   @PrimaryGeneratedColumn({ type: 'integer' })
   id!: number;
 
-  @Column({ name: 'actividad_id', type: 'integer' })
+  @Column({ name: 'actividadId', type: 'integer' })
   actividadId!: number;
 
-  @Column({ name: 'insumo_id', type: 'integer' })
+  @Column({ name: 'insumoId', type: 'integer' })
   insumoId!: number;
 
-  @Column({ name: 'cantidad_usada', type: 'numeric', precision: 10, scale: 2 })
-  cantidadUsada!: number;
+  @Column({ name: 'cantidadUso', type: 'float' })
+  cantidadUso!: number;
 
-  @Column({ type: 'text', nullable: true })
-  observaciones?: string;
+  @Column({ name: 'costoUnitarioUso', type: 'float' })
+  costoUnitarioUso!: number;
+
+  @Column({ name: 'costoTotal', type: 'float' })
+  costoTotal!: number;
+
+  @Column({ name: 'movimientoInsumoId', type: 'integer' })
+  movimientoInsumoId!: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;

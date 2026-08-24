@@ -4,12 +4,14 @@ import { ActividadHerramienta } from '../../domain/entities/actividad-herramient
 import { AsignarActividadHerramientaDto } from '../dto/actividad_herramienta.dto';
 
 @Injectable()
-export class AsignarHerramientaUseCase {
+export class CrearActividadHerramientaUseCase {
   constructor(
     private readonly actividadHerramientaRepository: ActividadHerramientaRepositoryPort,
   ) {}
 
-  async execute(dto: AsignarActividadHerramientaDto): Promise<ActividadHerramienta> {
+  async execute(
+    dto: AsignarActividadHerramientaDto,
+  ): Promise<ActividadHerramienta> {
     const nuevaHerramienta = new ActividadHerramienta();
     Object.assign(nuevaHerramienta, dto);
     return await this.actividadHerramientaRepository.save(nuevaHerramienta);

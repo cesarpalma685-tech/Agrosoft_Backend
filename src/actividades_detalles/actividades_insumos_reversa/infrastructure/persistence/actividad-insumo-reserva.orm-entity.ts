@@ -12,20 +12,14 @@ export class ActividadInsumoReservaOrmEntity {
   @PrimaryGeneratedColumn({ type: 'integer' })
   id!: number;
 
-  @Column({ name: 'actividad_id', type: 'integer' })
+  @Column({ name: 'actividadId', type: 'integer' })
   actividadId!: number;
 
-  @Column({ name: 'insumo_id', type: 'integer' })
+  @Column({ name: 'insumoId', type: 'integer' })
   insumoId!: number;
 
-  @Column({ name: 'cantidad_reservada', type: 'numeric', precision: 10, scale: 2 })
+  @Column({ name: 'cantidadReservada', type: 'float' })
   cantidadReservada!: number;
-
-  @Column({ type: 'varchar', length: 50, default: 'pendiente' })
-  estado?: string;
-
-  @Column({ type: 'text', nullable: true })
-  observaciones?: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;

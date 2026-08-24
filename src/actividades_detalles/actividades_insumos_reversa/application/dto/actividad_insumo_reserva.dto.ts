@@ -1,13 +1,7 @@
 import { Type } from 'class-transformer';
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Min,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, Min } from 'class-validator';
 
-export class ReservarActividadInsumoDto {
+export class CrearActividadInsumoReservaDto {
   @Type(() => Number)
   @IsNumber()
   @IsOptional()
@@ -20,15 +14,6 @@ export class ReservarActividadInsumoDto {
 
   @Type(() => Number)
   @IsNumber()
-  @Min(0.01, { message: 'La cantidad reservada debe ser mayor a 0' })
-  @IsNotEmpty()
+  @Min(0.01)
   cantidadReservada!: number;
-
-  @IsString()
-  @IsOptional()
-  estado?: string;
-
-  @IsString()
-  @IsOptional()
-  observaciones?: string;
 }

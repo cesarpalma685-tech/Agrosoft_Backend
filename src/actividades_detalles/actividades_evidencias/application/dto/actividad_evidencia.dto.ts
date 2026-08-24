@@ -1,10 +1,10 @@
 import { Type } from 'class-transformer';
 import {
+  IsArray,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
-  IsUrl,
 } from 'class-validator';
 
 export class CrearActividadEvidenciaDto {
@@ -15,14 +15,10 @@ export class CrearActividadEvidenciaDto {
 
   @IsString()
   @IsNotEmpty()
-  @IsUrl({}, { message: 'El campo archivoUrl debe ser una URL válida' })
-  archivoUrl!: string;
+  descripcion!: string;
 
-  @IsString()
   @IsOptional()
-  tipoArchivo?: string;
-
-  @IsString()
-  @IsOptional()
-  descripcion?: string;
+  @IsArray()
+  @IsString({ each: true })
+  imagenes?: string[];
 }

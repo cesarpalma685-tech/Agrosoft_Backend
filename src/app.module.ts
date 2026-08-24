@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { ActividesDetallesModule } from './actividades_detalles/actividades_detalles.module';
+import { Produccion_ActividadesModule } from './actividades_detalles/produccion_actividades.module';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { ActividesDetallesModule } from './actividades_detalles/actividades_deta
       autoLoadEntities: true,
       synchronize: true,
     }),
-    ActividesDetallesModule,
+    Produccion_ActividadesModule,
   ],
   controllers: [],
   providers: [],
