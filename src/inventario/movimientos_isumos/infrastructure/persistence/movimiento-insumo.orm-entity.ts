@@ -11,7 +11,8 @@ import {
 import { TipoMovimientoInsumoEnum } from '../../domain/enum/tipo-movimiento-insumo.enum';
 import { AlmacenOrmEntity } from 'src/inventario/almacenes/infrastructure/persistence/almacen.orm-entity';
 import { InsumoOrmEntity } from 'src/inventario/insumos/infrastructure/persistence/insumo.orm-entity';
-import { UsuarioOrmEntity } from 'src/identidad/usuarios/infrastructure/persistence/usuario.orm-entity';
+import { UsuarioOrmEntity } from 'src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity';
+
 
 
 @Entity('movimientos_insumos')

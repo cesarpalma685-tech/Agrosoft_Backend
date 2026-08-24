@@ -56,6 +56,7 @@ export class UsuarioOrmEntity {
   @ManyToOne(() => ProgramaFormacionOrmEntity )
   @JoinColumn({ name: 'programaFormacionId' })
   programaFormacion!: ProgramaFormacionOrmEntity;
+  movimientosInsumos: any;
 
   
 }
