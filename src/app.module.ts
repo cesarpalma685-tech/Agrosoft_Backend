@@ -3,13 +3,6 @@ import { InventarioModule } from './inventario/inventario.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ComercialModule } from './comercial/comercial.module';
-import { IdentidadModule } from './identidad/identidad.module';
-import { FormaciónModule } from './formación/formación.module';
-import { ProducciónModule } from './producción/producción.module';
-import { WikiAgronómiaModule } from './wiki-agronómia/wiki-agronómia.module';
-import { CatalogosModule } from './catalogos/catalogos.module';
-import { IotModule } from './iot/iot.module';
-import { TerritorioModule } from './territorio/territorio.module';
 @Module({
   imports:[
     ConfigModule.forRoot(),
@@ -25,13 +18,6 @@ import { TerritorioModule } from './territorio/territorio.module';
     }),
     InventarioModule,
     ComercialModule,
-    IdentidadModule,
-    FormaciónModule,
-    ProducciónModule,
-    WikiAgronómiaModule,
-    CatalogosModule,
-    IotModule,
-    TerritorioModule,
   ],
   controllers: [],
   providers: [],
