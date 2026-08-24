@@ -22,11 +22,8 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
-<<<<<<< HEAD
 
   afterEach(async () => {
     await app.close();
   });
-=======
->>>>>>> origin/cesar_dev
 });

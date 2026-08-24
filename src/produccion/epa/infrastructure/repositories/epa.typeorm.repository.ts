@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, IsNull, In } from 'typeorm';
 import { EpaOrmEntity } from '../persistence/epa.orm-entity';
-import { TipoCultivoWikiOrmEntity } from '../../../tipo-cultivo-wiki/infrastructure/persistence/tipo-cultivo-wiki.orm-entity';
+import { TipoCultivoWikiOrmEntity } from '../../../../wiki_agronomia/tipo-cultivo-wiki/infrastructure/persistence/tipo-cultivo-wiki.orm-entity';
 import { EpaRepositoryPort } from '../../application/ports/epa.repository.port';
 import { Epa } from '../../domain/entities/epa.entity';
 

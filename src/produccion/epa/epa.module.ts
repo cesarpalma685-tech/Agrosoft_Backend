@@ -7,7 +7,7 @@ import { AsociarTiposCultivoEpaUseCase } from './application/use-cases/asociar-t
 import { EpaRepositoryPort } from './application/ports/epa.repository.port';
 import { EpaTypeOrmRepository } from './infrastructure/repositories/epa.typeorm.repository';
 import { EpaOrmEntity } from './infrastructure/persistence/epa.orm-entity';
-import { TipoCultivoWikiOrmEntity } from '../tipo-cultivo-wiki/infrastructure/persistence/tipo-cultivo-wiki.orm-entity';
+import { TipoCultivoWikiOrmEntity } from '../../wiki_agronomia/tipo-cultivo-wiki/infrastructure/persistence/tipo-cultivo-wiki.orm-entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([EpaOrmEntity, TipoCultivoWikiOrmEntity])],

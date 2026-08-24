@@ -7,7 +7,7 @@ import {
   DeleteDateColumn,
   ManyToMany,
 } from 'typeorm';
-import { EpaOrmEntity } from '../../../epa/infrastructure/persistence/epa.orm-entity';
+import { EpaOrmEntity } from '../../../../produccion/epa/infrastructure/persistence/epa.orm-entity';
 
 @Entity('tipos_cultivos_wiki')
 export class TipoCultivoWikiOrmEntity {

@@ -8,7 +8,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { TipoCultivoWikiOrmEntity } from '../../../tipo-cultivo-wiki/infrastructure/persistence/tipo-cultivo-wiki.orm-entity';
+import { TipoCultivoWikiOrmEntity } from '../../../../wiki_agronomia/tipo-cultivo-wiki/infrastructure/persistence/tipo-cultivo-wiki.orm-entity';
 
 @Entity('epas')
 export class EpaOrmEntity {

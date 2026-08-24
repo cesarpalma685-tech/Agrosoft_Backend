@@ -4,12 +4,7 @@
     "moduleResolution": "nodenext",
     "resolvePackageJsonExports": true,
     "esModuleInterop": true,
-<<<<<<< HEAD
     "isolatedModules": false,
-=======
-    "types": ["node", "jest"],
-    "isolatedModules": true,
->>>>>>> origin/cesar_dev
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -27,8 +22,4 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/cesar_dev
