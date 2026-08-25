@@ -1,7 +1,8 @@
-import { ActividadResponsable } from "../../domain/entities/actividad_responsable.entity";
+import { ActividadResponsable } from '../../domain/entities/actividad_responsable.entity';
 
 export abstract class ActividadResponsableRepositoryPort {
-  abstract save(responsable: ActividadResponsable): Promise<ActividadResponsable>;
-
-  abstract findByActividadId(actividadId: number): Promise<ActividadResponsable[]>;
+  abstract save(
+    responsable: ActividadResponsable,
+  ): Promise<ActividadResponsable>;
+  abstract findAll(): Promise<ActividadResponsable[]>;
 }

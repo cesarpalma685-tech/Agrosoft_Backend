@@ -12,17 +12,20 @@ export class ActividadResponsableOrmEntity {
   @PrimaryGeneratedColumn({ type: 'integer' })
   id!: number;
 
-  @Column({ name: 'actividad_id', type: 'integer' })
+  @Column({ name: 'actividadId', type: 'integer' })
   actividadId!: number;
 
-  @Column({ name: 'persona_id', type: 'integer' })
-  personaId!: number;
+  @Column({ name: 'usuarioId', type: 'integer' })
+  usuarioId!: number;
 
-  @Column({ type: 'varchar', length: 100, nullable: true, default: 'Supervisor' })
-  rol?: string;
+  @Column({ type: 'float' })
+  horas!: number;
 
-  @Column({ type: 'text', nullable: true })
-  observaciones?: string;
+  @Column({ name: 'precioHora', type: 'float' })
+  precioHora!: number;
+
+  @Column({ type: 'float' })
+  costo!: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;

@@ -12,17 +12,26 @@ export class UsoHerramientaOrmEntity {
   @PrimaryGeneratedColumn({ type: 'integer' })
   id!: number;
 
-  @Column({ name: 'actividad_id', type: 'integer' })
+  @Column({ name: 'actividadId', type: 'integer' })
   actividadId!: number;
 
-  @Column({ name: 'herramienta_id', type: 'integer' })
-  herramientaId!: number;
+  @Column({ name: 'insumoId', type: 'integer' })
+  insumoId!: number;
 
-  @Column({ name: 'horas_uso', type: 'numeric', precision: 5, scale: 2, nullable: true })
-  horasUso?: number;
+  @Column({ name: 'horasUsadas', type: 'float' })
+  horasUsadas!: number;
 
-  @Column({ type: 'text', nullable: true })
-  observaciones?: string;
+  @Column({ name: 'depreciacionGenerada', type: 'float' })
+  depreciacionGenerada!: number;
+
+  @Column({ name: 'valorEnLibrosAntes', type: 'float' })
+  valorEnLibrosAntes!: number;
+
+  @Column({ name: 'valorEnLibrosDespues', type: 'float' })
+  valorEnLibrosDespues!: number;
+
+  @Column({ name: 'fechaUso', type: 'timestamp' })
+  fechaUso!: Date;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;

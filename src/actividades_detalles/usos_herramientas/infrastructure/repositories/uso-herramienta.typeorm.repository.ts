@@ -15,24 +15,14 @@ export class UsoHerramientaTypeOrmRepository extends UsoHerramientaRepositoryPor
     super();
   }
 
-  async save(usoHerramienta: UsoHerramienta): Promise<UsoHerramienta> {
-    const entity = this.usoHerramientaRepository.create({
-      ...usoHerramienta,
-    });
-
-    const saved = await this.usoHerramientaRepository.save(entity);
-
-    return saved;
+  async save(uso: UsoHerramienta): Promise<UsoHerramienta> {
+    const entity = this.usoHerramientaRepository.create({ ...uso });
+    return await this.usoHerramientaRepository.save(entity);
   }
 
-  async findByActividadId(actividadId: number): Promise<UsoHerramienta[]> {
-    const entities = await this.usoHerramientaRepository.find({
-      where: { actividadId },
-      order: {
-        createdAt: 'DESC',
-      },
+  async findAll(): Promise<UsoHerramienta[]> {
+    return await this.usoHerramientaRepository.find({
+      order: { createdAt: 'DESC' },
     });
-
-    return entities;
   }
 }

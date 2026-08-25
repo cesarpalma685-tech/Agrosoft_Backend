@@ -1,26 +1,34 @@
-import { AsignarResponsableUseCase } from '../../application/use-cases/asignar-responsable.use-case';
-import { ListarResponsablesPorActividadUseCase } from '../../application/use-cases/listar-responsables-por-actividad.use-case';
-import { AsignarActividadResponsableDto } from '../../application/dto/actividad_responsable.dto';
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
+import { CrearActividadResponsableUseCase } from '../../application/use-cases/crear-responsable.use-case';
+import { ListarActividadResponsablesUseCase } from '../../application/use-cases/listar-responsables-por-actividad.use-case';
+import { CrearActividadResponsableDto } from '../../application/dto/actividad_responsable.dto';
+import { ActividadResponsable } from '../../domain/entities/actividad_responsable.entity';
 
 @Controller('actividades/:actividadId/responsables')
 export class ActividadResponsableController {
   constructor(
-    private readonly asignarUseCase: AsignarResponsableUseCase,
-    private readonly listarUseCase: ListarResponsablesPorActividadUseCase,
+    private readonly crearUseCase: CrearActividadResponsableUseCase,
+    private readonly listarUseCase: ListarActividadResponsablesUseCase,
   ) {}
 
   @Post()
   async save(
     @Param('actividadId', ParseIntPipe) actividadId: number,
-    @Body() dto: AsignarActividadResponsableDto,
-  ) {
+    @Body() dto: CrearActividadResponsableDto,
+  ): Promise<ActividadResponsable> {
     dto.actividadId = actividadId;
-    return await this.asignarUseCase.execute(dto);
+    return await this.crearUseCase.execute(dto);
   }
 
   @Get()
-  async obtenerPorActividad(@Param('actividadId', ParseIntPipe) actividadId: number) {
-    return await this.listarUseCase.execute(actividadId);
+  async obtenerTodos(): Promise<ActividadResponsable[]> {
+    return await this.listarUseCase.execute();
   }
 }

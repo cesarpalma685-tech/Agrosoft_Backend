@@ -1,9 +1,11 @@
 export class ActividadServicio {
   id!: number;
   actividadId!: number;
-  servicioId!: number;
+  maquinariaId!: number;
+  nombreServicio!: string;
+  horas!: number;
+  precioHora!: number;
   costo!: number;
-  observaciones?: string;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;

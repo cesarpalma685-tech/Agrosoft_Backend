@@ -1,13 +1,7 @@
 import { Type } from 'class-transformer';
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Min,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, Min } from 'class-validator';
 
-export class RegistrarUsoHerramientaDto {
+export class CrearUsoHerramientaDto {
   @Type(() => Number)
   @IsNumber()
   @IsOptional()
@@ -16,15 +10,20 @@ export class RegistrarUsoHerramientaDto {
   @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
-  herramientaId!: number;
+  insumoId!: number;
 
   @Type(() => Number)
   @IsNumber()
-  @Min(0.1, { message: 'Las horas de uso deben ser mayores a 0' })
-  @IsOptional()
-  horasUso?: number;
+  @Min(0.01)
+  horasUsadas!: number;
 
-  @IsString()
-  @IsOptional()
-  observaciones?: string;
+  @Type(() => Number)
+  @IsNumber()
+  @Min(0)
+  valorEnLibrosAntes!: number;
+
+  @Type(() => Number)
+  @IsNumber()
+  @Min(0)
+  tasaDepreciacionPorHora!: number;
 }

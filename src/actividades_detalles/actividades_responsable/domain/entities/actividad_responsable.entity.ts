@@ -1,9 +1,10 @@
 export class ActividadResponsable {
   id!: number;
   actividadId!: number;
-  personaId!: number;
-  rol?: string;
-  observaciones?: string;
+  usuarioId!: number;
+  horas!: number;
+  precioHora!: number;
+  costo!: number;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
