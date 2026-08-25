@@ -10,7 +10,7 @@ import { ComercialModule } from './comercial/comercial.module';
 import { InventarioModule } from './inventario/inventario.module';
 import { FormacionModule } from './formacion/formacion.module';
 import { CatalogosModule } from './catalogos/catalogos.module';
-import { Produccion_ActividadesModule } from './actividades_detalles/produccion_actividades.module';
+import { ProduccionActividadesModule } from './actividades_detalles/produccion_actividades.module';
 
 @Module({
   imports:[
@@ -34,7 +34,7 @@ import { Produccion_ActividadesModule } from './actividades_detalles/produccion_
     TerritorioModule,
     ComercialModule,
     InventarioModule,
-    Produccion_ActividadesModule
+    ProduccionActividadesModule
   ],
   controllers: [],
   providers: [],

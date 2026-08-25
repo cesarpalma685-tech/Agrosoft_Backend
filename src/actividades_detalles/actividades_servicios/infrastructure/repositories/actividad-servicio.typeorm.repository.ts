@@ -16,23 +16,13 @@ export class ActividadServicioTypeOrmRepository extends ActividadServicioReposit
   }
 
   async save(servicio: ActividadServicio): Promise<ActividadServicio> {
-    const entity = this.actividadServicioRepository.create({
-      ...servicio,
-    });
-
-    const saved = await this.actividadServicioRepository.save(entity);
-
-    return saved;
+    const entity = this.actividadServicioRepository.create({ ...servicio });
+    return await this.actividadServicioRepository.save(entity);
   }
 
-  async findByActividadId(actividadId: number): Promise<ActividadServicio[]> {
-    const entities = await this.actividadServicioRepository.find({
-      where: { actividadId },
-      order: {
-        createdAt: 'DESC',
-      },
+  async findAll(): Promise<ActividadServicio[]> {
+    return await this.actividadServicioRepository.find({
+      order: { createdAt: 'DESC' },
     });
-
-    return entities;
   }
 }

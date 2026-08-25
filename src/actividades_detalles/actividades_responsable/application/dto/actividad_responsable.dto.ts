@@ -1,12 +1,7 @@
 import { Type } from 'class-transformer';
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, Min } from 'class-validator';
 
-export class AsignarActividadResponsableDto {
+export class CrearActividadResponsableDto {
   @Type(() => Number)
   @IsNumber()
   @IsOptional()
@@ -15,13 +10,15 @@ export class AsignarActividadResponsableDto {
   @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
-  personaId!: number;
+  usuarioId!: number;
 
-  @IsString()
-  @IsOptional()
-  rol?: string;
+  @Type(() => Number)
+  @IsNumber()
+  @Min(0.01)
+  horas!: number;
 
-  @IsString()
-  @IsOptional()
-  observaciones?: string;
+  @Type(() => Number)
+  @IsNumber()
+  @Min(0)
+  precioHora!: number;
 }

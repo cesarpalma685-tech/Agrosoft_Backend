@@ -4,16 +4,18 @@ import { UsoHerramientaOrmEntity } from './infrastructure/persistence/uso-herram
 
 import { UsoHerramientaRepositoryPort } from './application/ports/uso-herramienta.repository.port';
 import { UsoHerramientaTypeOrmRepository } from './infrastructure/repositories/uso-herramienta.typeorm.repository';
-import { RegistrarUsoHerramientaUseCase } from './application/use-cases/registrar-uso-herramienta.use-case';
-import { ListarUsosHerramientasPorActividadUseCase } from './application/use-cases/listar-usos-herramientas-por-actividad.use-case';
+
+import { CrearUsoHerramientaUseCase } from './application/use-cases/crear-usos-herramientas-por-actividad.use-case';
+import { ListarUsosHerramientaUseCase } from './application/use-cases/listar-uso-herramienta.use-case';
+
 import { UsoHerramientaController } from './infrastructure/controller/uso-herramienta.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UsoHerramientaOrmEntity])],
   controllers: [UsoHerramientaController],
   providers: [
-    RegistrarUsoHerramientaUseCase,
-    ListarUsosHerramientasPorActividadUseCase,
+    CrearUsoHerramientaUseCase,
+    ListarUsosHerramientaUseCase,
     {
       provide: UsoHerramientaRepositoryPort,
       useClass: UsoHerramientaTypeOrmRepository,

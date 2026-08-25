@@ -3,12 +3,12 @@ import { ActividadResponsableRepositoryPort } from '../ports/actividad-responsab
 import { ActividadResponsable } from '../../domain/entities/actividad_responsable.entity';
 
 @Injectable()
-export class ListarResponsablesPorActividadUseCase {
+export class ListarActividadResponsablesUseCase {
   constructor(
     private readonly actividadResponsableRepository: ActividadResponsableRepositoryPort,
   ) {}
 
-  async execute(actividadId: number): Promise<ActividadResponsable[]> {
-    return await this.actividadResponsableRepository.findByActividadId(actividadId);
+  async execute(): Promise<ActividadResponsable[]> {
+    return await this.actividadResponsableRepository.findAll();
   }
 }

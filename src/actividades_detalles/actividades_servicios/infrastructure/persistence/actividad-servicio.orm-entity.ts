@@ -12,17 +12,23 @@ export class ActividadServicioOrmEntity {
   @PrimaryGeneratedColumn({ type: 'integer' })
   id!: number;
 
-  @Column({ name: 'actividad_id', type: 'integer' })
+  @Column({ name: 'actividadId', type: 'integer' })
   actividadId!: number;
 
-  @Column({ name: 'servicio_id', type: 'integer' })
-  servicioId!: number;
+  @Column({ name: 'maquinariaId', type: 'integer' })
+  maquinariaId!: number;
 
-  @Column({ type: 'numeric', precision: 10, scale: 2, default: 0 })
+  @Column({ name: 'nombreServicio', type: 'varchar' })
+  nombreServicio!: string;
+
+  @Column({ type: 'float' })
+  horas!: number;
+
+  @Column({ name: 'precioHora', type: 'float' })
+  precioHora!: number;
+
+  @Column({ type: 'float' })
   costo!: number;
-
-  @Column({ type: 'text', nullable: true })
-  observaciones?: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;

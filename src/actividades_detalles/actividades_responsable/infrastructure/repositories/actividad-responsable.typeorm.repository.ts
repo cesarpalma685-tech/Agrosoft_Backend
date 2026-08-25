@@ -3,9 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { ActividadResponsableRepositoryPort } from '../../application/ports/actividad-responsable.repository.port';
-
-import { ActividadResponsableOrmEntity } from '../persistence/actividad-responsable.orm-entity';
 import { ActividadResponsable } from '../../domain/entities/actividad_responsable.entity';
+import { ActividadResponsableOrmEntity } from '../persistence/actividad-responsable.orm-entity';
 
 @Injectable()
 export class ActividadResponsableTypeOrmRepository extends ActividadResponsableRepositoryPort {
@@ -17,23 +16,13 @@ export class ActividadResponsableTypeOrmRepository extends ActividadResponsableR
   }
 
   async save(responsable: ActividadResponsable): Promise<ActividadResponsable> {
-    const entity = this.actividadResponsableRepository.create({
-      ...responsable,
-    });
-
-    const saved = await this.actividadResponsableRepository.save(entity);
-
-    return saved;
+    const entity = this.actividadResponsableRepository.create(responsable);
+    return await this.actividadResponsableRepository.save(entity);
   }
 
-  async findByActividadId(actividadId: number): Promise<ActividadResponsable[]> {
-    const entities = await this.actividadResponsableRepository.find({
-      where: { actividadId },
-      order: {
-        createdAt: 'DESC',
-      },
+  async findAll(): Promise<ActividadResponsable[]> {
+    return await this.actividadResponsableRepository.find({
+      order: { createdAt: 'DESC' },
     });
-
-    return entities;
   }
 }

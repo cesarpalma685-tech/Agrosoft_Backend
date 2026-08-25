@@ -7,7 +7,7 @@ import {
   Min,
 } from 'class-validator';
 
-export class ContratarActividadServicioDto {
+export class CrearActividadServicioDto {
   @Type(() => Number)
   @IsNumber()
   @IsOptional()
@@ -16,15 +16,19 @@ export class ContratarActividadServicioDto {
   @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
-  servicioId!: number;
+  maquinariaId!: number;
+
+  @IsString()
+  @IsNotEmpty()
+  nombreServicio!: string;
 
   @Type(() => Number)
   @IsNumber()
-  @Min(0, { message: 'El costo no puede ser negativo' })
-  @IsNotEmpty()
-  costo!: number;
+  @Min(0.01)
+  horas!: number;
 
-  @IsString()
-  @IsOptional()
-  observaciones?: string;
+  @Type(() => Number)
+  @IsNumber()
+  @Min(0)
+  precioHora!: number;
 }
