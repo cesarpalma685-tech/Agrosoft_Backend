@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { UsuarioRepository } from '../ports/usuario.repository';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { USUARIO_REPOSITORY, UsuarioRepository } from '../ports/usuario.repository';
 import { Usuario } from '../../domain/entities/usuario.entity';
 
 export interface ActualizarUsuarioInput {
@@ -12,7 +12,9 @@ export interface ActualizarUsuarioInput {
 
 @Injectable()
 export class ActualizarUsuarioUseCase {
-  constructor(private readonly repository: UsuarioRepository) {}
+  constructor(
+    @Inject(USUARIO_REPOSITORY)
+    private readonly repository: UsuarioRepository) {}
 
   async ejecutar(id: number, datos: ActualizarUsuarioInput): Promise<Usuario> {
     const usuario = await this.repository.buscarPorId(id);

@@ -1,6 +1,6 @@
-import { Injectable, ConflictException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
-import { UsuarioRepository } from '../ports/usuario.repository';
+import { Injectable, ConflictException, Inject } from '@nestjs/common';
+import * as bcrypt from 'bcryptjs';
+import { USUARIO_REPOSITORY, UsuarioRepository } from '../ports/usuario.repository';
 import { Usuario } from '../../domain/entities/usuario.entity';
 
 export interface CrearUsuarioInput {
@@ -16,7 +16,9 @@ export interface CrearUsuarioInput {
 
 @Injectable()
 export class CrearUsuarioUseCase {
-  constructor(private readonly repository: UsuarioRepository) {}
+  constructor(
+    @Inject(USUARIO_REPOSITORY)
+    private readonly repository: UsuarioRepository) {}
 
   async ejecutar(datos: CrearUsuarioInput): Promise<Usuario> {
     const existente = await this.repository.buscarPorCorreo(datos.correo);
