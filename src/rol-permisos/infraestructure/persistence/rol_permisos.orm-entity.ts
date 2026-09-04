@@ -5,6 +5,8 @@ import {
     CreateDateColumn,
     JoinColumn,
     ManyToOne,
+    UpdateDateColumn,
+    DeleteDateColumn,
 } from 'typeorm';
 import { PermisoOrmEntity } from '../../../permisos/infraestructure/persistence/permiso.orm-entity';
 import { RolOrmEntity } from '../../../roles/infraestructure/persistence/rol.orm-entity';
@@ -23,6 +25,12 @@ permisoId!: number;
 
 @CreateDateColumn()
 created_at!: Date;
+
+@UpdateDateColumn()
+updated_at!: Date;
+
+@DeleteDateColumn()
+deleted_at!: Date;
 
   @ManyToOne(() => RolOrmEntity, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'rolId' })

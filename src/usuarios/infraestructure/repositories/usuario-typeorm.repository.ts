@@ -45,7 +45,6 @@ export class UsuarioTypeOrmRepository extends UsuarioRepository {
     await this.repo.softDelete(id);
   }
 
-  // --- mapeadores privados: la parte que realmente hace el trabajo de "puente" ---
   private aDominio(orm: UsuarioOrmEntity): Usuario {
     return new Usuario(
       orm.id,
@@ -58,6 +57,7 @@ export class UsuarioTypeOrmRepository extends UsuarioRepository {
       orm.telefono,
       orm.programaFormacionId,
       orm.estado,
+      orm.avatarUrl,
       orm.emailVerifiedAt,
       orm.lastLoginAt,
       orm.created_at,
@@ -76,7 +76,7 @@ export class UsuarioTypeOrmRepository extends UsuarioRepository {
       programaFormacionId: usuario.programaFormacionId,
       estado: usuario.estado,
       identificacion: usuario.identificacion,
-      
+      avatarUrl: usuario.avatarUrl,
       
     };
   }

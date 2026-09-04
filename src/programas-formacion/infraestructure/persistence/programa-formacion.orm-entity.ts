@@ -4,6 +4,8 @@ import {
   Column,
   CreateDateColumn,
   OneToMany,
+  UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 
 
@@ -62,5 +64,9 @@ export class ProgramaFormacionOrmEntity {
   @CreateDateColumn()
   created_at!: Date;
 
+  @UpdateDateColumn()
+  updated_at!: Date;
 
+  @DeleteDateColumn()
+  deleted_at!: Date;
 }

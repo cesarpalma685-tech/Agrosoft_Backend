@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn,} from 'typeorm';
 
 @Entity('notificaciones')
 export class NotificacionOrmEntity {
@@ -31,4 +31,10 @@ export class NotificacionOrmEntity {
 
   @CreateDateColumn()
   created_at!: Date;
+
+  @UpdateDateColumn()
+  updated_at!: Date;
+
+  @DeleteDateColumn()
+  deleted_at!: Date;
 }

@@ -40,6 +40,9 @@ export class UsuarioOrmEntity {
   @Column({ type: 'varchar', default: 'activo' })
   estado!: string;
 
+  @Column({ type: 'varchar', nullable: true })
+  avatarUrl!: string | null;
+
   @CreateDateColumn()
   created_at!: Date;
 

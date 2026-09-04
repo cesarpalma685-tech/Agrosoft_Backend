@@ -15,9 +15,6 @@ export class TipoFormacionOrmEntity {
   @Column({ type: 'text', nullable: true })
   descripcion!: string;
 
-  @Column({ type: 'varchar', nullable: true })
-  tipoEpaEnum!: string;
-
   @Column({ type: 'boolean', default: true })
   activo!: boolean;
 
@@ -26,5 +23,11 @@ export class TipoFormacionOrmEntity {
 
   @CreateDateColumn()
   created_at!: Date;
+
+  @UpdateDateColumn()
+  updated_at!: Date;
+
+  @DeleteDateColumn()
+  deleted_at!: Date;
 
 }

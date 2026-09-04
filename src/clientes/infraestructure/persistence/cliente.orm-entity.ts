@@ -3,6 +3,8 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 
 @Entity('clientes')
@@ -47,4 +49,10 @@ export class ClienteOrmEntity {
 
   @CreateDateColumn()
   created_at!: Date;
+
+  @UpdateDateColumn()
+  updated_at!: Date;
+
+  @DeleteDateColumn()
+  deleted_at!: Date;
 }

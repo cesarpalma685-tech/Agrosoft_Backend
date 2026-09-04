@@ -10,6 +10,7 @@ export class Usuario {
     public programaFormacionId:string | null,
     public telefono:string | null,
     public estado: string,
+    public avatarUrl: string | null,
 
     public emailVerifiedAt: Date | null,
     public lastLoginAt: Date | null,
