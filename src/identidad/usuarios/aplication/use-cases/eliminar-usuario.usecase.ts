@@ -1,11 +1,15 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { USUARIO_REPOSITORY, UsuarioRepository } from '../ports/usuario.repository';
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import {
+  USUARIO_REPOSITORY,
+  UsuarioRepository,
+} from "../ports/usuario.repository";
 
 @Injectable()
 export class EliminarUsuarioUseCase {
   constructor(
     @Inject(USUARIO_REPOSITORY)
-    private readonly repository: UsuarioRepository) {}
+    private readonly repository: UsuarioRepository,
+  ) {}
 
   async ejecutar(id: number): Promise<void> {
     const usuario = await this.repository.buscarPorId(id);

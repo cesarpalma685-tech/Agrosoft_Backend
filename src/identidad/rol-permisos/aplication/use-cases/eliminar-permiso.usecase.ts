@@ -1,21 +1,17 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { RolPermisoRepository } from '../ports/rol_permisos.repository';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { RolPermisoRepository } from "../ports/rol_permisos.repository";
 
 @Injectable()
 export class EliminarRolPermisoUseCase {
+  constructor(private readonly repository: RolPermisoRepository) {}
 
-constructor(
-    private readonly repository: RolPermisoRepository,
-) {}
+  async ejecutar(id: number): Promise<void> {
+    const existente = await this.repository.buscarPorId(id);
 
-async ejecutar(id: number): Promise<void> {
+    if (!existente) {
+      throw new NotFoundException("Rol permiso no encontrado");
+    }
 
-const existente = await this.repository.buscarPorId(id);
-
-if (!existente) {
-    throw new NotFoundException('Rol permiso no encontrado');
-}
-
-await this.repository.eliminar(id);
-}
+    await this.repository.eliminar(id);
+  }
 }

@@ -1,12 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { ReservaRepositoryPort } from '../ports/reserva.repository.port';
-import { CrearReservaDto } from '../dto/crear-reservas.dto';
-import { Reserva } from '../../domain/entities/crear-reserva.dto';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { ReservaRepositoryPort } from "../ports/reserva.repository.port";
+import { CrearReservaDto } from "../dto/crear-reservas.dto";
+import { Reserva } from "../../domain/entities/crear-reserva.dto";
 @Injectable()
 export class ActualizarReservaUseCase {
-  constructor(
-    private readonly reservaRepository: ReservaRepositoryPort,
-  ) {}
+  constructor(private readonly reservaRepository: ReservaRepositoryPort) {}
 
   async execute(id: number, dto: Partial<CrearReservaDto>): Promise<Reserva> {
     const existe = await this.reservaRepository.findById(id);

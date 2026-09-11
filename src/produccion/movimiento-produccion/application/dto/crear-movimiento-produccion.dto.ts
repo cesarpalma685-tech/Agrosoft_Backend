@@ -1,4 +1,11 @@
-import { IsInt, IsOptional, IsString, IsNumber, IsNotEmpty, IsDateString } from 'class-validator';
+import {
+  IsInt,
+  IsOptional,
+  IsString,
+  IsNumber,
+  IsNotEmpty,
+  IsDateString,
+} from "class-validator";
 
 export class CrearMovimientoProduccionDto {
   @IsInt()

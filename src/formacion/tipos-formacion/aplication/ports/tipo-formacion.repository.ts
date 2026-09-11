@@ -1,6 +1,6 @@
-import { TipoFormacion } from '../../domain/entities/tipo-formacion.entity';
+import { TipoFormacion } from "../../domain/entities/tipo-formacion.entity";
 
-export const TIPO_FORMACION_REPOSITORY = 'TIPO_FORMACION_REPOSITORY';
+export const TIPO_FORMACION_REPOSITORY = "TIPO_FORMACION_REPOSITORY";
 
 export interface TipoFormacionRepository {
   crear(tipo: TipoFormacion): Promise<TipoFormacion>;

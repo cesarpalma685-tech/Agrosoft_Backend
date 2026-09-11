@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { ProgramaFormacionRepository } from '../ports/programa-formacion.repository';
-import { ProgramaFormacion } from '../../domain/entities/programa-formacion.entity';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { ProgramaFormacionRepository } from "../ports/programa-formacion.repository";
+import { ProgramaFormacion } from "../../domain/entities/programa-formacion.entity";
 
 export interface ActualizarProgramaFormacionInput {
   numeroFicha?: string;
@@ -15,21 +15,16 @@ export interface ActualizarProgramaFormacionInput {
 
 @Injectable()
 export class ActualizarProgramaFormacionUseCase {
-  constructor(
-    private readonly repository: ProgramaFormacionRepository,
-  ) {}
+  constructor(private readonly repository: ProgramaFormacionRepository) {}
 
   async ejecutar(
     id: number,
     datos: ActualizarProgramaFormacionInput,
   ): Promise<ProgramaFormacion> {
-
     const programa = await this.repository.buscarPorId(id);
 
     if (!programa) {
-      throw new NotFoundException(
-        'Programa de formación no encontrado',
-      );
+      throw new NotFoundException("Programa de formación no encontrado");
     }
 
     const actualizado = new ProgramaFormacion(

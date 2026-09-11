@@ -5,28 +5,28 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('almacenes')
+@Entity("almacenes")
 export class AlmacenOrmEntity {
-  @PrimaryGeneratedColumn({ type: 'integer' })
+  @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
 
-  @Column({ type: 'varchar', length: 150 })
+  @Column({ type: "varchar", length: 150 })
   nombre!: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: "text", nullable: true })
   descripcion?: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: "varchar", length: 255 })
   ubicacion!: string;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
 }

@@ -1,6 +1,6 @@
-export enum TipoMovimientoInsumoEnum{
-    ENTRADA= 'ENTRADA',
-    SALIDA= 'SALIDA',
-    TRASLADO='TRASLADO',
-    AJUSTE='AJUSTE',
+export enum TipoMovimientoInsumoEnum {
+  ENTRADA = "ENTRADA",
+  SALIDA = "SALIDA",
+  TRASLADO = "TRASLADO",
+  AJUSTE = "AJUSTE",
 }

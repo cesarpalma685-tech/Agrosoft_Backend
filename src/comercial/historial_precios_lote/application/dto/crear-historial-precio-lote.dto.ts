@@ -1,12 +1,12 @@
-import { 
-  IsNotEmpty, 
-  IsNumber, 
-  IsString, 
-  IsDateString, 
-  IsOptional, 
-  Min 
-} from 'class-validator';
-import { Type } from 'class-transformer';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsDateString,
+  IsOptional,
+  Min,
+} from "class-validator";
+import { Type } from "class-transformer";
 
 export class CrearHistorialPrecioLoteDto {
   @Type(() => Number)

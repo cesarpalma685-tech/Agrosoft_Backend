@@ -5,12 +5,12 @@ import {
   Param,
   ParseIntPipe,
   Post,
-} from '@nestjs/common';
-import { CrearActividadInsumoReservaUseCase } from '../../application/use-cases/crear-insumo.use-case';
-import { ListarActividadInsumoReservasUseCase } from '../../application/use-cases/listar-insumos-reserva-por-actividad.use-case';
-import { CrearActividadInsumoReservaDto } from '../../application/dto/actividad_insumo_reserva.dto';
+} from "@nestjs/common";
+import { CrearActividadInsumoReservaUseCase } from "../../application/use-cases/crear-insumo.use-case";
+import { ListarActividadInsumoReservasUseCase } from "../../application/use-cases/listar-insumos-reserva-por-actividad.use-case";
+import { CrearActividadInsumoReservaDto } from "../../application/dto/actividad_insumo_reserva.dto";
 
-@Controller('actividades/:actividadId/insumos-reserva')
+@Controller("actividades/:actividadId/insumos-reserva")
 export class ActividadInsumoReservaController {
   constructor(
     private readonly crearUseCase: CrearActividadInsumoReservaUseCase,
@@ -19,7 +19,7 @@ export class ActividadInsumoReservaController {
 
   @Post()
   async save(
-    @Param('actividadId', ParseIntPipe) actividadId: number,
+    @Param("actividadId", ParseIntPipe) actividadId: number,
     @Body() dto: CrearActividadInsumoReservaDto,
   ): Promise<any> {
     dto.actividadId = actividadId;

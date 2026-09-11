@@ -1,6 +1,6 @@
-import { Usuario } from '../../domain/entities/usuario.entity';
+import { Usuario } from "../../domain/entities/usuario.entity";
 
-export const USUARIO_REPOSITORY = 'USUARIO_REPOSITORY';
+export const USUARIO_REPOSITORY = "USUARIO_REPOSITORY";
 
 export abstract class UsuarioRepository {
   abstract crear(usuario: Usuario): Promise<Usuario>;

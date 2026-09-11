@@ -1,43 +1,52 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { RolOrmEntity } from '../../../roles/infraestructure/persistence/rol.orm-entity';
-import { ProgramaFormacionOrmEntity } from '../../../../formacion/programas-formacion/infraestructure/persistence/programa-formacion.orm-entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
+import { RolOrmEntity } from "../../../roles/infraestructure/persistence/rol.orm-entity";
+import { ProgramaFormacionOrmEntity } from "../../../../formacion/programas-formacion/infraestructure/persistence/programa-formacion.orm-entity";
 
-@Entity('usuarios')
+@Entity("usuarios")
 export class UsuarioOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   nombre!: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   apellido!: string;
 
-  @Column({ type: 'varchar', unique: true, nullable: true })
+  @Column({ type: "varchar", unique: true, nullable: true })
   identificacion!: string;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({ type: "int", nullable: true })
   idFicha!: number;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   programaFormacionId!: string | null;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   telefono!: string | null;
 
-  @Column({ type: 'varchar', unique: true })
+  @Column({ type: "varchar", unique: true })
   correo!: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   passwordHash!: string;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   lastLoginAt!: Date | null;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   emailVerifiedAt!: Date | null;
 
-  @Column({ type: 'varchar', default: 'activo' })
+  @Column({ type: "varchar", default: "activo" })
   estado!: string;
 
   @CreateDateColumn()
@@ -50,13 +59,11 @@ export class UsuarioOrmEntity {
   deleted_at!: Date;
 
   @ManyToOne(() => RolOrmEntity)
-  @JoinColumn({ name: 'rolId' })
+  @JoinColumn({ name: "rolId" })
   rol!: RolOrmEntity;
 
-  @ManyToOne(() => ProgramaFormacionOrmEntity )
-  @JoinColumn({ name: 'programaFormacionId' })
+  @ManyToOne(() => ProgramaFormacionOrmEntity)
+  @JoinColumn({ name: "programaFormacionId" })
   programaFormacion!: ProgramaFormacionOrmEntity;
   movimientosInsumos: any;
-
-  
 }

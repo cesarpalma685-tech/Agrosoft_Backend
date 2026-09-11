@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { TiposSensoresRepositoryPort } from '../ports/tipos_sensores.repository.port';
-import { TiposSensores } from '../../domain/entities/tipos_sensores.dto';
+import { Injectable } from "@nestjs/common";
+import { TiposSensoresRepositoryPort } from "../ports/tipos_sensores.repository.port";
+import { TiposSensores } from "../../domain/entities/tipos_sensores.dto";
 
 @Injectable()
 export class ListarTiposSensoresUseCase {
@@ -9,6 +9,6 @@ export class ListarTiposSensoresUseCase {
   ) {}
 
   async execute(): Promise<TiposSensores[]> {
-    return await this.tiposSensoresRepository .listar();
+    return await this.tiposSensoresRepository.listar();
   }
 }

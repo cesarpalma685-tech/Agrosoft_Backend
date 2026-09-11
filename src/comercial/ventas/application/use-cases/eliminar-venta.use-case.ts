@@ -1,11 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { VentaRepositoryPort } from '../ports/venta.repository.ports';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { VentaRepositoryPort } from "../ports/venta.repository.ports";
 
 @Injectable()
 export class EliminarVentaUseCase {
-  constructor(
-    private readonly ventaRepository: VentaRepositoryPort,
-  ) {}
+  constructor(private readonly ventaRepository: VentaRepositoryPort) {}
 
   async execute(id: number): Promise<void> {
     const existe = await this.ventaRepository.findById(id);

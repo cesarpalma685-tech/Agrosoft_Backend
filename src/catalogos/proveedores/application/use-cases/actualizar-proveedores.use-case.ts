@@ -1,12 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { ProveedoresDto } from '../dto/crear-proveedores.dto';
-import { ProveedoresRepositoryPort } from '../ports/proveedores.repository.port';
+import { Injectable } from "@nestjs/common";
+import { ProveedoresDto } from "../dto/crear-proveedores.dto";
+import { ProveedoresRepositoryPort } from "../ports/proveedores.repository.port";
 
 @Injectable()
 export class ActualizarProveedoresUseCase {
-  constructor(
-    private readonly repository: ProveedoresRepositoryPort,
-  ) {}
+  constructor(private readonly repository: ProveedoresRepositoryPort) {}
 
   async ejecutar(
     id: number,

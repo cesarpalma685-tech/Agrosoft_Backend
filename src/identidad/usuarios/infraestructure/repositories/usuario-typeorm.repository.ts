@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Usuario } from '../../domain/entities/usuario.entity';
-import { UsuarioRepository } from '../../aplication/ports/usuario.repository';
-import { UsuarioOrmEntity } from '../persistence/usuario.orm-entity';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Usuario } from "../../domain/entities/usuario.entity";
+import { UsuarioRepository } from "../../aplication/ports/usuario.repository";
+import { UsuarioOrmEntity } from "../persistence/usuario.orm-entity";
 
 @Injectable()
 export class UsuarioTypeOrmRepository extends UsuarioRepository {
@@ -76,8 +76,6 @@ export class UsuarioTypeOrmRepository extends UsuarioRepository {
       programaFormacionId: usuario.programaFormacionId,
       estado: usuario.estado,
       identificacion: usuario.identificacion,
-      
-      
     };
   }
 }

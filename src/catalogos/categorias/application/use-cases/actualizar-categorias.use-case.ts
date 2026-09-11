@@ -1,5 +1,5 @@
-import { CategoriasDto } from '../../domain/entities/categorias.dto';
-import { CategoriasRepositoryPort } from '../ports/categorias-repository.port';
+import { CategoriasDto } from "../../domain/entities/categorias.dto";
+import { CategoriasRepositoryPort } from "../ports/categorias-repository.port";
 
 export class ActualizarCategoriasUseCase {
   constructor(

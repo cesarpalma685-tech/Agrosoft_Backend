@@ -5,28 +5,28 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('actividades_insumos_reserva')
+@Entity("actividades_insumos_reserva")
 export class ActividadInsumoReservaOrmEntity {
-  @PrimaryGeneratedColumn({ type: 'integer' })
+  @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
 
-  @Column({ name: 'actividadId', type: 'integer' })
+  @Column({ name: "actividadId", type: "integer" })
   actividadId!: number;
 
-  @Column({ name: 'insumoId', type: 'integer' })
+  @Column({ name: "insumoId", type: "integer" })
   insumoId!: number;
 
-  @Column({ name: 'cantidadReservada', type: 'float' })
+  @Column({ name: "cantidadReservada", type: "float" })
   cantidadReservada!: number;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
 }

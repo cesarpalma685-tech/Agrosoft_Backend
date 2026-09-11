@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { TransaccionFinanciera } from '../../domain/entities/transaccion-financiera.entity';
-import { CrearTransaccionFinancieraDto } from '../dto/crear-transaccion-financiera.dto';
-import { TransaccionFinancieraRepositoryPort } from '../ports/crear-transaccion-financiera.repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { TransaccionFinanciera } from "../../domain/entities/transaccion-financiera.entity";
+import { CrearTransaccionFinancieraDto } from "../dto/crear-transaccion-financiera.dto";
+import { TransaccionFinancieraRepositoryPort } from "../ports/crear-transaccion-financiera.repository.port";
 
 @Injectable()
 export class ActualizarTransaccionFinancieraUseCase {
@@ -9,10 +9,15 @@ export class ActualizarTransaccionFinancieraUseCase {
     private readonly repository: TransaccionFinancieraRepositoryPort,
   ) {}
 
-  async execute(id: number, dto: Partial<CrearTransaccionFinancieraDto>): Promise<TransaccionFinanciera> {
+  async execute(
+    id: number,
+    dto: Partial<CrearTransaccionFinancieraDto>,
+  ): Promise<TransaccionFinanciera> {
     const existe = await this.repository.findById(id);
     if (!existe) {
-      throw new NotFoundException(`La transacción financiera con ID ${id} no existe`);
+      throw new NotFoundException(
+        `La transacción financiera con ID ${id} no existe`,
+      );
     }
 
     const payload: Partial<TransaccionFinanciera> = { ...dto } as any;

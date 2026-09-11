@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { SubloteRepositoryPort } from '../../application/ports/sublote.repository.port';
-import { Sublote } from '../../domain/entities/sublote.dto';
-import { SubloteOrmEntity } from '../persistence/sublote.orm-entity';
+import { SubloteRepositoryPort } from "../../application/ports/sublote.repository.port";
+import { Sublote } from "../../domain/entities/sublote.dto";
+import { SubloteOrmEntity } from "../persistence/sublote.orm-entity";
 
 @Injectable()
 export class SubloteTypeormRepository implements SubloteRepositoryPort {
@@ -28,10 +28,7 @@ export class SubloteTypeormRepository implements SubloteRepositoryPort {
     return await this.repository.find();
   }
 
-  async update(
-    id: number,
-    sublote: Partial<Sublote >,
-  ): Promise<Sublote | null> {
+  async update(id: number, sublote: Partial<Sublote>): Promise<Sublote | null> {
     await this.repository.update(id, sublote);
 
     return await this.findById(id);

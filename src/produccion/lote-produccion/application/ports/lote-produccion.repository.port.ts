@@ -1,4 +1,4 @@
-import { LoteProduccion } from '../../domain/entities/lote-produccion.entity';
+import { LoteProduccion } from "../../domain/entities/lote-produccion.entity";
 
 export abstract class LoteProduccionRepositoryPort {
   abstract save(loteProduccion: LoteProduccion): Promise<LoteProduccion>;

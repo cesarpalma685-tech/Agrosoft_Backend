@@ -5,13 +5,13 @@ import {
   Param,
   ParseIntPipe,
   Post,
-} from '@nestjs/common';
-import { CrearActividadResponsableUseCase } from '../../application/use-cases/crear-responsable.use-case';
-import { ListarActividadResponsablesUseCase } from '../../application/use-cases/listar-responsables-por-actividad.use-case';
-import { CrearActividadResponsableDto } from '../../application/dto/actividad_responsable.dto';
-import { ActividadResponsable } from '../../domain/entities/actividad_responsable.entity';
+} from "@nestjs/common";
+import { CrearActividadResponsableUseCase } from "../../application/use-cases/crear-responsable.use-case";
+import { ListarActividadResponsablesUseCase } from "../../application/use-cases/listar-responsables-por-actividad.use-case";
+import { CrearActividadResponsableDto } from "../../application/dto/actividad_responsable.dto";
+import { ActividadResponsable } from "../../domain/entities/actividad_responsable.entity";
 
-@Controller('actividades/:actividadId/responsables')
+@Controller("actividades/:actividadId/responsables")
 export class ActividadResponsableController {
   constructor(
     private readonly crearUseCase: CrearActividadResponsableUseCase,
@@ -20,7 +20,7 @@ export class ActividadResponsableController {
 
   @Post()
   async save(
-    @Param('actividadId', ParseIntPipe) actividadId: number,
+    @Param("actividadId", ParseIntPipe) actividadId: number,
     @Body() dto: CrearActividadResponsableDto,
   ): Promise<ActividadResponsable> {
     dto.actividadId = actividadId;

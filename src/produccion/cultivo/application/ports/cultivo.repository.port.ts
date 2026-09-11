@@ -1,4 +1,4 @@
-import { Cultivo } from '../../domain/entities/cultivo.entity';
+import { Cultivo } from "../../domain/entities/cultivo.entity";
 
 export abstract class CultivoRepositoryPort {
   abstract save(cultivo: Cultivo): Promise<Cultivo>;

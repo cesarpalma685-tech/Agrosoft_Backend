@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { LoteRepositoryPort } from '../../application/ports/lote.repository.port';
-import { LoteDto } from '../../domain/entities/lote.dto';
-import { LoteOrmEntity } from '../persistence/lote.orm-entity';
+import { LoteRepositoryPort } from "../../application/ports/lote.repository.port";
+import { LoteDto } from "../../domain/entities/lote.dto";
+import { LoteOrmEntity } from "../persistence/lote.orm-entity";
 
 @Injectable()
 export class LoteTypeormRepository implements LoteRepositoryPort {
@@ -30,10 +30,7 @@ export class LoteTypeormRepository implements LoteRepositoryPort {
     return await this.repository.find();
   }
 
-  async update(
-    id: number, 
-    lote: Partial<LoteDto>)
-    : Promise<LoteDto | null > {
+  async update(id: number, lote: Partial<LoteDto>): Promise<LoteDto | null> {
     await this.repository.update(id, lote);
 
     return await this.findById(id);

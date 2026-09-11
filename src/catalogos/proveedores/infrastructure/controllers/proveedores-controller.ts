@@ -7,16 +7,16 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
-import { ProveedoresDto } from '../../application/dto/crear-proveedores.dto';
-import { CrearProveedoresUseCase } from '../../application/use-cases/crear-proveedores.use-case';
-import { ListarProveedoresUseCase } from '../../application/use-cases/listar-proveedores.use-case';
-import { ObtenerProveedoresUseCase } from '../../application/use-cases/obtener-proveedores-por-id.use-case';
-import { ActualizarProveedoresUseCase } from '../../application/use-cases/actualizar-proveedores.use-case';
-import { EliminarProveedoresUseCase } from '../../application/use-cases/eliminar-proveedores-por-id.use-case';
+import { ProveedoresDto } from "../../application/dto/crear-proveedores.dto";
+import { CrearProveedoresUseCase } from "../../application/use-cases/crear-proveedores.use-case";
+import { ListarProveedoresUseCase } from "../../application/use-cases/listar-proveedores.use-case";
+import { ObtenerProveedoresUseCase } from "../../application/use-cases/obtener-proveedores-por-id.use-case";
+import { ActualizarProveedoresUseCase } from "../../application/use-cases/actualizar-proveedores.use-case";
+import { EliminarProveedoresUseCase } from "../../application/use-cases/eliminar-proveedores-por-id.use-case";
 
-@Controller('proveedores')
+@Controller("proveedores")
 export class ProveedoresController {
   constructor(
     private readonly crearUseCase: CrearProveedoresUseCase,
@@ -36,21 +36,21 @@ export class ProveedoresController {
     return this.listarUseCase.ejecutar();
   }
 
-  @Get(':id')
-  obtener(@Param('id', ParseIntPipe) id: number) {
+  @Get(":id")
+  obtener(@Param("id", ParseIntPipe) id: number) {
     return this.obtenerUseCase.ejecutar(id);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   actualizar(
-    @Param('id', ParseIntPipe) id: number,
+    @Param("id", ParseIntPipe) id: number,
     @Body() datos: Partial<ProveedoresDto>,
   ) {
     return this.actualizarUseCase.ejecutar(id, datos);
   }
 
-  @Delete(':id')
-  eliminar(@Param('id', ParseIntPipe) id: number) {
+  @Delete(":id")
+  eliminar(@Param("id", ParseIntPipe) id: number) {
     return this.eliminarUseCase.ejecutar(id);
   }
 }

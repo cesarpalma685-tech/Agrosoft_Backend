@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { AlmacenRepositoryPort } from '../ports/almacen.repository.port';
-import { Almacen } from '../../domain/entities/crear-almacen.dto';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { AlmacenRepositoryPort } from "../ports/almacen.repository.port";
+import { Almacen } from "../../domain/entities/crear-almacen.dto";
 
 @Injectable()
 export class ObtenerAlmacenPorIdUseCase {

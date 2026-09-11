@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { Notificacion } from '../../domain/entities/notificaciones.entity';
-import { NotificacionRepository } from '../../aplication/ports/notificaciones.repository';
-import { NotificacionOrmEntity } from '../persistence/notificaciones.orm-entity';
+import { Notificacion } from "../../domain/entities/notificaciones.entity";
+import { NotificacionRepository } from "../../aplication/ports/notificaciones.repository";
+import { NotificacionOrmEntity } from "../persistence/notificaciones.orm-entity";
 
 @Injectable()
 export class NotificacionTypeOrmRepository extends NotificacionRepository {
@@ -22,9 +22,7 @@ export class NotificacionTypeOrmRepository extends NotificacionRepository {
   }
 
   async actualizar(notificacion: Notificacion): Promise<Notificacion> {
-    const actualizado = await this.repo.save(
-      this.aOrm(notificacion),
-    );
+    const actualizado = await this.repo.save(this.aOrm(notificacion));
 
     return this.aDominio(actualizado);
   }
@@ -38,14 +36,10 @@ export class NotificacionTypeOrmRepository extends NotificacionRepository {
       where: { id },
     });
 
-    return notificacion
-      ? this.aDominio(notificacion)
-      : null;
+    return notificacion ? this.aDominio(notificacion) : null;
   }
 
-  private aDominio(
-    orm: NotificacionOrmEntity,
-  ): Notificacion {
+  private aDominio(orm: NotificacionOrmEntity): Notificacion {
     return new Notificacion(
       orm.id,
       orm.usuarioId,
@@ -58,9 +52,7 @@ export class NotificacionTypeOrmRepository extends NotificacionRepository {
     );
   }
 
-  private aOrm(
-    notificacion: Notificacion,
-  ): Partial<NotificacionOrmEntity> {
+  private aOrm(notificacion: Notificacion): Partial<NotificacionOrmEntity> {
     return {
       id: notificacion.id ?? undefined,
       usuarioId: notificacion.usuarioId,

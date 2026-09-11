@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { EpaRepositoryPort } from '../ports/epa.repository.port';
-import { Epa } from '../../domain/entities/epa.entity';
+import { Injectable } from "@nestjs/common";
+import { EpaRepositoryPort } from "../ports/epa.repository.port";
+import { Epa } from "../../domain/entities/epa.entity";
 
 @Injectable()
 export class ListarEpaUseCase {

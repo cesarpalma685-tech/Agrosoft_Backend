@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { Cliente } from '../../domain/entities/cliente.entity';
-import { ClienteRepository } from '../../aplication/ports/cliente.repository';
-import { ClienteOrmEntity } from '../persistence/cliente.orm-entity';
+import { Cliente } from "../../domain/entities/cliente.entity";
+import { ClienteRepository } from "../../aplication/ports/cliente.repository";
+import { ClienteOrmEntity } from "../persistence/cliente.orm-entity";
 
 @Injectable()
 export class ClienteTypeOrmRepository extends ClienteRepository {
@@ -23,9 +23,7 @@ export class ClienteTypeOrmRepository extends ClienteRepository {
   }
 
   async actualizar(cliente: Cliente): Promise<Cliente> {
-    const actualizado = await this.repo.save(
-      this.aOrm(cliente),
-    );
+    const actualizado = await this.repo.save(this.aOrm(cliente));
 
     return this.aDominio(actualizado);
   }
@@ -39,14 +37,10 @@ export class ClienteTypeOrmRepository extends ClienteRepository {
       where: { id },
     });
 
-    return cliente
-      ? this.aDominio(cliente)
-      : null;
+    return cliente ? this.aDominio(cliente) : null;
   }
 
-  private aDominio(
-    orm: ClienteOrmEntity,
-  ): Cliente {
+  private aDominio(orm: ClienteOrmEntity): Cliente {
     return new Cliente(
       orm.id,
       orm.nombre,
@@ -59,9 +53,7 @@ export class ClienteTypeOrmRepository extends ClienteRepository {
     );
   }
 
-  private aOrm(
-    cliente: Cliente,
-  ): Partial<ClienteOrmEntity> {
+  private aOrm(cliente: Cliente): Partial<ClienteOrmEntity> {
     return {
       id: cliente.id ?? undefined,
       nombre: cliente.nombre,

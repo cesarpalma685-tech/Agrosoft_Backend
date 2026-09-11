@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { ActividadResponsableRepositoryPort } from '../ports/actividad-responsable.repository.port';
-import { ActividadResponsable } from '../../domain/entities/actividad_responsable.entity';
-import { CrearActividadResponsableDto } from '../dto/actividad_responsable.dto';
+import { Injectable } from "@nestjs/common";
+import { ActividadResponsableRepositoryPort } from "../ports/actividad-responsable.repository.port";
+import { ActividadResponsable } from "../../domain/entities/actividad_responsable.entity";
+import { CrearActividadResponsableDto } from "../dto/actividad_responsable.dto";
 
 @Injectable()
 export class CrearActividadResponsableUseCase {

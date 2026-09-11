@@ -1,4 +1,4 @@
-import { ProgramaFormacion } from '../../domain/entities/programa-formacion.entity';
+import { ProgramaFormacion } from "../../domain/entities/programa-formacion.entity";
 
 export abstract class ProgramaFormacionRepository {
   abstract crear(programa: ProgramaFormacion): Promise<ProgramaFormacion>;

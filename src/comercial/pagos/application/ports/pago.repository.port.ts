@@ -1,4 +1,4 @@
-import { Pago } from '../../domain/entities/pago.entity';
+import { Pago } from "../../domain/entities/pago.entity";
 
 export abstract class PagoRepositoryPort {
   abstract save(pago: Pago): Promise<Pago>;

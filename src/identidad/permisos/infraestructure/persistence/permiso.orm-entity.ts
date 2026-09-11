@@ -1,24 +1,24 @@
 import {
-Entity,
-PrimaryGeneratedColumn,
-Column,
-CreateDateColumn,
-} from 'typeorm';
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+} from "typeorm";
 
-@Entity('permisos')
+@Entity("permisos")
 export class PermisoOrmEntity {
-@PrimaryGeneratedColumn()
-id!: number;
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-@Column()
-modulo!: string;
+  @Column()
+  modulo!: string;
 
-@Column()
-accion!: string;
+  @Column()
+  accion!: string;
 
-@Column()
-clave!: string;
+  @Column()
+  clave!: string;
 
-@CreateDateColumn()
-created_at!: Date;
+  @CreateDateColumn()
+  created_at!: Date;
 }

@@ -5,48 +5,48 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('lotes')
+@Entity("lotes")
 export class LoteOrmEntity {
-  @PrimaryGeneratedColumn({ type: 'integer' })
+  @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   nombre!: string;
 
   @Column({
-    type: 'geometry',
-    spatialFeatureType: 'Polygon',
+    type: "geometry",
+    spatialFeatureType: "Polygon",
     srid: 4326,
   })
   geom!: object;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2 })
+  @Column({ type: "numeric", precision: 12, scale: 2 })
   areaM2!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 4 })
+  @Column({ type: "numeric", precision: 12, scale: 4 })
   areaHa!: number;
 
   @Column({
-    type: 'geometry',
-    spatialFeatureType: 'Point',
+    type: "geometry",
+    spatialFeatureType: "Point",
     srid: 4326,
   })
   centroide!: object;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   descripcion!: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   estado!: string;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: "timestamp" })
   created_at!: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: "timestamp" })
   updated_at!: Date;
 
-  @DeleteDateColumn({ type: 'timestamp', nullable: true })
+  @DeleteDateColumn({ type: "timestamp", nullable: true })
   deleted_at!: Date | null;
 }

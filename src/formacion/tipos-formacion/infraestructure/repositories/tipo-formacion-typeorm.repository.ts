@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { TipoFormacion } from '../../domain/entities/tipo-formacion.entity';
-import { TipoFormacionRepository } from '../../aplication/ports/tipo-formacion.repository';
-import { TipoFormacionOrmEntity } from '../persistence/tipo-formacion.orm-entity';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { TipoFormacion } from "../../domain/entities/tipo-formacion.entity";
+import { TipoFormacionRepository } from "../../aplication/ports/tipo-formacion.repository";
+import { TipoFormacionOrmEntity } from "../persistence/tipo-formacion.orm-entity";
 
 @Injectable()
 export class TipoFormacionTypeOrmRepository implements TipoFormacionRepository {
@@ -24,7 +24,7 @@ export class TipoFormacionTypeOrmRepository implements TipoFormacionRepository {
   }
 
   async listar(): Promise<TipoFormacion[]> {
-    const registros = await this.repo.find({ order: { orden: 'ASC' } });
+    const registros = await this.repo.find({ order: { orden: "ASC" } });
     return registros.map((r) => this.aDominio(r));
   }
 

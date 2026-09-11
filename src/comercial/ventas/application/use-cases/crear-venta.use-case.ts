@@ -1,13 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { VentaRepositoryPort } from '../ports/venta.repository.ports';
-import { CrearVentaDto } from '../dto/crear-venta.dto';
-import { Venta } from '../../domain/entities/crear-venta.entity';
+import { Injectable } from "@nestjs/common";
+import { VentaRepositoryPort } from "../ports/venta.repository.ports";
+import { CrearVentaDto } from "../dto/crear-venta.dto";
+import { Venta } from "../../domain/entities/crear-venta.entity";
 
 @Injectable()
 export class CrearVentaUseCase {
-  constructor(
-    private readonly ventaRepository: VentaRepositoryPort,
-  ) {}
+  constructor(private readonly ventaRepository: VentaRepositoryPort) {}
 
   async execute(dto: CrearVentaDto): Promise<Venta> {
     const nuevaVenta = new Venta();

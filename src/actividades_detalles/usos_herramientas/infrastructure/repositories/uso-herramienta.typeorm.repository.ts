@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { UsoHerramientaRepositoryPort } from '../../application/ports/uso-herramienta.repository.port';
-import { UsoHerramienta } from '../../domain/entities/uso-herramienta.entity';
-import { UsoHerramientaOrmEntity } from '../persistence/uso-herramienta.orm-entity';
+import { UsoHerramientaRepositoryPort } from "../../application/ports/uso-herramienta.repository.port";
+import { UsoHerramienta } from "../../domain/entities/uso-herramienta.entity";
+import { UsoHerramientaOrmEntity } from "../persistence/uso-herramienta.orm-entity";
 
 @Injectable()
 export class UsoHerramientaTypeOrmRepository extends UsoHerramientaRepositoryPort {
@@ -22,7 +22,7 @@ export class UsoHerramientaTypeOrmRepository extends UsoHerramientaRepositoryPor
 
   async findAll(): Promise<UsoHerramienta[]> {
     return await this.usoHerramientaRepository.find({
-      order: { createdAt: 'DESC' },
+      order: { createdAt: "DESC" },
     });
   }
 }

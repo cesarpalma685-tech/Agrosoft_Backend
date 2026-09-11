@@ -4,7 +4,7 @@ import {
   IsOptional,
   IsString,
   IsInt,
-} from 'class-validator';
+} from "class-validator";
 
 export class CrearSensorDto {
   @IsString()

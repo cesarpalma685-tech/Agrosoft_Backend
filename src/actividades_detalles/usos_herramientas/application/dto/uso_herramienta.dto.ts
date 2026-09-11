@@ -1,5 +1,5 @@
-import { Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsOptional, Min } from 'class-validator';
+import { Type } from "class-transformer";
+import { IsNotEmpty, IsNumber, IsOptional, Min } from "class-validator";
 
 export class CrearUsoHerramientaDto {
   @Type(() => Number)

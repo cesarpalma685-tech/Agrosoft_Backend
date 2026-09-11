@@ -5,9 +5,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('sensor_alertas')
+@Entity("sensor_alertas")
 export class SensorAlertasPersistence {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -24,10 +24,10 @@ export class SensorAlertasPersistence {
   @Column()
   sensor_id!: number;
 
-  @Column('double precision')
+  @Column("double precision")
   valor!: number;
 
-  @Column('double precision')
+  @Column("double precision")
   umbral!: number;
 
   @Column({ length: 10 })

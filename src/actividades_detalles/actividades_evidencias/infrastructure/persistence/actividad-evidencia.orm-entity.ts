@@ -5,21 +5,21 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('actividades_evidencias')
+@Entity("actividades_evidencias")
 export class ActividadEvidenciaOrmEntity {
-  @PrimaryGeneratedColumn({ type: 'integer' })
+  @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
 
-  @Column({ name: 'actividadId', type: 'integer' })
+  @Column({ name: "actividadId", type: "integer" })
   actividadId!: number;
 
-  @Column({ type: 'text' })
+  @Column({ type: "text" })
   descripcion!: string;
 
   @Column({
-    type: 'text',
+    type: "text",
     nullable: true,
     transformer: {
       to: (value?: string[]): string => JSON.stringify(value ?? []),
@@ -29,12 +29,12 @@ export class ActividadEvidenciaOrmEntity {
   })
   imagenes?: string[];
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
 }

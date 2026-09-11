@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { CategoriasDto } from '../../domain/entities/categorias.dto';
-import { CategoriasRepositoryPort } from '../../application/ports/categorias-repository.port';
-import { CategoriasPersistence } from '../persistence/categorias-orm-entity';
+import { CategoriasDto } from "../../domain/entities/categorias.dto";
+import { CategoriasRepositoryPort } from "../../application/ports/categorias-repository.port";
+import { CategoriasPersistence } from "../persistence/categorias-orm-entity";
 
 @Injectable()
 export class CategoriaRepository implements CategoriasRepositoryPort {

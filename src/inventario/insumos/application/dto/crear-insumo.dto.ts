@@ -1,15 +1,15 @@
-import { 
-  IsEnum, 
-  IsNotEmpty, 
-  IsNumber, 
-  IsOptional, 
-  IsPositive, 
-  IsString, 
-  Min 
-} from 'class-validator';
-import { Type } from 'class-transformer';
-import { TipoInsumoEnum } from '../../domain/enums/tipo-insumo.enum';
-import { EstadoInsumoEnum } from '../../domain/enums/estado-insumo.enum';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsPositive,
+  IsString,
+  Min,
+} from "class-validator";
+import { Type } from "class-transformer";
+import { TipoInsumoEnum } from "../../domain/enums/tipo-insumo.enum";
+import { EstadoInsumoEnum } from "../../domain/enums/estado-insumo.enum";
 
 export class CrearInsumoDto {
   @IsString()
@@ -29,7 +29,7 @@ export class CrearInsumoDto {
   presentacionTipo!: string;
 
   @Type(() => Number)
-  @IsNumber({}, { message: 'La cantidad de presentación debe ser un número' })
+  @IsNumber({}, { message: "La cantidad de presentación debe ser un número" })
   @IsPositive()
   presentacionCantidad!: number;
 

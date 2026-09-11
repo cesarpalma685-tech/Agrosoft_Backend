@@ -5,37 +5,37 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('actividades_insumos_uso')
+@Entity("actividades_insumos_uso")
 export class ActividadInsumoUsoOrmEntity {
-  @PrimaryGeneratedColumn({ type: 'integer' })
+  @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
 
-  @Column({ name: 'actividadId', type: 'integer' })
+  @Column({ name: "actividadId", type: "integer" })
   actividadId!: number;
 
-  @Column({ name: 'insumoId', type: 'integer' })
+  @Column({ name: "insumoId", type: "integer" })
   insumoId!: number;
 
-  @Column({ name: 'cantidadUso', type: 'float' })
+  @Column({ name: "cantidadUso", type: "float" })
   cantidadUso!: number;
 
-  @Column({ name: 'costoUnitarioUso', type: 'float' })
+  @Column({ name: "costoUnitarioUso", type: "float" })
   costoUnitarioUso!: number;
 
-  @Column({ name: 'costoTotal', type: 'float' })
+  @Column({ name: "costoTotal", type: "float" })
   costoTotal!: number;
 
-  @Column({ name: 'movimientoInsumoId', type: 'integer' })
+  @Column({ name: "movimientoInsumoId", type: "integer" })
   movimientoInsumoId!: number;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
 }

@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, IsNull } from 'typeorm';
-import { WikiTipoEpaOrmEntity } from '../persistence/wiki-tipo-epa.orm-entity';
-import { WikiTipoEpaRepositoryPort } from '../../application/ports/wiki-tipo-epa.repository.port';
-import { WikiTipoEpa } from '../../domain/entities/wiki-tipo-epa.entity';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, IsNull } from "typeorm";
+import { WikiTipoEpaOrmEntity } from "../persistence/wiki-tipo-epa.orm-entity";
+import { WikiTipoEpaRepositoryPort } from "../../application/ports/wiki-tipo-epa.repository.port";
+import { WikiTipoEpa } from "../../domain/entities/wiki-tipo-epa.entity";
 
 @Injectable()
 export class WikiTipoEpaTypeOrmRepository extends WikiTipoEpaRepositoryPort {
@@ -15,7 +15,9 @@ export class WikiTipoEpaTypeOrmRepository extends WikiTipoEpaRepositoryPort {
   }
 
   async save(wikiTipoEpa: WikiTipoEpa): Promise<WikiTipoEpa> {
-    const entity = this.repository.create(wikiTipoEpa as Partial<WikiTipoEpaOrmEntity>);
+    const entity = this.repository.create(
+      wikiTipoEpa as Partial<WikiTipoEpaOrmEntity>,
+    );
     const saved = await this.repository.save(entity);
     return saved as unknown as WikiTipoEpa;
   }
@@ -26,7 +28,9 @@ export class WikiTipoEpaTypeOrmRepository extends WikiTipoEpaRepositoryPort {
   }
 
   async findById(id: number): Promise<WikiTipoEpa | null> {
-    const row = await this.repository.findOne({ where: { id, deletedAt: IsNull() } });
+    const row = await this.repository.findOne({
+      where: { id, deletedAt: IsNull() },
+    });
     return row as unknown as WikiTipoEpa | null;
   }
 }

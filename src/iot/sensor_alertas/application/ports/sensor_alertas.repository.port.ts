@@ -1,4 +1,4 @@
-import { SensorAlertas } from '../../domain/entities/sensor_alertas.dto';
+import { SensorAlertas } from "../../domain/entities/sensor_alertas.dto";
 export abstract class SensorAlertasRepositoryPort {
   abstract crear(sensorAlertas: SensorAlertas): Promise<SensorAlertas>;
 

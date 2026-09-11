@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { ActividadEvidenciaRepositoryPort } from '../../application/ports/actividad-evidencia.repository.port';
-import { ActividadEvidencia } from '../../domain/entities/actividad_evidencia.entity';
-import { ActividadEvidenciaOrmEntity } from '../persistence/actividad-evidencia.orm-entity';
+import { ActividadEvidenciaRepositoryPort } from "../../application/ports/actividad-evidencia.repository.port";
+import { ActividadEvidencia } from "../../domain/entities/actividad_evidencia.entity";
+import { ActividadEvidenciaOrmEntity } from "../persistence/actividad-evidencia.orm-entity";
 
 @Injectable()
 export class ActividadEvidenciaTypeOrmRepository extends ActividadEvidenciaRepositoryPort {
@@ -28,7 +28,7 @@ export class ActividadEvidenciaTypeOrmRepository extends ActividadEvidenciaRepos
   async findAll(): Promise<ActividadEvidencia[]> {
     const entities = await this.actividadEvidenciaRepository.find({
       order: {
-        createdAt: 'DESC',
+        createdAt: "DESC",
       },
     });
 

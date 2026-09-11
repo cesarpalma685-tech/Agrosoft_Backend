@@ -1,4 +1,4 @@
-import { CategoriasDto } from '../../domain/entities/categorias.dto';
+import { CategoriasDto } from "../../domain/entities/categorias.dto";
 
 export abstract class CategoriasRepositoryPort {
   abstract crear(categoria: CategoriasDto): Promise<CategoriasDto>;
@@ -10,7 +10,7 @@ export abstract class CategoriasRepositoryPort {
   abstract actualizar(
     id: number,
     datos: Partial<CategoriasDto>,
-  ): Promise<CategoriasDto| null>;
+  ): Promise<CategoriasDto | null>;
 
   abstract eliminar(id: number): Promise<boolean>;
 }

@@ -1,4 +1,4 @@
-import { Notificacion } from '../../domain/entities/notificaciones.entity';
+import { Notificacion } from "../../domain/entities/notificaciones.entity";
 
 export abstract class NotificacionRepository {
   abstract crear(notificacion: Notificacion): Promise<Notificacion>;

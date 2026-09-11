@@ -1,23 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { SensorLecturasRepositoryPort } from '../../application/ports/sensor_lecturas.repository.port';
-import { SensorLecturas } from '../../domain/entities/sensor_lecturas.dto';
-import { SensorLecturasOrmEntity } from '../persistence/sensor_lecturas.orm-entity';
+import { SensorLecturasRepositoryPort } from "../../application/ports/sensor_lecturas.repository.port";
+import { SensorLecturas } from "../../domain/entities/sensor_lecturas.dto";
+import { SensorLecturasOrmEntity } from "../persistence/sensor_lecturas.orm-entity";
 
 @Injectable()
-export class SensorLecturasTypeormRepository
-  implements SensorLecturasRepositoryPort
-{
+export class SensorLecturasTypeormRepository implements SensorLecturasRepositoryPort {
   constructor(
     @InjectRepository(SensorLecturasOrmEntity)
     private readonly repository: Repository<SensorLecturasOrmEntity>,
   ) {}
 
-  async crear(
-    sensorLectura: SensorLecturas,
-  ): Promise<SensorLecturas> {
+  async crear(sensorLectura: SensorLecturas): Promise<SensorLecturas> {
     const entity = this.repository.create(sensorLectura);
 
     const guardado = await this.repository.save(entity);
@@ -25,9 +21,7 @@ export class SensorLecturasTypeormRepository
     return guardado as unknown as SensorLecturas;
   }
 
-  async BuscarPorId(
-  id: number,
-): Promise<SensorLecturas | null> {
+  async BuscarPorId(id: number): Promise<SensorLecturas | null> {
     const entity = await this.repository.findOne({
       where: { id },
     });
@@ -50,17 +44,13 @@ export class SensorLecturasTypeormRepository
     const actualizado = await this.BuscarPorId(id);
 
     if (!actualizado) {
-      throw new Error(
-        `La lectura con id ${id} no existe`,
-      );
+      throw new Error(`La lectura con id ${id} no existe`);
     }
 
     return actualizado;
   }
 
   async eliminar(id: number): Promise<void> {
-
-   await this.repository.delete(id); 
+    await this.repository.delete(id);
   }
-  
-  }
+}

@@ -5,9 +5,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('proveedores')
+@Entity("proveedores")
 export class ProveedoresPersistence {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -15,12 +15,12 @@ export class ProveedoresPersistence {
   @Column()
   nombre!: string;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   created_at!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updated_at!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deleted_at?: Date;
 }

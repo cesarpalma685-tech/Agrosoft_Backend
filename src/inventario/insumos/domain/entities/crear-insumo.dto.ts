@@ -1,7 +1,6 @@
 import { EstadoInsumoEnum } from "../enums/estado-insumo.enum";
 import { TipoInsumoEnum } from "../enums/tipo-insumo.enum";
 
-
 export class Insumo {
   id!: number;
 

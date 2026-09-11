@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { EpaRepositoryPort } from '../ports/epa.repository.port';
+import { Injectable } from "@nestjs/common";
+import { EpaRepositoryPort } from "../ports/epa.repository.port";
 
 @Injectable()
 export class AsociarTiposCultivoEpaUseCase {

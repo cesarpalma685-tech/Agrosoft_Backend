@@ -5,9 +5,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('sensor_lecturas')
+@Entity("sensor_lecturas")
 export class SensorLecturasOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -18,13 +18,13 @@ export class SensorLecturasOrmEntity {
   @Column()
   valor!: string;
 
-  @Column({ type: 'timestamptz' })
+  @Column({ type: "timestamptz" })
   fecha_lectura!: Date;
 
   @Column()
   unidad!: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: "text", nullable: true })
   observaciones!: string | null;
 
   @CreateDateColumn()

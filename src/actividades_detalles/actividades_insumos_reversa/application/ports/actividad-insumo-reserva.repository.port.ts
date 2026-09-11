@@ -1,4 +1,4 @@
-import { ActividadInsumoReserva } from '../../domain/entities/actividad-insumo-reserva.entity';
+import { ActividadInsumoReserva } from "../../domain/entities/actividad-insumo-reserva.entity";
 
 export abstract class ActividadInsumoReservaRepositoryPort {
   abstract save(

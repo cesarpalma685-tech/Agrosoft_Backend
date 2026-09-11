@@ -1,4 +1,3 @@
-
 import {
   Column,
   CreateDateColumn,
@@ -6,65 +5,65 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('sensores')
+@Entity("sensores")
 export class SensorOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   nombre_sensor!: string;
 
-  @Column({ type: 'integer' })
+  @Column({ type: "integer" })
   tipo_sensor_id!: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   protocolo!: string;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   endpoint_url!: string | null;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   mqtt_topic!: string | null;
 
-  @Column({ type: 'numeric', nullable: true })
+  @Column({ type: "numeric", nullable: true })
   valor_minimo_sensor!: number | null;
 
-  @Column({ type: 'numeric', nullable: true })
-  valor_maximo_sensor!  : number | null;
+  @Column({ type: "numeric", nullable: true })
+  valor_maximo_sensor!: number | null;
 
-  @Column({ type: 'boolean', default: true })
+  @Column({ type: "boolean", default: true })
   activo!: boolean;
 
-  @Column({ type: 'varchar', nullable: true })
-  estado_conexion! : string | null;
+  @Column({ type: "varchar", nullable: true })
+  estado_conexion!: string | null;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   estado!: string | null;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   ultimo_valor!: string | null;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   ultima_medicion!: Date | null;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   last_seen_at!: Date | null;
 
-  @Column({ type: 'integer' })
-  cultivoId! : number;
+  @Column({ type: "integer" })
+  cultivoId!: number;
 
-  @Column({ type: 'integer' })
+  @Column({ type: "integer" })
   creadoPorUsuarioId!: number;
 
-  @Column({ type: 'integer' })
+  @Column({ type: "integer" })
   global_config_id!: number;
 
-  @Column({ type: 'integer' })
+  @Column({ type: "integer" })
   lote_id!: number;
 
-  @Column({ type: 'integer' })
+  @Column({ type: "integer" })
   sub_lote_id!: number;
 
   @CreateDateColumn()

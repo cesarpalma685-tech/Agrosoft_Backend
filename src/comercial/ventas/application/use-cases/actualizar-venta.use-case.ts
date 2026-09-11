@@ -1,13 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CrearVentaDto } from '../dto/crear-venta.dto';
-import { VentaRepositoryPort } from '../ports/venta.repository.ports';
-import { Venta } from '../../domain/entities/crear-venta.entity';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { CrearVentaDto } from "../dto/crear-venta.dto";
+import { VentaRepositoryPort } from "../ports/venta.repository.ports";
+import { Venta } from "../../domain/entities/crear-venta.entity";
 
 @Injectable()
 export class ActualizarVentaUseCase {
-  constructor(
-    private readonly ventaRepository: VentaRepositoryPort,
-  ) {}
+  constructor(private readonly ventaRepository: VentaRepositoryPort) {}
 
   async execute(id: number, dto: Partial<CrearVentaDto>): Promise<Venta> {
     const existe = await this.ventaRepository.findById(id);

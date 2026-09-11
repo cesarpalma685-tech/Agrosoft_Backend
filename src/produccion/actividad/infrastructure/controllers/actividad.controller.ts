@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CrearActividadUseCase } from '../../application/use-cases/crear-actividad.use-case';
-import { ListarActividadUseCase } from '../../application/use-cases/listar-actividad.use-case';
-import { CrearActividadDto } from '../../application/dto/crear-actividad.dto';
+import { Body, Controller, Get, Post } from "@nestjs/common";
+import { CrearActividadUseCase } from "../../application/use-cases/crear-actividad.use-case";
+import { ListarActividadUseCase } from "../../application/use-cases/listar-actividad.use-case";
+import { CrearActividadDto } from "../../application/dto/crear-actividad.dto";
 
-@Controller('actividades')
+@Controller("actividades")
 export class ActividadController {
   constructor(
     private readonly crearActividadUseCase: CrearActividadUseCase,

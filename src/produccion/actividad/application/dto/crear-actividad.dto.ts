@@ -1,4 +1,11 @@
-import { IsString, IsOptional, IsNotEmpty, IsInt, IsDateString, IsNumber } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  IsNotEmpty,
+  IsInt,
+  IsDateString,
+  IsNumber,
+} from "class-validator";
 
 export class CrearActividadDto {
   @IsString()

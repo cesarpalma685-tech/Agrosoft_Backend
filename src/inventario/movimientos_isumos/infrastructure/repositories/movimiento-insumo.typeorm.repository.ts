@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { MovimientoInsumoRepositoryPort } from '../../application/ports/crear-movimiento-insumo.repository.port';
-import { MovimientoInsumo } from '../../domain/entities/movimiento-insumo.entity';
-import { MovimientoInsumoOrmEntity } from '../persistence/movimiento-insumo.orm-entity';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { MovimientoInsumoRepositoryPort } from "../../application/ports/crear-movimiento-insumo.repository.port";
+import { MovimientoInsumo } from "../../domain/entities/movimiento-insumo.entity";
+import { MovimientoInsumoOrmEntity } from "../persistence/movimiento-insumo.orm-entity";
 
 @Injectable()
 export class MovimientoInsumoTypeOrmRepository extends MovimientoInsumoRepositoryPort {
@@ -15,7 +15,9 @@ export class MovimientoInsumoTypeOrmRepository extends MovimientoInsumoRepositor
   }
 
   async save(movimiento: MovimientoInsumo): Promise<MovimientoInsumo> {
-    const entity = this.repository.create(movimiento as Partial<MovimientoInsumoOrmEntity>);
+    const entity = this.repository.create(
+      movimiento as Partial<MovimientoInsumoOrmEntity>,
+    );
     const saved = await this.repository.save(entity);
     return saved as unknown as MovimientoInsumo;
   }
@@ -41,10 +43,12 @@ export class MovimientoInsumoTypeOrmRepository extends MovimientoInsumoRepositor
     id: number,
     movimiento: Partial<MovimientoInsumo>,
   ): Promise<MovimientoInsumo> {
-    await this.repository.update(id, movimiento as Partial<MovimientoInsumoOrmEntity>);
+    await this.repository.update(id, movimiento);
     const updated = await this.findById(id);
     if (!updated) {
-      throw new NotFoundException(`Movimiento de insumo con ID ${id} no encontrado`);
+      throw new NotFoundException(
+        `Movimiento de insumo con ID ${id} no encontrado`,
+      );
     }
     return updated;
   }

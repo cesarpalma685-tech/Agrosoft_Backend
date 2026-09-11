@@ -7,16 +7,16 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
-import { ProductosAgroDto } from '../../application/dto/crear-productos_agro.dto';
-import { CrearProductosAgroUseCase } from '../../application/use-cases/crear-productos_agro.use-case';
-import { ListarProductosAgroUseCase } from '../../application/use-cases/listar-productos_agro.use-case';
-import { ObtenerProductosAgroUseCase } from '../../application/use-cases/obtener-productos_agro-por-id.use-case';
-import { ActualizarProductosAgroUseCase } from '../../application/use-cases/actualizar-productos_agro.use-case';
-import { EliminarProductosAgroUseCase } from '../../application/use-cases/eliminar-productos_agro-por-id.use-case';
+import { ProductosAgroDto } from "../../application/dto/crear-productos_agro.dto";
+import { CrearProductosAgroUseCase } from "../../application/use-cases/crear-productos_agro.use-case";
+import { ListarProductosAgroUseCase } from "../../application/use-cases/listar-productos_agro.use-case";
+import { ObtenerProductosAgroUseCase } from "../../application/use-cases/obtener-productos_agro-por-id.use-case";
+import { ActualizarProductosAgroUseCase } from "../../application/use-cases/actualizar-productos_agro.use-case";
+import { EliminarProductosAgroUseCase } from "../../application/use-cases/eliminar-productos_agro-por-id.use-case";
 
-@Controller('productos_agro')
+@Controller("productos_agro")
 export class ProductosAgroController {
   constructor(
     private readonly crearUseCase: CrearProductosAgroUseCase,
@@ -36,21 +36,21 @@ export class ProductosAgroController {
     return this.listarUseCase.ejecutar();
   }
 
-  @Get(':id')
-  obtener(@Param('id', ParseIntPipe) id: number) {
+  @Get(":id")
+  obtener(@Param("id", ParseIntPipe) id: number) {
     return this.obtenerUseCase.ejecutar(id);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   actualizar(
-    @Param('id', ParseIntPipe) id: number,
+    @Param("id", ParseIntPipe) id: number,
     @Body() datos: Partial<ProductosAgroDto>,
   ) {
     return this.actualizarUseCase.ejecutar(id, datos);
   }
 
-  @Delete(':id')
-  eliminar(@Param('id', ParseIntPipe) id: number) {
+  @Delete(":id")
+  eliminar(@Param("id", ParseIntPipe) id: number) {
     return this.eliminarUseCase.ejecutar(id);
   }
 }

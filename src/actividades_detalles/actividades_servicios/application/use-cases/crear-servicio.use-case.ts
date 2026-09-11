@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { ActividadServicioRepositoryPort } from '../ports/actividad-servicio.repository.port';
-import { ActividadServicio } from '../../domain/entities/actividad-servicio.entity';
-import { CrearActividadServicioDto } from '../dto/actividad_servicio.dto';
+import { Injectable } from "@nestjs/common";
+import { ActividadServicioRepositoryPort } from "../ports/actividad-servicio.repository.port";
+import { ActividadServicio } from "../../domain/entities/actividad-servicio.entity";
+import { CrearActividadServicioDto } from "../dto/actividad_servicio.dto";
 
 @Injectable()
 export class CrearActividadServicioUseCase {

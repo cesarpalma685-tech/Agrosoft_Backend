@@ -4,9 +4,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('categorias')
+@Entity("categorias")
 export class CategoriasPersistence {
   @PrimaryGeneratedColumn()
   id!: number;

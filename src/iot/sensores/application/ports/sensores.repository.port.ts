@@ -1,4 +1,4 @@
-import { Sensor } from '../../domain/entities/sensores.dto';
+import { Sensor } from "../../domain/entities/sensores.dto";
 
 export abstract class SensorRepositoryPort {
   abstract crear(sensor: Sensor): Promise<Sensor>;
@@ -7,10 +7,7 @@ export abstract class SensorRepositoryPort {
 
   abstract listar(): Promise<Sensor[]>;
 
-  abstract actualizar(
-    id: number,
-    datos: Partial<Sensor>,
-  ): Promise<Sensor>;
+  abstract actualizar(id: number, datos: Partial<Sensor>): Promise<Sensor>;
 
   abstract eliminar(id: number): Promise<void>;
-}   
+}

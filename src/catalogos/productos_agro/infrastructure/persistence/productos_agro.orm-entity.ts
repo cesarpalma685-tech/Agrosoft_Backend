@@ -5,9 +5,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('productos_agro')
+@Entity("productos_agro")
 export class ProductosAgroPersistence {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -15,7 +15,7 @@ export class ProductosAgroPersistence {
   @Column()
   nombre!: string;
 
-  @Column({ name: 'unidad_base' })
+  @Column({ name: "unidad_base" })
   unidadBase!: string;
 
   @Column()
@@ -24,12 +24,12 @@ export class ProductosAgroPersistence {
   @Column({ nullable: true })
   imagen?: string;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   created_at!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updated_at!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deleted_at?: Date;
 }

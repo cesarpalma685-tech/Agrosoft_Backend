@@ -1,4 +1,4 @@
-import { TipoCultivoWiki } from '../../domain/entities/tipo-cultivo-wiki.entity';
+import { TipoCultivoWiki } from "../../domain/entities/tipo-cultivo-wiki.entity";
 
 export abstract class TipoCultivoWikiRepositoryPort {
   abstract save(tipoCultivoWiki: TipoCultivoWiki): Promise<TipoCultivoWiki>;

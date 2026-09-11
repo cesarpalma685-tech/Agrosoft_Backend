@@ -6,17 +6,17 @@ import {
   Param,
   Post,
   Put,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
-import { CrearLoteDto } from '../../application/dto/crear-lote.dto';
+import { CrearLoteDto } from "../../application/dto/crear-lote.dto";
 
-import { CrearLoteUseCase } from '../../application/use-cases/crear-lote.use-case';
-import { ListarLotesUseCase } from '../../application/use-cases/listar-lotes.use-case';
-import { ObtenerLotePorIdUseCase } from '../../application/use-cases/obtener-lote-por-id.use-case';
-import { ActualizarLoteUseCase } from '../../application/use-cases/actualizar-lote.use-case';
-import { EliminarLoteUseCase } from '../../application/use-cases/eliminar-lote.use-case';
+import { CrearLoteUseCase } from "../../application/use-cases/crear-lote.use-case";
+import { ListarLotesUseCase } from "../../application/use-cases/listar-lotes.use-case";
+import { ObtenerLotePorIdUseCase } from "../../application/use-cases/obtener-lote-por-id.use-case";
+import { ActualizarLoteUseCase } from "../../application/use-cases/actualizar-lote.use-case";
+import { EliminarLoteUseCase } from "../../application/use-cases/eliminar-lote.use-case";
 
-@Controller('lotes')
+@Controller("lotes")
 export class LoteController {
   constructor(
     private readonly crearLoteUseCase: CrearLoteUseCase,
@@ -36,21 +36,18 @@ export class LoteController {
     return this.listarLotesUseCase.execute();
   }
 
-  @Get(':id')
-  obtenerPorId(@Param('id') id: string) {
+  @Get(":id")
+  obtenerPorId(@Param("id") id: string) {
     return this.obtenerLotePorIdUseCase.execute(Number(id));
   }
 
-  @Put(':id')
-  actualizar(
-    @Param('id') id: string,
-    @Body() dto: CrearLoteDto,
-  ) {
+  @Put(":id")
+  actualizar(@Param("id") id: string, @Body() dto: CrearLoteDto) {
     return this.actualizarLoteUseCase.execute(Number(id), dto);
   }
 
-  @Delete(':id')
-  eliminar(@Param('id') id: string) {
+  @Delete(":id")
+  eliminar(@Param("id") id: string) {
     return this.eliminarLoteUseCase.execute(Number(id));
   }
-};
+}

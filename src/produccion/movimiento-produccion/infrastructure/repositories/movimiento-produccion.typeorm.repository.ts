@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, IsNull } from 'typeorm';
-import { MovimientoProduccionOrmEntity } from '../persistence/movimiento-produccion.orm-entity';
-import { LoteProduccionOrmEntity } from '../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity';
-import { MovimientoProduccionRepositoryPort } from '../../application/ports/movimiento-produccion.repository.port';
-import { MovimientoProduccion } from '../../domain/entities/movimiento-produccion.entity';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, IsNull } from "typeorm";
+import { MovimientoProduccionOrmEntity } from "../persistence/movimiento-produccion.orm-entity";
+import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
+import { MovimientoProduccionRepositoryPort } from "../../application/ports/movimiento-produccion.repository.port";
+import { MovimientoProduccion } from "../../domain/entities/movimiento-produccion.entity";
 
 @Injectable()
 export class MovimientoProduccionTypeOrmRepository extends MovimientoProduccionRepositoryPort {
@@ -17,8 +17,12 @@ export class MovimientoProduccionTypeOrmRepository extends MovimientoProduccionR
     super();
   }
 
-  async save(movimientoProduccion: MovimientoProduccion): Promise<MovimientoProduccion> {
-    const entity = this.repository.create(movimientoProduccion as Partial<MovimientoProduccionOrmEntity>);
+  async save(
+    movimientoProduccion: MovimientoProduccion,
+  ): Promise<MovimientoProduccion> {
+    const entity = this.repository.create(
+      movimientoProduccion as Partial<MovimientoProduccionOrmEntity>,
+    );
     const saved = await this.repository.save(entity);
     return saved as unknown as MovimientoProduccion;
   }
@@ -29,12 +33,16 @@ export class MovimientoProduccionTypeOrmRepository extends MovimientoProduccionR
   }
 
   async getStockDisponible(loteProduccionId: number): Promise<number | null> {
-    const lote = await this.loteProduccionRepository.findOne({ where: { id: loteProduccionId } });
+    const lote = await this.loteProduccionRepository.findOne({
+      where: { id: loteProduccionId },
+    });
     return lote ? lote.stockDisponibleKg : null;
   }
 
   async descontarStock(loteProduccionId: number, delta: number): Promise<void> {
-    const lote = await this.loteProduccionRepository.findOne({ where: { id: loteProduccionId } });
+    const lote = await this.loteProduccionRepository.findOne({
+      where: { id: loteProduccionId },
+    });
     if (!lote) return;
     lote.stockDisponibleKg = lote.stockDisponibleKg + delta;
     await this.loteProduccionRepository.save(lote);

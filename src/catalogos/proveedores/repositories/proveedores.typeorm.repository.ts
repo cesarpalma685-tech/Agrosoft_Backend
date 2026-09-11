@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { Proveedores } from '../domain/entities/proveedores.dto';
-import { ProveedoresRepositoryPort } from '../application/ports/proveedores.repository.port';
-import { ProveedoresPersistence } from '../infrastructure/persistence/proveedores.orm-entity';
+import { Proveedores } from "../domain/entities/proveedores.dto";
+import { ProveedoresRepositoryPort } from "../application/ports/proveedores.repository.port";
+import { ProveedoresPersistence } from "../infrastructure/persistence/proveedores.orm-entity";
 
 @Injectable()
 export class ProveedoresRepository implements ProveedoresRepositoryPort {
@@ -24,9 +24,7 @@ export class ProveedoresRepository implements ProveedoresRepositoryPort {
   async listar(): Promise<Proveedores[]> {
     const proveedores = await this.repository.find();
 
-    return proveedores.map((proveedor) =>
-      this.toDomain(proveedor),
-    );
+    return proveedores.map((proveedor) => this.toDomain(proveedor));
   }
 
   async obtenerPorId(id: number): Promise<Proveedores | null> {
@@ -56,9 +54,7 @@ export class ProveedoresRepository implements ProveedoresRepositoryPort {
     return resultado.affected !== 0;
   }
 
-  private toDomain(
-    proveedor: ProveedoresPersistence,
-  ): Proveedores {
+  private toDomain(proveedor: ProveedoresPersistence): Proveedores {
     const domain = new Proveedores();
 
     domain.nombre = proveedor.nombre;

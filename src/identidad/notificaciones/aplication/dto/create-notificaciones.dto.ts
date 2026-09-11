@@ -1,24 +1,30 @@
-import { IsBoolean, IsInt, IsObject, IsOptional, IsString,} from 'class-validator';
+import {
+  IsBoolean,
+  IsInt,
+  IsObject,
+  IsOptional,
+  IsString,
+} from "class-validator";
 
 export class CreateNotificacionDto {
-@IsInt()
-usuarioId!: number;
+  @IsInt()
+  usuarioId!: number;
 
-@IsString()
-titulo!: string;
+  @IsString()
+  titulo!: string;
 
-@IsString()
-mensaje!: string;
+  @IsString()
+  mensaje!: string;
 
-@IsOptional()
-@IsBoolean()
-leida?: boolean;
+  @IsOptional()
+  @IsBoolean()
+  leida?: boolean;
 
-@IsOptional()
-@IsString()
-tipo?: string;
+  @IsOptional()
+  @IsString()
+  tipo?: string;
 
-@IsOptional()
-@IsObject()
-metadata?: Record<string, any>;
+  @IsOptional()
+  @IsObject()
+  metadata?: Record<string, any>;
 }

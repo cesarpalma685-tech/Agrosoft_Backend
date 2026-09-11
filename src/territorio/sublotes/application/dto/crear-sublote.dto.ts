@@ -1,12 +1,6 @@
-import {
-  IsInt,
-  IsNumber,
-  IsObject,
-  IsString,
-} from 'class-validator';
+import { IsInt, IsNumber, IsObject, IsString } from "class-validator";
 
 export class CrearSubloteDto {
-
   @IsString()
   nombre!: string;
 

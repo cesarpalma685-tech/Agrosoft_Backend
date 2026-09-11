@@ -1,4 +1,4 @@
-import { IsArray, IsInt } from 'class-validator';
+import { IsArray, IsInt } from "class-validator";
 
 export class AsociarTiposCultivoEpaDto {
   @IsArray()

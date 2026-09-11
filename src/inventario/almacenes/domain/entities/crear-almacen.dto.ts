@@ -1,11 +1,11 @@
-export class Almacen{
-    id!: number;
+export class Almacen {
+  id!: number;
 
-    nombre!: string;
-    descripcion!: string;
-    ubicacion!:string;
+  nombre!: string;
+  descripcion!: string;
+  ubicacion!: string;
 
-    createAt!: Date;
-    updatedAt!: Date;
-    deletedAt!: Date;
+  createAt!: Date;
+  updatedAt!: Date;
+  deletedAt!: Date;
 }

@@ -1,4 +1,10 @@
-import { IsString, IsOptional, IsNotEmpty, IsArray, IsInt } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  IsNotEmpty,
+  IsArray,
+  IsInt,
+} from "class-validator";
 
 export class CrearEpaDto {
   @IsString()
