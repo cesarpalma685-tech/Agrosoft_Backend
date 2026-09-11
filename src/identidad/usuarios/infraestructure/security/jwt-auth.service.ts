@@ -6,7 +6,7 @@ import { IAuthServicePort } from "../../aplication/ports/auth-service.port";
 export class JwtAuthService implements IAuthServicePort {
   constructor(private readonly jwtService: JwtService) {}
 
-  generateToken(payload: { id: string; email: string }): string {
+  generateToken(payload: { id:number| string; email: string }): string {
     return this.jwtService.sign(payload);
   }
 }
