@@ -12,6 +12,7 @@ import {
 import { CultivoOrmEntity } from "../../../cultivo/infrastructure/persistence/cultivo.orm-entity";
 import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
 import { ActividadResponsableOrmEntity } from "src/actividades_detalles/actividades_responsable/infrastructure/persistence/actividad-responsable.orm-entity";
+import { ActividadEvidenciaOrmEntity } from "src/actividades_detalles/actividades_evidencias/infrastructure/persistence/actividad-evidencia.orm-entity";
 
 @Entity("actividades")
 export class ActividadOrmEntity {
@@ -85,6 +86,10 @@ export class ActividadOrmEntity {
 
   @OneToMany(() => LoteProduccionOrmEntity, (l) => l.actividadCosecha)
   lotesProduccion!: LoteProduccionOrmEntity[];
+
   @OneToMany(() => ActividadResponsableOrmEntity, (ar) => ar.actividad)
   actividadesResponsables!: ActividadResponsableOrmEntity[];
+
+  @OneToMany(()=> ActividadEvidenciaOrmEntity, (ae) => ae.actividad)
+  actividadesEvidencias!: ActividadEvidenciaOrmEntity[];
 }
