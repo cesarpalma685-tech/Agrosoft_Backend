@@ -1,3 +1,4 @@
+import { ActividadOrmEntity } from "src/produccion/actividad/infrastructure/persistence/actividad.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,6 +6,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 
 @Entity("actividades_insumos_reserva")
@@ -29,4 +32,10 @@ export class ActividadInsumoReservaOrmEntity {
 
   @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
+
+  @ManyToOne(() => ActividadOrmEntity,
+    (actividad) => actividad.actividadInsumosReserva,
+    { onDelete: "CASCADE" },
+  )
+  @JoinColumn({ name: "actividadId" })actividad!: ActividadOrmEntity;
 }

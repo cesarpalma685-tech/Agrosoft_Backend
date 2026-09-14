@@ -1,3 +1,4 @@
+import { ActividadOrmEntity } from "src/produccion/actividad/infrastructure/persistence/actividad.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,6 +7,8 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from "typeorm";
+import { JoinColumn } from "typeorm/browser";
+import { ManyToOne } from "typeorm/browser";
 
 @Entity("actividad_historial")
 export class ActividadHistorialOrmEntity {
@@ -33,5 +36,9 @@ export class ActividadHistorialOrmEntity {
   @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
 
-  
+  @ManyToOne(() => ActividadOrmEntity,(actividad) => actividad.actividadesHistorial,
+    { onDelete: "CASCADE" },
+  )
+  @JoinColumn({ name: "actividad_id" })
+  actividad!: ActividadOrmEntity;
 }

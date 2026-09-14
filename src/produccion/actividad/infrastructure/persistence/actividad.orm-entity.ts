@@ -14,6 +14,12 @@ import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure
 import { ActividadResponsableOrmEntity } from "src/actividades_detalles/actividades_responsable/infrastructure/persistence/actividad-responsable.orm-entity";
 import { ActividadEvidenciaOrmEntity } from "src/actividades_detalles/actividades_evidencias/infrastructure/persistence/actividad-evidencia.orm-entity";
 import { ActividadServicioOrmEntity } from "src/actividades_detalles/actividades_servicios/infrastructure/persistence/actividad-servicio.orm-entity";
+import { ActividadHerramientaOrmEntity } from "src/actividades_detalles/actividades_herramientas/infrastructure/persistence/actividad-herramienta.orm-entity";
+import { ActividadHistorialOrmEntity } from "src/actividades_detalles/actividades_historial/infrastructure/persistence/actividad-historial.orm-entity";
+import { ActividadInsumoOrmEntity } from "src/actividades_detalles/actividades_insumos/infrastructure/persistence/actividad-insumo.orm-entity";
+import { ActividadInsumoReservaOrmEntity } from "src/actividades_detalles/actividades_insumos_reversa/infrastructure/persistence/actividad-insumo-reserva.orm-entity";
+import { ActividadInsumoUsoOrmEntity } from "src/actividades_detalles/actividades_insumos_uso/infrastructure/persistence/actividad-insumo-uso.orm-entity";
+import { UsoHerramientaOrmEntity } from "src/actividades_detalles/usos_herramientas/infrastructure/persistence/uso-herramienta.orm-entity";
 
 @Entity("actividades")
 export class ActividadOrmEntity {
@@ -91,9 +97,27 @@ export class ActividadOrmEntity {
   @OneToMany(() => ActividadResponsableOrmEntity, (ar) => ar.actividad)
   actividadesResponsables!: ActividadResponsableOrmEntity[];
 
-  @OneToMany(()=> ActividadEvidenciaOrmEntity, (ae) => ae.actividad)
+  @OneToMany(() => ActividadEvidenciaOrmEntity, (ae) => ae.actividad)
   actividadesEvidencias!: ActividadEvidenciaOrmEntity[];
 
-  @OneToMany(()=> ActividadServicioOrmEntity, (as) => as.actividad)
+  @OneToMany(() => ActividadServicioOrmEntity, (as) => as.actividad)
   actividadesServicios!: ActividadServicioOrmEntity[];
+
+  @OneToMany(() => ActividadHerramientaOrmEntity, (ah) => ah.actividad)
+  actividadesHerramientas!: ActividadHerramientaOrmEntity[];
+
+  @OneToMany(() => ActividadHistorialOrmEntity, (ahi) => ahi.actividad)
+  actividadesHistorial!: ActividadHistorialOrmEntity[];
+
+  @OneToMany(() => ActividadInsumoOrmEntity, (ai) => ai.actividad)
+  actividadInsumos!: ActividadInsumoOrmEntity[];
+
+  @OneToMany(() => ActividadInsumoReservaOrmEntity, (air) => air.actividad)
+  actividadInsumosReserva!: ActividadInsumoReservaOrmEntity[];
+
+  @OneToMany(() => ActividadInsumoUsoOrmEntity, (aiu) => aiu.actividad)
+  actividadInsumosUso!: ActividadInsumoUsoOrmEntity[];
+
+  @OneToMany(() => UsoHerramientaOrmEntity, (uh) => uh.actividad)
+  usosHerramientas!: UsoHerramientaOrmEntity[];
 }
