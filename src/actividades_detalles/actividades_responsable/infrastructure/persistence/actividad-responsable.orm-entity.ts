@@ -1,3 +1,4 @@
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 import { ActividadOrmEntity } from "src/produccion/actividad/infrastructure/persistence/actividad.orm-entity";
 import {
   Entity,
@@ -46,4 +47,8 @@ export class ActividadResponsableOrmEntity {
     })
   @JoinColumn({ name: "actividadId" })
   actividad!: ActividadOrmEntity;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario!: UsuarioOrmEntity;
 }
