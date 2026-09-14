@@ -4,7 +4,6 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -16,6 +15,7 @@ import { AlmacenOrmEntity } from "src/inventario/almacenes/infrastructure/persis
 import { MovimientoInsumoOrmEntity } from "src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity";
 import { ReservaOrmEntity } from "src/inventario/reservas/infrastructure/persistence/reserva.orm-entity";
 import { ProveedoresPersistence } from "src/catalogos/proveedores/infrastructure/persistence/proveedores.orm-entity";
+import { CategoriasPersistence } from "src/catalogos/categorias/infrastructure/persistence/categorias-orm-entity";
 
 @Entity("insumos")
 export class InsumoOrmEntity {
@@ -155,14 +155,14 @@ export class InsumoOrmEntity {
   })
   depreciacionAcumulada!: number;
 
+  @Column({ type: "integer", name: "categoria_id" })
+  categoriaId!: number;
+
   @Column({ type: "integer", name: "almacen_id" })
   almacenId!: number;
 
   @Column({ type: "integer", name: "proveedor_id" })
   proveedorId!: number;
-
-  @Column({ type: "integer", name: "categoria_id" })
-  categoriaId!: number;
 
   @Column({ type: "integer", name: "creado_por_usuario_id" })
   creadoPorUsuarioId!: number;
@@ -217,7 +217,11 @@ export class InsumoOrmEntity {
   @OneToMany(() => ReservaOrmEntity, (reserva) => reserva.insumo)
   reservas!: ReservaOrmEntity[];
 
-  @ManyToMany(()=>ProveedoresPersistence, (proveedor) => proveedor.insumos)
+  @ManyToOne(()=>ProveedoresPersistence, (proveedor) => proveedor.insumos)
   @JoinColumn({ name: "proveedor_id" })
-  proveedorid!: ProveedoresPersistence[];
+  proveedorid!: ProveedoresPersistence;
+
+  @ManyToOne(()=> CategoriasPersistence, (categoria)=> categoria.insumos)
+  @JoinColumn({name: "categoria_id"})
+  categoriaid!: CategoriasPersistence;
 }
