@@ -1,8 +1,10 @@
+import { VentaDetalleOrmEntity } from "src/comercial/ventas_detalles/infrastructure/persistence/venta-detalle.orm-entity";
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -32,4 +34,7 @@ export class ProductosAgroPersistence {
 
   @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deleted_at?: Date;
+
+  @OneToMany(()=> VentaDetalleOrmEntity, (ventadetalle)=> ventadetalle.productoagro)
+  ventasdetalles!: VentaDetalleOrmEntity[];
 }
