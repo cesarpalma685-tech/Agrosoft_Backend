@@ -9,6 +9,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { CultivoOrmEntity } from "../../../cultivo/infrastructure/persistence/cultivo.orm-entity";
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 
 @Entity("cultivo_historial")
 export class CultivoHistorialOrmEntity {
@@ -39,4 +40,8 @@ export class CultivoHistorialOrmEntity {
 
   @DeleteDateColumn({ name: "deleted_at" })
   deletedAt!: Date | null;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario!: UsuarioOrmEntity;
 }

@@ -15,6 +15,8 @@ import { NotificacionOrmEntity } from 'src/identidad/notificaciones/infraestruct
 import { ActividadHistorialOrmEntity } from 'src/actividades_detalles/actividades_historial/infrastructure/persistence/actividad-historial.orm-entity';
 import { ActividadResponsableOrmEntity } from 'src/actividades_detalles/actividades_responsable/infrastructure/persistence/actividad-responsable.orm-entity';
 import { MovimientoProduccionOrmEntity } from 'src/produccion/movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity';
+import { CultivoHistorialOrmEntity } from 'src/produccion/cultivo-historial/infrastructure/persistence/cultivo-historial.orm-entity';
+import { CultivoHistorialOrmEntity } from 'src/produccion/cultivo-historial/infrastructure/persistence/cultivo-historial.orm-entity';
 
 @Entity("usuarios")
 export class UsuarioOrmEntity {
@@ -87,4 +89,8 @@ export class UsuarioOrmEntity {
   @OneToMany(() => MovimientoProduccionOrmEntity,
   (movimientoProduccion) => movimientoProduccion.usuario)
   movimientosProduccion!: MovimientoProduccionOrmEntity[];
+
+  @OneToMany(() => CultivoHistorialOrmEntity,
+  (cultivoHistorial) => cultivoHistorial.usuario)
+  cultivosHistorial!: CultivoHistorialOrmEntity[];
 }
