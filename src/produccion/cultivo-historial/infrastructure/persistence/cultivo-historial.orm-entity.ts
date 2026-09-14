@@ -40,8 +40,4 @@ export class CultivoHistorialOrmEntity {
 
   @DeleteDateColumn({ name: "deleted_at" })
   deletedAt!: Date | null;
-
-  @ManyToOne(() => UsuarioOrmEntity)
-  @JoinColumn({ name: 'usuarioId' })
-  usuario!: UsuarioOrmEntity;
 }

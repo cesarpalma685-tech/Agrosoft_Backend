@@ -90,7 +90,4 @@ export class UsuarioOrmEntity {
   (movimientoProduccion) => movimientoProduccion.usuario)
   movimientosProduccion!: MovimientoProduccionOrmEntity[];
 
-  @OneToMany(() => CultivoHistorialOrmEntity,
-  (cultivoHistorial) => cultivoHistorial.usuario)
-  cultivosHistorial!: CultivoHistorialOrmEntity[];
 }
