@@ -9,6 +9,7 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
+
 import { RolOrmEntity } from '../../../roles/infraestructure/persistence/rol.orm-entity';
 import { ProgramaFormacionOrmEntity } from '../../../../formacion/programas-formacion/infraestructure/persistence/programa-formacion.orm-entity';
 import { NotificacionOrmEntity } from 'src/identidad/notificaciones/infraestructure/persistence/notificaciones.orm-entity';
@@ -19,6 +20,7 @@ import { TransaccionFinancieraOrmEntity } from 'src/comercial/transacciones_fina
 import { ReservaOrmEntity } from 'src/inventario/reservas/infrastructure/persistence/reserva.orm-entity';
 import { VentaOrmEntity } from 'src/comercial/ventas/infrastructure/persistence/venta.orm-entity';
 import { MovimientoInsumoOrmEntity } from 'src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity';
+import { CultivoHistorialOrmEntity } from '../../../../produccion/cultivo-historial/infrastructure/persistence/cultivo-historial.orm-entity';
 
 @Entity("usuarios")
 export class UsuarioOrmEntity {
@@ -75,35 +77,57 @@ export class UsuarioOrmEntity {
   @JoinColumn({ name: 'programaFormacionId' })
   programaFormacion!: ProgramaFormacionOrmEntity;
 
-  @OneToMany( () => NotificacionOrmEntity,
-  (notificacion)=>notificacion.usuario)
+  @OneToMany(
+    () => NotificacionOrmEntity,
+    (notificacion) => notificacion.usuario
+  )
   notificaciones!: NotificacionOrmEntity[];
 
-  @OneToMany(() => ActividadHistorialOrmEntity,
-  (actividadHistorial) => actividadHistorial.usuario)
+  @OneToMany(
+    () => ActividadHistorialOrmEntity,
+    (actividadHistorial) => actividadHistorial.usuario
+  )
   actividadesHistorial!: ActividadHistorialOrmEntity[];
 
-  @OneToMany(() => ActividadResponsableOrmEntity,
-  (actividadResponsable) => actividadResponsable.usuario)
+  @OneToMany(
+    () => ActividadResponsableOrmEntity,
+    (actividadResponsable) => actividadResponsable.usuario
+  )
   actividadesResponsables!: ActividadResponsableOrmEntity[];
 
-  @OneToMany(() => MovimientoProduccionOrmEntity,
-  (movimientoProduccion) => movimientoProduccion.usuario)
+  @OneToMany(
+    () => MovimientoProduccionOrmEntity,
+    (movimientoProduccion) => movimientoProduccion.usuario
+  )
   movimientosProduccion!: MovimientoProduccionOrmEntity[];
 
-  @OneToMany(() => TransaccionFinancieraOrmEntity,
-  (transaccionFinanciera) => transaccionFinanciera.usuario)
+  @OneToMany(
+    () => TransaccionFinancieraOrmEntity,
+    (transaccionFinanciera) => transaccionFinanciera.usuario
+  )
   transaccionesFinancieras!: TransaccionFinancieraOrmEntity[];
 
-  @OneToMany(() => ReservaOrmEntity,
-  (reserva) => reserva.usuario)
+  @OneToMany(
+    () => ReservaOrmEntity,
+    (reserva) => reserva.usuario
+  )
   reservas!: ReservaOrmEntity[];
 
-  @OneToMany(() => VentaOrmEntity,
-  (venta) => venta.usuario)
+  @OneToMany(
+    () => VentaOrmEntity,
+    (venta) => venta.usuario
+  )
   ventas!: VentaOrmEntity[];
 
-  @OneToMany(() => MovimientoInsumoOrmEntity,
-  (movimientoInsumo) => movimientoInsumo.usuario)
+  @OneToMany(
+    () => CultivoHistorialOrmEntity,
+    (cultivoHistorial) => cultivoHistorial.usuario
+  )
+  cultivosHistorial!: CultivoHistorialOrmEntity[];
+
+  @OneToMany(
+    () => MovimientoInsumoOrmEntity,
+    (movimientoInsumo) => movimientoInsumo.usuario
+  )
   movimientosInsumos!: MovimientoInsumoOrmEntity[];
 }
