@@ -93,4 +93,5 @@ export class UsuarioOrmEntity {
   @OneToMany(() => TransaccionFinancieraOrmEntity,
   (transaccionFinanciera) => transaccionFinanciera.usuario)
   transaccionesFinancieras!: TransaccionFinancieraOrmEntity[];
+
 }

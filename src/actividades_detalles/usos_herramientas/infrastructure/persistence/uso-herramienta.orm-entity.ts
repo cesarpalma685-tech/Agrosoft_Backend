@@ -1,3 +1,4 @@
+import { InsumoOrmEntity } from "src/inventario/insumos/infrastructure/persistence/insumo.orm-entity";
 import { ActividadOrmEntity } from "src/produccion/actividad/infrastructure/persistence/actividad.orm-entity";
 import {
   Entity,
@@ -50,4 +51,11 @@ export class UsoHerramientaOrmEntity {
   )
   @JoinColumn({ name: "actividadId" })
   actividad!: ActividadOrmEntity;
+
+
+  @ManyToOne(() => InsumoOrmEntity, (insumo) => insumo.usosHerramientas, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn({ name: "insumoId" })
+  insumo!: InsumoOrmEntity;
 }

@@ -14,6 +14,10 @@ import { EstadoInsumoEnum } from "../../domain/enums/estado-insumo.enum";
 import { AlmacenOrmEntity } from "src/inventario/almacenes/infrastructure/persistence/almacen.orm-entity";
 import { MovimientoInsumoOrmEntity } from "src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity";
 import { ReservaOrmEntity } from "src/inventario/reservas/infrastructure/persistence/reserva.orm-entity";
+import { ActividadInsumoOrmEntity } from "src/actividades_detalles/actividades_insumos/infrastructure/persistence/actividad-insumo.orm-entity";
+import { ActividadInsumoReservaOrmEntity } from "src/actividades_detalles/actividades_insumos_reversa/infrastructure/persistence/actividad-insumo-reserva.orm-entity";
+import { ActividadInsumoUsoOrmEntity } from "src/actividades_detalles/actividades_insumos_uso/infrastructure/persistence/actividad-insumo-uso.orm-entity";
+import { UsoHerramientaOrmEntity } from "src/actividades_detalles/usos_herramientas/infrastructure/persistence/uso-herramienta.orm-entity";
 
 @Entity("insumos")
 export class InsumoOrmEntity {
@@ -214,4 +218,16 @@ export class InsumoOrmEntity {
 
   @OneToMany(() => ReservaOrmEntity, (reserva) => reserva.insumo)
   reservas!: ReservaOrmEntity[];
+
+  @OneToMany(() => ActividadInsumoOrmEntity, (actividadInsumo) => actividadInsumo.insumo)
+  actividadesInsumos!: ActividadInsumoOrmEntity[];
+
+  @OneToMany(() => ActividadInsumoReservaOrmEntity, (reserva) => reserva.insumo)
+  reservasInsumos!: ActividadInsumoReservaOrmEntity[];
+
+  @OneToMany(() => ActividadInsumoUsoOrmEntity, (uso) => uso.insumo)
+  usosInsumos!: ActividadInsumoUsoOrmEntity[];
+
+  @OneToMany(() => UsoHerramientaOrmEntity, (uso) => uso.insumo)
+  usosHerramientas!: UsoHerramientaOrmEntity[];
 }
