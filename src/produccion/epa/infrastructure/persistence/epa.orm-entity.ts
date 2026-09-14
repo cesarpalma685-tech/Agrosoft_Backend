@@ -7,8 +7,11 @@ import {
   DeleteDateColumn,
   ManyToMany,
   JoinTable,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import { TipoCultivoWikiOrmEntity } from "../../../../wiki_agronomia/tipo-cultivo-wiki/infrastructure/persistence/tipo-cultivo-wiki.orm-entity";
+import { UsuarioOrmEntity } from "../../../../identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 
 @Entity("epas")
 export class EpaOrmEntity {
@@ -65,6 +68,10 @@ export class EpaOrmEntity {
 
   @Column({ name: "creado_por_usuario_id", type: "int", nullable: true })
   creadoPorUsuarioId!: number | null;
+
+  @ManyToOne(() => UsuarioOrmEntity, { nullable: true })
+  @JoinColumn({ name: "creado_por_usuario_id" })
+  creadoPorUsuario!: UsuarioOrmEntity | null;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
