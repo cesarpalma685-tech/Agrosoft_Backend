@@ -3,6 +3,7 @@ import { PagoOrmEntity } from "src/comercial/pagos/infrastructure/persistence/pa
 import { TransaccionFinancieraOrmEntity } from "src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity";
 import { VentaDetalleOrmEntity } from "src/comercial/ventas_detalles/infrastructure/persistence/venta-detalle.orm-entity";
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
+import { MovimientoProduccionOrmEntity } from "src/produccion/movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity";
 import {
   Column,
   CreateDateColumn,
@@ -80,4 +81,7 @@ export class VentaOrmEntity {
   @ManyToOne(() => UsuarioOrmEntity)
   @JoinColumn({ name: 'usuarioId' })
   usuario!: UsuarioOrmEntity;
+
+  @OneToMany(() => MovimientoProduccionOrmEntity, (movimiento) => movimiento.venta)
+  movimientoProduccion!: MovimientoProduccionOrmEntity[];
 }

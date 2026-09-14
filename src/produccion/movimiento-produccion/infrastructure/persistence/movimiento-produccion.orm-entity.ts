@@ -7,9 +7,11 @@ import {
   DeleteDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from "typeorm";
 import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
+import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
 
 @Entity("movimientos_produccion")
 export class MovimientoProduccionOrmEntity {
@@ -40,12 +42,12 @@ export class MovimientoProduccionOrmEntity {
   costoTotal!: number | null;
 
   @Column({ name: "venta_id", type: "int", nullable: true })
-  ventaId!: number | null;
+  ventaId?: number | null;
 
   @Column({ type: "text", nullable: true })
   descripcion!: string | null;
 
-  @Column({ name: "usuario_id", type: "int", nullable: true })
+  @Column({ name: "usuarioId", type: "int", nullable: true })
   usuarioId!: number | null;
 
   @Column({ type: "timestamp" })
@@ -63,4 +65,8 @@ export class MovimientoProduccionOrmEntity {
   @ManyToOne(() => UsuarioOrmEntity)
   @JoinColumn({ name: 'usuarioId' })
   usuario!: UsuarioOrmEntity;
+
+  @OneToMany(()=>VentaOrmEntity , (venta) => venta.movimientoProduccion)
+  @JoinColumn({name:'venta_id'})
+  venta!: VentaOrmEntity;
 }
