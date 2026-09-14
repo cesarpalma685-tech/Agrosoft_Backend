@@ -17,6 +17,7 @@ import { ActividadResponsableOrmEntity } from 'src/actividades_detalles/activida
 import { MovimientoProduccionOrmEntity } from 'src/produccion/movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity';
 import { TransaccionFinancieraOrmEntity } from 'src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity';
 import { ReservaOrmEntity } from 'src/inventario/reservas/infrastructure/persistence/reserva.orm-entity';
+import { VentaOrmEntity } from 'src/comercial/ventas/infrastructure/persistence/venta.orm-entity';
 
 @Entity("usuarios")
 export class UsuarioOrmEntity {
@@ -97,4 +98,8 @@ export class UsuarioOrmEntity {
   @OneToMany(() => ReservaOrmEntity,
   (reserva) => reserva.usuario)
   reservas!: ReservaOrmEntity[];
+
+  @OneToMany(() => VentaOrmEntity,
+  (venta) => venta.usuario)
+  ventas!: VentaOrmEntity[];
 }

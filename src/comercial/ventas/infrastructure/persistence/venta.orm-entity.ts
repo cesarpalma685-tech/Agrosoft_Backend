@@ -2,11 +2,14 @@ import { FacturaOrmEntity } from "src/comercial/factura/infrastructure/persisten
 import { PagoOrmEntity } from "src/comercial/pagos/infrastructure/persistence/pago.orm-entity";
 import { TransaccionFinancieraOrmEntity } from "src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity";
 import { VentaDetalleOrmEntity } from "src/comercial/ventas_detalles/infrastructure/persistence/venta-detalle.orm-entity";
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -73,4 +76,8 @@ export class VentaOrmEntity {
 
   @OneToOne(() => FacturaOrmEntity, (factura) => factura.venta)
   factura!: FacturaOrmEntity;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario!: UsuarioOrmEntity;
 }
