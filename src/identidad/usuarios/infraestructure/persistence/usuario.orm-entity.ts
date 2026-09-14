@@ -7,9 +7,12 @@ import {
   DeleteDateColumn,
   ManyToOne,
   JoinColumn,
-} from "typeorm";
-import { RolOrmEntity } from "../../../roles/infraestructure/persistence/rol.orm-entity";
-import { ProgramaFormacionOrmEntity } from "../../../../formacion/programas-formacion/infraestructure/persistence/programa-formacion.orm-entity";
+  OneToMany,
+} from 'typeorm';
+import { RolOrmEntity } from '../../../roles/infraestructure/persistence/rol.orm-entity';
+import { ProgramaFormacionOrmEntity } from '../../../../formacion/programas-formacion/infraestructure/persistence/programa-formacion.orm-entity';
+import { NotificacionOrmEntity } from 'src/identidad/notificaciones/infraestructure/persistence/notificaciones.orm-entity';
+
 
 @Entity("usuarios")
 export class UsuarioOrmEntity {
@@ -63,7 +66,11 @@ export class UsuarioOrmEntity {
   rol!: RolOrmEntity;
 
   @ManyToOne(() => ProgramaFormacionOrmEntity)
-  @JoinColumn({ name: "programaFormacionId" })
+  @JoinColumn({ name: 'programaFormacionId' })
   programaFormacion!: ProgramaFormacionOrmEntity;
   movimientosInsumos: any;
+
+  @OneToMany( () => NotificacionOrmEntity,
+  (notificacion)=>notificacion.usuario)
+  notificaciones!: NotificacionOrmEntity[];
 }

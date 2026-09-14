@@ -1,9 +1,19 @@
+<<<<<<< HEAD
+=======
+import { UsuarioOrmEntity } from 'src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity';
+>>>>>>> dc6f57a (relacion entre usuario y notificación)
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+<<<<<<< HEAD
 } from "typeorm";
+=======
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+>>>>>>> dc6f57a (relacion entre usuario y notificación)
 
 @Entity("notificaciones")
 export class NotificacionOrmEntity {
@@ -36,4 +46,11 @@ export class NotificacionOrmEntity {
 
   @CreateDateColumn()
   created_at!: Date;
+<<<<<<< HEAD
+=======
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario!: UsuarioOrmEntity;
+>>>>>>> dc6f57a (relacion entre usuario y notificación)
 }
