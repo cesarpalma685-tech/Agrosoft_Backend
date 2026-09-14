@@ -20,6 +20,7 @@ import { ActividadInsumoUsoOrmEntity } from "src/actividades_detalles/actividade
 import { UsoHerramientaOrmEntity } from "src/actividades_detalles/usos_herramientas/infrastructure/persistence/uso-herramienta.orm-entity";
 import { ProveedoresPersistence } from "src/catalogos/proveedores/infrastructure/persistence/proveedores.orm-entity";
 import { CategoriasPersistence } from "src/catalogos/categorias/infrastructure/persistence/categorias-orm-entity";
+import { TransaccionFinancieraOrmEntity } from "src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity";
 
 @Entity("insumos")
 export class InsumoOrmEntity {
@@ -239,4 +240,7 @@ export class InsumoOrmEntity {
   @ManyToOne(()=> CategoriasPersistence, (categoria)=> categoria.insumos)
   @JoinColumn({name: "categoria_id"})
   categoriaid!: CategoriasPersistence;
+
+  @OneToMany(() => TransaccionFinancieraOrmEntity, (transaccion) => transaccion.insumo)
+  transacciones!: TransaccionFinancieraOrmEntity[];
 }

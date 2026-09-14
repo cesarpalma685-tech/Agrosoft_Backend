@@ -1,5 +1,6 @@
 import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
+import { InsumoOrmEntity } from "src/inventario/insumos/infrastructure/persistence/insumo.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -40,7 +41,7 @@ export class TransaccionFinancieraOrmEntity {
   @Column({ name: "venta_id", type: "integer", nullable: true })
   ventaId?: number;
 
-  @Column({ name: "usuario_id", type: "integer" })
+  @Column({ name: "usuarioId", type: "integer" })
   usuarioId!: number;
 
   @CreateDateColumn({ name: "created_at" })
@@ -59,4 +60,8 @@ export class TransaccionFinancieraOrmEntity {
   @ManyToOne(() => UsuarioOrmEntity)
   @JoinColumn({ name: 'usuarioId' })
   usuario!: UsuarioOrmEntity;
+
+  @ManyToOne(() => InsumoOrmEntity)
+  @JoinColumn({ name: 'insumo_id' })
+  insumo!: InsumoOrmEntity;
 }
