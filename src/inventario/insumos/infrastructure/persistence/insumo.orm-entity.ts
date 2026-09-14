@@ -18,6 +18,8 @@ import { ActividadInsumoOrmEntity } from "src/actividades_detalles/actividades_i
 import { ActividadInsumoReservaOrmEntity } from "src/actividades_detalles/actividades_insumos_reversa/infrastructure/persistence/actividad-insumo-reserva.orm-entity";
 import { ActividadInsumoUsoOrmEntity } from "src/actividades_detalles/actividades_insumos_uso/infrastructure/persistence/actividad-insumo-uso.orm-entity";
 import { UsoHerramientaOrmEntity } from "src/actividades_detalles/usos_herramientas/infrastructure/persistence/uso-herramienta.orm-entity";
+import { ProveedoresPersistence } from "src/catalogos/proveedores/infrastructure/persistence/proveedores.orm-entity";
+import { CategoriasPersistence } from "src/catalogos/categorias/infrastructure/persistence/categorias-orm-entity";
 
 @Entity("insumos")
 export class InsumoOrmEntity {
@@ -157,14 +159,14 @@ export class InsumoOrmEntity {
   })
   depreciacionAcumulada!: number;
 
+  @Column({ type: "integer", name: "categoria_id" })
+  categoriaId!: number;
+
   @Column({ type: "integer", name: "almacen_id" })
   almacenId!: number;
 
   @Column({ type: "integer", name: "proveedor_id" })
   proveedorId!: number;
-
-  @Column({ type: "integer", name: "categoria_id" })
-  categoriaId!: number;
 
   @Column({ type: "integer", name: "creado_por_usuario_id" })
   creadoPorUsuarioId!: number;
@@ -230,4 +232,11 @@ export class InsumoOrmEntity {
 
   @OneToMany(() => UsoHerramientaOrmEntity, (uso) => uso.insumo)
   usosHerramientas!: UsoHerramientaOrmEntity[];
+  @ManyToOne(()=>ProveedoresPersistence, (proveedor) => proveedor.insumos)
+  @JoinColumn({ name: "proveedor_id" })
+  proveedorid!: ProveedoresPersistence;
+
+  @ManyToOne(()=> CategoriasPersistence, (categoria)=> categoria.insumos)
+  @JoinColumn({name: "categoria_id"})
+  categoriaid!: CategoriasPersistence;
 }

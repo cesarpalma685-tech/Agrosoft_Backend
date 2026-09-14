@@ -1,3 +1,4 @@
+import { ProductosAgroPersistence } from "src/catalogos/productos_agro/infrastructure/persistence/productos_agro.orm-entity";
 import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
 import {
   Entity,
@@ -56,4 +57,8 @@ export class VentaDetalleOrmEntity {
   })
   @JoinColumn({ name: "venta_id" })
   venta!: VentaOrmEntity;
+
+  @ManyToOne(()=> ProductosAgroPersistence, (productoagro) =>productoagro.ventasdetalles)
+  @JoinColumn({name: "producto_agro_id"})
+  productoagro!: ProductosAgroPersistence;
 }

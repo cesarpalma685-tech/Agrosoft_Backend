@@ -15,8 +15,10 @@ import { NotificacionOrmEntity } from 'src/identidad/notificaciones/infraestruct
 import { ActividadHistorialOrmEntity } from 'src/actividades_detalles/actividades_historial/infrastructure/persistence/actividad-historial.orm-entity';
 import { ActividadResponsableOrmEntity } from 'src/actividades_detalles/actividades_responsable/infrastructure/persistence/actividad-responsable.orm-entity';
 import { MovimientoProduccionOrmEntity } from 'src/produccion/movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity';
-import { CultivoHistorialOrmEntity } from 'src/produccion/cultivo-historial/infrastructure/persistence/cultivo-historial.orm-entity';
 import { TransaccionFinancieraOrmEntity } from 'src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity';
+import { ReservaOrmEntity } from 'src/inventario/reservas/infrastructure/persistence/reserva.orm-entity';
+import { VentaOrmEntity } from 'src/comercial/ventas/infrastructure/persistence/venta.orm-entity';
+import { MovimientoInsumoOrmEntity } from 'src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity';
 
 @Entity("usuarios")
 export class UsuarioOrmEntity {
@@ -72,7 +74,6 @@ export class UsuarioOrmEntity {
   @ManyToOne(() => ProgramaFormacionOrmEntity)
   @JoinColumn({ name: 'programaFormacionId' })
   programaFormacion!: ProgramaFormacionOrmEntity;
-  movimientosInsumos: any;
 
   @OneToMany( () => NotificacionOrmEntity,
   (notificacion)=>notificacion.usuario)
@@ -94,4 +95,15 @@ export class UsuarioOrmEntity {
   (transaccionFinanciera) => transaccionFinanciera.usuario)
   transaccionesFinancieras!: TransaccionFinancieraOrmEntity[];
 
+  @OneToMany(() => ReservaOrmEntity,
+  (reserva) => reserva.usuario)
+  reservas!: ReservaOrmEntity[];
+
+  @OneToMany(() => VentaOrmEntity,
+  (venta) => venta.usuario)
+  ventas!: VentaOrmEntity[];
+
+  @OneToMany(() => MovimientoInsumoOrmEntity,
+  (movimientoInsumo) => movimientoInsumo.usuario)
+  movimientosInsumos!: MovimientoInsumoOrmEntity[];
 }
