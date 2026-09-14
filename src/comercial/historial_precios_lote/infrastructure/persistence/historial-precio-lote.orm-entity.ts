@@ -1,3 +1,4 @@
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,6 +6,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 
 @Entity("historial_precios_lote")
@@ -38,4 +41,8 @@ export class HistorialPrecioLoteOrmEntity {
 
   @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+    @JoinColumn({ name: 'usuario_id' })
+    usuario!: UsuarioOrmEntity;
 }

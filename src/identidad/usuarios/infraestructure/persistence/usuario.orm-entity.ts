@@ -19,6 +19,7 @@ import { TransaccionFinancieraOrmEntity } from 'src/comercial/transacciones_fina
 import { ReservaOrmEntity } from 'src/inventario/reservas/infrastructure/persistence/reserva.orm-entity';
 import { VentaOrmEntity } from 'src/comercial/ventas/infrastructure/persistence/venta.orm-entity';
 import { MovimientoInsumoOrmEntity } from 'src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity';
+import { HistorialPrecioLoteOrmEntity } from 'src/comercial/historial_precios_lote/infrastructure/persistence/historial-precio-lote.orm-entity';
 
 @Entity("usuarios")
 export class UsuarioOrmEntity {
@@ -106,4 +107,7 @@ export class UsuarioOrmEntity {
   @OneToMany(() => MovimientoInsumoOrmEntity,
   (movimientoInsumo) => movimientoInsumo.usuario)
   movimientosInsumos!: MovimientoInsumoOrmEntity[];
+
+  @OneToMany(() => HistorialPrecioLoteOrmEntity,(historialPrecioLote) => historialPrecioLote.usuario)
+  historialesPreciosLotes!: HistorialPrecioLoteOrmEntity[];
 }
