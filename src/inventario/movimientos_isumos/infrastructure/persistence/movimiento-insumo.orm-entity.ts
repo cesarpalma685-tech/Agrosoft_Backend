@@ -97,6 +97,6 @@ export class MovimientoInsumoOrmEntity {
   @ManyToOne(() => UsuarioOrmEntity, (usuario) => usuario.movimientosInsumos, {
     onDelete: "RESTRICT", // o 'NO ACTION' / 'SET NULL' según tu lógica
   })
-  @JoinColumn({ name: "usuario_id" })
+  @JoinColumn({ name: "usuarioId" })
   usuario!: UsuarioOrmEntity;
 }

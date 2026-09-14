@@ -36,7 +36,7 @@ export class ReservaOrmEntity {
   })
   estado!: ReservaEstadoEnum;
 
-  @Column({ name: "usuario_id", type: "integer" })
+  @Column({ name: "usuarioId", type: "integer" })
   usuarioId!: number;
 
   @Column({ name: "actividad_id", type: "integer" })

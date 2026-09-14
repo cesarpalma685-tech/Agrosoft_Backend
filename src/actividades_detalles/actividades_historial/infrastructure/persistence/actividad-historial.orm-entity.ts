@@ -19,7 +19,7 @@ export class ActividadHistorialOrmEntity {
   @Column({ name: "actividad_id", type: "integer" })
   actividadId!: number;
 
-  @Column({ name: "usuario_id", type: "integer" })
+  @Column({ name: "usuarioId", type: "integer" })
   usuarioId!: number;
 
   @Column({ type: "text", nullable: true })

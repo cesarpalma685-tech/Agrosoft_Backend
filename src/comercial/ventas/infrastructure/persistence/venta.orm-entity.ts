@@ -43,7 +43,7 @@ export class VentaOrmEntity {
   @Column({ type: "varchar", length: 100 })
   estado!: string;
 
-  @Column({ name: "usuario_id", type: "integer" })
+  @Column({ name: "usuarioId", type: "integer" })
   usuarioId!: number;
 
   @Column({ name: "anulada_por_usuario_id", type: "integer", nullable: true })
