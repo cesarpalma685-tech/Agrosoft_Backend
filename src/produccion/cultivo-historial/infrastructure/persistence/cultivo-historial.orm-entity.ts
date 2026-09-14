@@ -8,6 +8,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
+
 import { CultivoOrmEntity } from "../../../cultivo/infrastructure/persistence/cultivo.orm-entity";
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 
@@ -25,6 +26,10 @@ export class CultivoHistorialOrmEntity {
 
   @Column({ name: "usuario_id", type: "int", nullable: true })
   usuarioId!: number | null;
+
+  @ManyToOne(() => UsuarioOrmEntity, { nullable: true })
+  @JoinColumn({ name: "usuario_id" })
+  usuario!: UsuarioOrmEntity | null;
 
   @Column({ type: "text", nullable: true })
   motivo!: string | null;
