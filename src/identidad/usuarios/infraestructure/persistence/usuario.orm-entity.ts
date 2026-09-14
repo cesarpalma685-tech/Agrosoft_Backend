@@ -74,7 +74,6 @@ export class UsuarioOrmEntity {
   @ManyToOne(() => ProgramaFormacionOrmEntity)
   @JoinColumn({ name: 'programaFormacionId' })
   programaFormacion!: ProgramaFormacionOrmEntity;
-  movimientosInsumos: any;
 
   @OneToMany( () => NotificacionOrmEntity,
   (notificacion)=>notificacion.usuario)

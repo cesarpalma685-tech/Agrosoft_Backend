@@ -4,6 +4,7 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -14,6 +15,7 @@ import { EstadoInsumoEnum } from "../../domain/enums/estado-insumo.enum";
 import { AlmacenOrmEntity } from "src/inventario/almacenes/infrastructure/persistence/almacen.orm-entity";
 import { MovimientoInsumoOrmEntity } from "src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity";
 import { ReservaOrmEntity } from "src/inventario/reservas/infrastructure/persistence/reserva.orm-entity";
+import { ProveedoresPersistence } from "src/catalogos/proveedores/infrastructure/persistence/proveedores.orm-entity";
 
 @Entity("insumos")
 export class InsumoOrmEntity {
@@ -214,4 +216,8 @@ export class InsumoOrmEntity {
 
   @OneToMany(() => ReservaOrmEntity, (reserva) => reserva.insumo)
   reservas!: ReservaOrmEntity[];
+
+  @ManyToMany(()=>ProveedoresPersistence, (proveedor) => proveedor.insumos)
+  @JoinColumn({ name: "proveedor_id" })
+  proveedorid!: ProveedoresPersistence[];
 }
