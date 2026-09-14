@@ -14,6 +14,7 @@ import { ProgramaFormacionOrmEntity } from '../../../../formacion/programas-form
 import { NotificacionOrmEntity } from 'src/identidad/notificaciones/infraestructure/persistence/notificaciones.orm-entity';
 import { ActividadHistorialOrmEntity } from 'src/actividades_detalles/actividades_historial/infrastructure/persistence/actividad-historial.orm-entity';
 import { ActividadResponsableOrmEntity } from 'src/actividades_detalles/actividades_responsable/infrastructure/persistence/actividad-responsable.orm-entity';
+import { MovimientoProduccionOrmEntity } from 'src/produccion/movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity';
 
 @Entity("usuarios")
 export class UsuarioOrmEntity {
@@ -82,4 +83,8 @@ export class UsuarioOrmEntity {
   @OneToMany(() => ActividadResponsableOrmEntity,
   (actividadResponsable) => actividadResponsable.usuario)
   actividadesResponsables!: ActividadResponsableOrmEntity[];
+
+  @OneToMany(() => MovimientoProduccionOrmEntity,
+  (movimientoProduccion) => movimientoProduccion.usuario)
+  movimientosProduccion!: MovimientoProduccionOrmEntity[];
 }

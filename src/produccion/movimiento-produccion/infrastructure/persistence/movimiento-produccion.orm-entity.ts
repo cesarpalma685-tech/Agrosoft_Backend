@@ -9,6 +9,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 
 @Entity("movimientos_produccion")
 export class MovimientoProduccionOrmEntity {
@@ -58,4 +59,8 @@ export class MovimientoProduccionOrmEntity {
 
   @DeleteDateColumn({ name: "deleted_at" })
   deletedAt!: Date | null;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario!: UsuarioOrmEntity;
 }
