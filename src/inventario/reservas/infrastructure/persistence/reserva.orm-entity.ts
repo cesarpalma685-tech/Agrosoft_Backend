@@ -10,6 +10,7 @@ import {
 } from "typeorm";
 import { ReservaEstadoEnum } from "../../domain/enums/reserva-estado.enum";
 import { InsumoOrmEntity } from "src/inventario/insumos/infrastructure/persistence/insumo.orm-entity";
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 
 @Entity("reservas")
 export class ReservaOrmEntity {
@@ -55,4 +56,8 @@ export class ReservaOrmEntity {
   })
   @JoinColumn({ name: "insumo_id" })
   insumo!: InsumoOrmEntity;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario!: UsuarioOrmEntity;
 }

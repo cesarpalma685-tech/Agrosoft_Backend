@@ -16,7 +16,7 @@ import { ActividadHistorialOrmEntity } from 'src/actividades_detalles/actividade
 import { ActividadResponsableOrmEntity } from 'src/actividades_detalles/actividades_responsable/infrastructure/persistence/actividad-responsable.orm-entity';
 import { MovimientoProduccionOrmEntity } from 'src/produccion/movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity';
 import { CultivoHistorialOrmEntity } from 'src/produccion/cultivo-historial/infrastructure/persistence/cultivo-historial.orm-entity';
-import { CultivoHistorialOrmEntity } from 'src/produccion/cultivo-historial/infrastructure/persistence/cultivo-historial.orm-entity';
+import { TransaccionFinancieraOrmEntity } from 'src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity';
 
 @Entity("usuarios")
 export class UsuarioOrmEntity {
@@ -90,4 +90,7 @@ export class UsuarioOrmEntity {
   (movimientoProduccion) => movimientoProduccion.usuario)
   movimientosProduccion!: MovimientoProduccionOrmEntity[];
 
+  @OneToMany(() => TransaccionFinancieraOrmEntity,
+  (transaccionFinanciera) => transaccionFinanciera.usuario)
+  transaccionesFinancieras!: TransaccionFinancieraOrmEntity[];
 }

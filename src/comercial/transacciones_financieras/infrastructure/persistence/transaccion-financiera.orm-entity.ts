@@ -1,4 +1,5 @@
 import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -54,4 +55,8 @@ export class TransaccionFinancieraOrmEntity {
   @ManyToOne(() => VentaOrmEntity, { onDelete: "SET NULL", nullable: true })
   @JoinColumn({ name: "venta_id" })
   venta!: VentaOrmEntity;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario!: UsuarioOrmEntity;
 }
