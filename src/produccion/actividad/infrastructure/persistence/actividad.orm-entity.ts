@@ -9,8 +9,10 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
+
 import { CultivoOrmEntity } from "../../../cultivo/infrastructure/persistence/cultivo.orm-entity";
 import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
+import { ProductosAgroPersistence } from "../../../../catalogos/productos_agro/infrastructure/persistence/productos_agro.orm-entity";
 import { ActividadResponsableOrmEntity } from "src/actividades_detalles/actividades_responsable/infrastructure/persistence/actividad-responsable.orm-entity";
 import { ActividadEvidenciaOrmEntity } from "src/actividades_detalles/actividades_evidencias/infrastructure/persistence/actividad-evidencia.orm-entity";
 import { ActividadServicioOrmEntity } from "src/actividades_detalles/actividades_servicios/infrastructure/persistence/actividad-servicio.orm-entity";
@@ -51,7 +53,11 @@ export class ActividadOrmEntity {
   @Column({ type: "timestamp" })
   fecha!: Date;
 
-  @Column({ name: "horas_actividad", type: "double precision", nullable: true })
+  @Column({
+    name: "horas_actividad",
+    type: "double precision",
+    nullable: true,
+  })
   horasActividad!: number | null;
 
   @Column({
@@ -61,7 +67,11 @@ export class ActividadOrmEntity {
   })
   precioHoraActividad!: number | null;
 
-  @Column({ name: "costo_mano_obra", type: "double precision", nullable: true })
+  @Column({
+    name: "costo_mano_obra",
+    type: "double precision",
+    nullable: true,
+  })
   costoManoObra!: number | null;
 
   @Column({ type: "text", nullable: true })
@@ -70,17 +80,37 @@ export class ActividadOrmEntity {
   @Column({ type: "varchar", default: "pendiente" })
   estado!: string;
 
-  @Column({ name: "creado_por_usuario_id", type: "int", nullable: true })
+  @Column({
+    name: "creado_por_usuario_id",
+    type: "int",
+    nullable: true,
+  })
   creadoPorUsuarioId!: number | null;
 
-  @Column({ name: "cantidad_plantas", type: "int", nullable: true })
+  @Column({
+    name: "cantidad_plantas",
+    type: "int",
+    nullable: true,
+  })
   cantidadPlantas!: number | null;
 
-  @Column({ name: "kg_recolectados", type: "double precision", nullable: true })
+  @Column({
+    name: "kg_recolectados",
+    type: "double precision",
+    nullable: true,
+  })
   kgRecolectados!: number | null;
 
-  @Column({ name: "producto_agro_id", type: "int", nullable: true })
+  @Column({
+    name: "producto_agro_id",
+    type: "int",
+    nullable: true,
+  })
   productoAgroId!: number | null;
+
+  @ManyToOne(() => ProductosAgroPersistence, { nullable: true })
+  @JoinColumn({ name: "producto_agro_id" })
+  productoAgro!: ProductosAgroPersistence | null;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
@@ -91,33 +121,63 @@ export class ActividadOrmEntity {
   @DeleteDateColumn({ name: "deleted_at" })
   deletedAt!: Date | null;
 
-  @OneToMany(() => LoteProduccionOrmEntity, (l) => l.actividadCosecha)
+  @OneToMany(
+    () => LoteProduccionOrmEntity,
+    (l) => l.actividadCosecha,
+  )
   lotesProduccion!: LoteProduccionOrmEntity[];
 
-  @OneToMany(() => ActividadResponsableOrmEntity, (ar) => ar.actividad)
+  @OneToMany(
+    () => ActividadResponsableOrmEntity,
+    (ar) => ar.actividad,
+  )
   actividadesResponsables!: ActividadResponsableOrmEntity[];
 
-  @OneToMany(() => ActividadEvidenciaOrmEntity, (ae) => ae.actividad)
+  @OneToMany(
+    () => ActividadEvidenciaOrmEntity,
+    (ae) => ae.actividad,
+  )
   actividadesEvidencias!: ActividadEvidenciaOrmEntity[];
 
-  @OneToMany(() => ActividadServicioOrmEntity, (as) => as.actividad)
+  @OneToMany(
+    () => ActividadServicioOrmEntity,
+    (as) => as.actividad,
+  )
   actividadesServicios!: ActividadServicioOrmEntity[];
 
-  @OneToMany(() => ActividadHerramientaOrmEntity, (ah) => ah.actividad)
+  @OneToMany(
+    () => ActividadHerramientaOrmEntity,
+    (ah) => ah.actividad,
+  )
   actividadesHerramientas!: ActividadHerramientaOrmEntity[];
 
-  @OneToMany(() => ActividadHistorialOrmEntity, (ahi) => ahi.actividad)
+  @OneToMany(
+    () => ActividadHistorialOrmEntity,
+    (ahi) => ahi.actividad,
+  )
   actividadesHistorial!: ActividadHistorialOrmEntity[];
 
-  @OneToMany(() => ActividadInsumoOrmEntity, (ai) => ai.actividad)
+  @OneToMany(
+    () => ActividadInsumoOrmEntity,
+    (ai) => ai.actividad,
+  )
   actividadInsumos!: ActividadInsumoOrmEntity[];
 
-  @OneToMany(() => ActividadInsumoReservaOrmEntity, (air) => air.actividad)
+  @OneToMany(
+    () => ActividadInsumoReservaOrmEntity,
+    (air) => air.actividad,
+  )
   actividadInsumosReserva!: ActividadInsumoReservaOrmEntity[];
 
-  @OneToMany(() => ActividadInsumoUsoOrmEntity, (aiu) => aiu.actividad)
+  @OneToMany(
+    () => ActividadInsumoUsoOrmEntity,
+    (aiu) => aiu.actividad,
+  )
   actividadInsumosUso!: ActividadInsumoUsoOrmEntity[];
 
-  @OneToMany(() => UsoHerramientaOrmEntity, (uh) => uh.actividad)
+  @OneToMany(
+    () => UsoHerramientaOrmEntity,
+    (uh) => uh.actividad,
+  )
   usosHerramientas!: UsoHerramientaOrmEntity[];
 }
