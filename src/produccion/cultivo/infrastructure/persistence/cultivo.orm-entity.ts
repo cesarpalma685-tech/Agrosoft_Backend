@@ -6,10 +6,13 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   OneToMany,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import { CultivoHistorialOrmEntity } from "../../../cultivo-historial/infrastructure/persistence/cultivo-historial.orm-entity";
 import { ActividadOrmEntity } from "../../../actividad/infrastructure/persistence/actividad.orm-entity";
 import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
+import { SubloteOrmEntity } from "../../../../territorio/sublotes/infrastructure/persistence/sublote.orm-entity";
 
 @Entity("cultivos")
 export class CultivoOrmEntity {
@@ -30,6 +33,10 @@ export class CultivoOrmEntity {
 
   @Column({ name: "sublote_id", type: "int", nullable: true })
   subloteId!: number | null;
+
+  @ManyToOne(() => SubloteOrmEntity, { nullable: true })
+  @JoinColumn({ name: "sublote_id" })
+  sublote!: SubloteOrmEntity | null;
 
   @Column({ name: "img_cultivo", type: "varchar", nullable: true })
   imgCultivo!: string | null;
