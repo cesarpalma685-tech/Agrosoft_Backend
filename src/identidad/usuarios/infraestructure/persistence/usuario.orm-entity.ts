@@ -18,6 +18,7 @@ import { MovimientoProduccionOrmEntity } from 'src/produccion/movimiento-producc
 import { TransaccionFinancieraOrmEntity } from 'src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity';
 import { ReservaOrmEntity } from 'src/inventario/reservas/infrastructure/persistence/reserva.orm-entity';
 import { VentaOrmEntity } from 'src/comercial/ventas/infrastructure/persistence/venta.orm-entity';
+import { MovimientoInsumoOrmEntity } from 'src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity';
 
 @Entity("usuarios")
 export class UsuarioOrmEntity {
@@ -102,4 +103,8 @@ export class UsuarioOrmEntity {
   @OneToMany(() => VentaOrmEntity,
   (venta) => venta.usuario)
   ventas!: VentaOrmEntity[];
+
+  @OneToMany(() => MovimientoInsumoOrmEntity,
+  (movimientoInsumo) => movimientoInsumo.usuario)
+  movimientosInsumos!: MovimientoInsumoOrmEntity[];
 }

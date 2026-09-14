@@ -99,4 +99,8 @@ export class MovimientoInsumoOrmEntity {
   })
   @JoinColumn({ name: "usuario_id" })
   usuario!: UsuarioOrmEntity;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario!: UsuarioOrmEntity;
 }
