@@ -12,6 +12,7 @@ import {
 import { CultivoOrmEntity } from "../../../cultivo/infrastructure/persistence/cultivo.orm-entity";
 import { ActividadOrmEntity } from "../../../actividad/infrastructure/persistence/actividad.orm-entity";
 import { MovimientoProduccionOrmEntity } from "../../../movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity";
+import { ProductosAgroPersistence } from "../../../../catalogos/productos_agro/infrastructure/persistence/productos_agro.orm-entity";
 
 @Entity("lotes_produccion")
 export class LoteProduccionOrmEntity {
@@ -20,6 +21,10 @@ export class LoteProduccionOrmEntity {
 
   @Column({ name: "producto_agro_id", type: "int", nullable: true })
   productoAgroId!: number | null;
+
+  @ManyToOne(() => ProductosAgroPersistence, { nullable: true })
+  @JoinColumn({ name: "producto_agro_id" })
+  productoAgro!: ProductosAgroPersistence | null;
 
   @Column({ name: "cultivo_id", type: "int" })
   cultivoId!: number;
