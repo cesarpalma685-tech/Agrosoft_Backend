@@ -1,11 +1,18 @@
+import { SensorOrmEntity } from 'src/iot/sensores/infrastructure/persistence/sensores.orm-entity';
+import { LoteOrmEntity } from 'src/territorio/lotes/infrastructure/persistence/lote.orm-entity';
+import { SubloteOrmEntity } from 'src/territorio/sublotes/infrastructure/persistence/sublote.orm-entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
 
 @Entity('iot_global_config')
 export class IotGlobalConfigPersistence {
@@ -42,11 +49,19 @@ export class IotGlobalConfigPersistence {
   @Column()
   custom_topics!: string;
 
-  @Column()
+  @Column({ insert: false, update: false })
   lote_id!: number;
 
-  @Column()
+  @ManyToOne(() => LoteOrmEntity, (lote) => lote.iotConfigs)
+  @JoinColumn({ name: 'lote_id' })
+  lote!: LoteOrmEntity;
+
+  @Column({ insert: false, update: false })
   sub_lote_id!: number;
+
+  @ManyToOne(() => SubloteOrmEntity, (sublote) => sublote.iotConfigs)
+  @JoinColumn({ name: 'sub_lote_id' })
+  sublote!: SubloteOrmEntity;
 
   @Column()
   username!: string;
@@ -62,4 +77,7 @@ export class IotGlobalConfigPersistence {
 
   @Column({ default: false })
   auto_discover!: boolean;
+
+@OneToMany(() => SensorOrmEntity, (sensor: SensorOrmEntity) => sensor.lote)
+sensores!: SensorOrmEntity[];
 }

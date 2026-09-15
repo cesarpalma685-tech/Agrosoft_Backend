@@ -1,19 +1,28 @@
+import { SensorOrmEntity } from 'src/iot/sensores/infrastructure/persistence/sensores.orm-entity';
+
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
 
 @Entity('sensor_lecturas')
 export class SensorLecturasOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ insert: false, update: false })
   sensor_id!: number;
+
+  @ManyToOne(() => SensorOrmEntity, (sensor: SensorOrmEntity) => sensor.lecturas)
+  @JoinColumn({ name: 'sensor_id' })
+  sensor!: SensorOrmEntity;
 
   @Column()
   valor!: string;

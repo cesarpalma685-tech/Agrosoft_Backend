@@ -1,11 +1,16 @@
+import { SensorOrmEntity } from 'src/iot/sensores/infrastructure/persistence/sensores.orm-entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
 
 @Entity('tipos_sensores')
 export class TiposSensoresOrmEntity {
@@ -38,4 +43,9 @@ export class TiposSensoresOrmEntity {
 
   @DeleteDateColumn({ nullable: true })
   deleted_at!: Date | null;
+
+
+  // relación con sensores
+  @OneToMany(() => SensorOrmEntity, (sensor) => sensor.tipoSensor)
+  sensores!: SensorOrmEntity[];
 }

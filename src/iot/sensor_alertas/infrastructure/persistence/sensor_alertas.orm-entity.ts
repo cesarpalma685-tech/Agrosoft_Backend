@@ -1,8 +1,13 @@
+import { SensorOrmEntity } from 'src/iot/sensores/infrastructure/persistence/sensores.orm-entity';
+import { LoteOrmEntity } from 'src/territorio/lotes/infrastructure/persistence/lote.orm-entity';
+import { SubloteOrmEntity } from 'src/territorio/sublotes/infrastructure/persistence/sublote.orm-entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -21,8 +26,12 @@ export class SensorAlertasPersistence {
   @DeleteDateColumn()
   deleted_at!: Date | null;
 
-  @Column()
+  @Column({ insert: false, update: false })
   sensor_id!: number;
+
+  @ManyToOne(() => SensorOrmEntity, (sensor: SensorOrmEntity) => sensor.alertas)
+  @JoinColumn({ name: 'sensor_id' })
+  sensor!: SensorOrmEntity;
 
   @Column('double precision')
   valor!: number;
@@ -36,9 +45,17 @@ export class SensorAlertasPersistence {
   @Column()
   fecha_alerta!: Date;
 
-  @Column()
+  @Column({ insert: false, update: false })
   lote_id!: number;
 
-  @Column()
+  @ManyToOne(() => LoteOrmEntity, (lote: LoteOrmEntity) => lote.alertas)
+  @JoinColumn({ name: 'lote_id' })
+  lote!: LoteOrmEntity;
+
+  @Column({ insert: false, update: false })
   sub_lote_id!: number;
+
+  @ManyToOne(() => SubloteOrmEntity, (sublote: SubloteOrmEntity) => sublote.alertas)
+  @JoinColumn({ name: 'sub_lote_id' })
+  sublote!: SubloteOrmEntity;
 }
