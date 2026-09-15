@@ -1,5 +1,6 @@
 import { ProductosAgroPersistence } from "src/catalogos/productos_agro/infrastructure/persistence/productos_agro.orm-entity";
 import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
+import { CultivoOrmEntity } from "src/produccion/cultivo/infrastructure/persistence/cultivo.orm-entity";
 import { LoteProduccionOrmEntity } from "src/produccion/lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
 import {
   Entity,
@@ -66,4 +67,8 @@ export class VentaDetalleOrmEntity {
   @ManyToOne(()=> LoteProduccionOrmEntity, (lote) =>lote.ventasDetalles)
   @JoinColumn({name: "lote_produccion_id"})
   loteProduccion!: LoteProduccionOrmEntity;
+
+  @ManyToOne(()=> CultivoOrmEntity, (cultivo) =>cultivo.ventasDetalles)
+  @JoinColumn({name: "cultivo_id"})
+  cultivo!: CultivoOrmEntity  ;
 }

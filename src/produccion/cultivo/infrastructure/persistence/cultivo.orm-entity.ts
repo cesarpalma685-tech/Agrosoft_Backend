@@ -14,6 +14,7 @@ import { ActividadOrmEntity } from "../../../actividad/infrastructure/persistenc
 import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
 import { SubloteOrmEntity } from "../../../../territorio/sublotes/infrastructure/persistence/sublote.orm-entity";
 import { LoteOrmEntity } from "../../../../territorio/lotes/infrastructure/persistence/lote.orm-entity";
+import { VentaDetalleOrmEntity } from "src/comercial/ventas_detalles/infrastructure/persistence/venta-detalle.orm-entity";
 
 @Entity("cultivos")
 export class CultivoOrmEntity {
@@ -81,4 +82,7 @@ export class CultivoOrmEntity {
 
   @OneToMany(() => LoteProduccionOrmEntity, (l) => l.cultivo)
   lotesProduccion!: LoteProduccionOrmEntity[];
+
+  @OneToMany(() => VentaDetalleOrmEntity, (v) => v.cultivo)
+  ventasDetalles!: VentaDetalleOrmEntity[];
 }
