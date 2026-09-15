@@ -68,7 +68,7 @@ export class MovimientoProduccionOrmEntity {
   @JoinColumn({ name: "usuarioId" })
   usuario!: UsuarioOrmEntity;
 
-  @OneToMany(()=>VentaOrmEntity , (venta) => venta.movimientoProduccion)
+  @ManyToOne(() => VentaOrmEntity, (venta) => venta.movimientoProduccion)
   @JoinColumn({name:'venta_id'})
   venta!: VentaOrmEntity;
 }

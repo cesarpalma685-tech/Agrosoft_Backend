@@ -1,4 +1,5 @@
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
+import { LoteProduccionOrmEntity } from "src/produccion/lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -45,4 +46,8 @@ export class HistorialPrecioLoteOrmEntity {
   @ManyToOne(() => UsuarioOrmEntity)
     @JoinColumn({ name: 'usuario_id' })
     usuario!: UsuarioOrmEntity;
+
+  @ManyToOne(() => LoteProduccionOrmEntity, (loteproduccion) => loteproduccion.historialpreciolote)
+  @JoinColumn({name:'lote_produccion_id'})
+  loteproduccion!: LoteProduccionOrmEntity;
 }
