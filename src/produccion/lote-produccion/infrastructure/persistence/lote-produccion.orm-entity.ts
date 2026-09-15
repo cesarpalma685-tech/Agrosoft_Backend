@@ -14,6 +14,7 @@ import { ActividadOrmEntity } from "../../../actividad/infrastructure/persistenc
 import { MovimientoProduccionOrmEntity } from "../../../movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity";
 import { ProductosAgroPersistence } from "../../../../catalogos/productos_agro/infrastructure/persistence/productos_agro.orm-entity";
 import { HistorialPrecioLoteOrmEntity } from "src/comercial/historial_precios_lote/infrastructure/persistence/historial-precio-lote.orm-entity";
+import { VentaDetalleOrmEntity } from "src/comercial/ventas_detalles/infrastructure/persistence/venta-detalle.orm-entity";
 
 @Entity("lotes_produccion")
 export class LoteProduccionOrmEntity {
@@ -87,4 +88,7 @@ export class LoteProduccionOrmEntity {
 
   @OneToMany(() => HistorialPrecioLoteOrmEntity, (historial) => historial.loteproduccion)
   historialpreciolote!: HistorialPrecioLoteOrmEntity[];
+
+  @OneToMany(() => VentaDetalleOrmEntity, (ventaDetalle) => ventaDetalle.loteProduccion)
+  ventasDetalles!: VentaDetalleOrmEntity[];
 }
