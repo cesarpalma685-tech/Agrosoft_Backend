@@ -11,6 +11,7 @@ import {
 import { ReservaEstadoEnum } from "../../domain/enums/reserva-estado.enum";
 import { InsumoOrmEntity } from "src/inventario/insumos/infrastructure/persistence/insumo.orm-entity";
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
+import { ActividadOrmEntity } from "src/produccion/actividad/infrastructure/persistence/actividad.orm-entity";
 
 @Entity("reservas")
 export class ReservaOrmEntity {
@@ -60,4 +61,8 @@ export class ReservaOrmEntity {
   @ManyToOne(() => UsuarioOrmEntity)
   @JoinColumn({ name: 'usuarioId' })
   usuario!: UsuarioOrmEntity;
+
+  @ManyToOne(() => ActividadOrmEntity, (actividad) => actividad.reserva,)
+  @JoinColumn({name:'actividad_id'})
+  actividad!: ActividadOrmEntity;
 }

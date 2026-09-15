@@ -22,6 +22,7 @@ import { ActividadInsumoOrmEntity } from "src/actividades_detalles/actividades_i
 import { ActividadInsumoReservaOrmEntity } from "src/actividades_detalles/actividades_insumos_reversa/infrastructure/persistence/actividad-insumo-reserva.orm-entity";
 import { ActividadInsumoUsoOrmEntity } from "src/actividades_detalles/actividades_insumos_uso/infrastructure/persistence/actividad-insumo-uso.orm-entity";
 import { UsoHerramientaOrmEntity } from "src/actividades_detalles/usos_herramientas/infrastructure/persistence/uso-herramienta.orm-entity";
+import { ReservaOrmEntity } from "src/inventario/reservas/infrastructure/persistence/reserva.orm-entity";
 
 @Entity("actividades")
 export class ActividadOrmEntity {
@@ -180,4 +181,10 @@ export class ActividadOrmEntity {
     (uh) => uh.actividad,
   )
   usosHerramientas!: UsoHerramientaOrmEntity[];
+
+  @OneToMany(
+    () => ReservaOrmEntity,
+    (re) => re.actividad,
+  )
+  reserva!: ReservaOrmEntity[];
 }
