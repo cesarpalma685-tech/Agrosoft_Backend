@@ -1,11 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { ReservaRepositoryPort } from '../ports/reserva.repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { ReservaRepositoryPort } from "../ports/reserva.repository.port";
 
 @Injectable()
 export class EliminarReservaUseCase {
-  constructor(
-    private readonly reservaRepository: ReservaRepositoryPort,
-  ) {}
+  constructor(private readonly reservaRepository: ReservaRepositoryPort) {}
 
   async execute(id: number): Promise<void> {
     const existe = await this.reservaRepository.findById(id);

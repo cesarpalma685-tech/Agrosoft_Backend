@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { ActividadHistorialRepositoryPort } from '../../application/ports/actividad-historial.repository.port';
-import { ActividadHistorial } from '../../domain/entities/actividad-historial.entity';
-import { ActividadHistorialOrmEntity } from '../persistence/actividad-historial.orm-entity';
+import { ActividadHistorialRepositoryPort } from "../../application/ports/actividad-historial.repository.port";
+import { ActividadHistorial } from "../../domain/entities/actividad-historial.entity";
+import { ActividadHistorialOrmEntity } from "../persistence/actividad-historial.orm-entity";
 
 @Injectable()
 export class ActividadHistorialTypeOrmRepository extends ActividadHistorialRepositoryPort {
@@ -22,7 +22,7 @@ export class ActividadHistorialTypeOrmRepository extends ActividadHistorialRepos
 
   async findAll(): Promise<ActividadHistorial[]> {
     return await this.actividadHistorialRepository.find({
-      order: { createdAt: 'DESC' },
+      order: { createdAt: "DESC" },
     });
   }
 }

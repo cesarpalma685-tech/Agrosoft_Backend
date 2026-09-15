@@ -1,11 +1,11 @@
-import { Type } from 'class-transformer';
+import { Type } from "class-transformer";
 import {
   IsNotEmpty,
   IsNumber,
   IsObject,
   IsOptional,
   IsString,
-} from 'class-validator';
+} from "class-validator";
 
 export class CrearActividadHistorialDto {
   @Type(() => Number)

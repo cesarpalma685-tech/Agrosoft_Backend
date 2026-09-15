@@ -1,12 +1,12 @@
-import { 
-  IsNotEmpty, 
-  IsNumber, 
-  IsString, 
-  IsDateString, 
-  IsOptional, 
-  IsPositive 
-} from 'class-validator';
-import { Type } from 'class-transformer';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsDateString,
+  IsOptional,
+  IsPositive,
+} from "class-validator";
+import { Type } from "class-transformer";
 
 export class CrearTransaccionFinancieraDto {
   @IsString()

@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { TiposSensoresRepositoryPort } from '../ports/tipos_sensores.repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { TiposSensoresRepositoryPort } from "../ports/tipos_sensores.repository.port";
 
 @Injectable()
 export class EliminarTiposSensoresUseCase {

@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { Cliente } from '../../domain/entities/cliente.entity';
-import { ClienteRepository } from '../ports/cliente.repository';
+import { Injectable } from "@nestjs/common";
+import { Cliente } from "../../domain/entities/cliente.entity";
+import { ClienteRepository } from "../ports/cliente.repository";
 
 export interface CrearClienteInput {
   nombre: string;
@@ -13,9 +13,7 @@ export interface CrearClienteInput {
 
 @Injectable()
 export class CrearClienteUseCase {
-  constructor(
-    private readonly repository: ClienteRepository,
-  ) {}
+  constructor(private readonly repository: ClienteRepository) {}
 
   async ejecutar(datos: CrearClienteInput): Promise<Cliente> {
     const cliente = new Cliente(

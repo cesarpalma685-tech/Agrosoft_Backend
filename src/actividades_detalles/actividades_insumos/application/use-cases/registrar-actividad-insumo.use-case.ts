@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { ActividadInsumoRepositoryPort } from '../ports/actividad-insumo.repository.port';
-import { ActividadInsumo } from '../../domain/entities/actividad-insumo.entity';
-import { CrearActividadInsumoDto } from '../dto/actividad_insumo.dto';
+import { Injectable } from "@nestjs/common";
+import { ActividadInsumoRepositoryPort } from "../ports/actividad-insumo.repository.port";
+import { ActividadInsumo } from "../../domain/entities/actividad-insumo.entity";
+import { CrearActividadInsumoDto } from "../dto/actividad_insumo.dto";
 
 @Injectable()
 export class CrearActividadInsumoUseCase {

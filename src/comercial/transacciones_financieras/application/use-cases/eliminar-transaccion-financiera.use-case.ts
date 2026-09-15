@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { TransaccionFinancieraRepositoryPort } from '../ports/crear-transaccion-financiera.repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { TransaccionFinancieraRepositoryPort } from "../ports/crear-transaccion-financiera.repository.port";
 
 @Injectable()
 export class EliminarTransaccionFinancieraUseCase {
@@ -10,7 +10,9 @@ export class EliminarTransaccionFinancieraUseCase {
   async execute(id: number): Promise<void> {
     const existe = await this.repository.findById(id);
     if (!existe) {
-      throw new NotFoundException(`La transacción financiera con ID ${id} no existe`);
+      throw new NotFoundException(
+        `La transacción financiera con ID ${id} no existe`,
+      );
     }
     await this.repository.softDelete(id);
   }

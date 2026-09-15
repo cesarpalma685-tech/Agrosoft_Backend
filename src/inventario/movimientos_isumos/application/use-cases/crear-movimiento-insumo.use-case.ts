@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { MovimientoInsumoRepositoryPort } from '../ports/crear-movimiento-insumo.repository.port';
+import { Injectable } from "@nestjs/common";
+import { MovimientoInsumoRepositoryPort } from "../ports/crear-movimiento-insumo.repository.port";
 
-import { MovimientoInsumo } from '../../domain/entities/movimiento-insumo.entity';
-import { CrearMovimientoIsumoDto } from '../dto/crear-movimiento-insumo.dto';
+import { MovimientoInsumo } from "../../domain/entities/movimiento-insumo.entity";
+import { CrearMovimientoIsumoDto } from "../dto/crear-movimiento-insumo.dto";
 
 @Injectable()
 export class RegistrarMovimientoInsumoUseCase {

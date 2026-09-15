@@ -1,35 +1,33 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    CreateDateColumn,
-    JoinColumn,
-    ManyToOne,
-} from 'typeorm';
-import { PermisoOrmEntity } from '../../../permisos/infraestructure/persistence/permiso.orm-entity';
-import { RolOrmEntity } from '../../../roles/infraestructure/persistence/rol.orm-entity';
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  JoinColumn,
+  ManyToOne,
+} from "typeorm";
+import { PermisoOrmEntity } from "../../../permisos/infraestructure/persistence/permiso.orm-entity";
+import { RolOrmEntity } from "../../../roles/infraestructure/persistence/rol.orm-entity";
 
-@Entity('rol_permisos')
+@Entity("rol_permisos")
 export class RolPermisoOrmEntity {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-@PrimaryGeneratedColumn()
-id!: number;
+  @Column()
+  rolId!: number;
 
-@Column()
-rolId!: number;
+  @Column()
+  permisoId!: number;
 
-@Column()
-permisoId!: number;
+  @CreateDateColumn()
+  created_at!: Date;
 
-@CreateDateColumn()
-created_at!: Date;
-
-  @ManyToOne(() => RolOrmEntity, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'rolId' })
+  @ManyToOne(() => RolOrmEntity, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "rolId" })
   rol!: RolOrmEntity;
 
-  @ManyToOne(() => PermisoOrmEntity, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'permisoId' })
+  @ManyToOne(() => PermisoOrmEntity, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "permisoId" })
   permiso!: PermisoOrmEntity;
-
 }

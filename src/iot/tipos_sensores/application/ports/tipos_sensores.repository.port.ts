@@ -1,7 +1,7 @@
-import { TiposSensores } from '../../domain/entities/tipos_sensores.dto';
+import { TiposSensores } from "../../domain/entities/tipos_sensores.dto";
 
 export abstract class TiposSensoresRepositoryPort {
-  abstract crear(tipoSensor: TiposSensores): Promise<TiposSensores        >;
+  abstract crear(tipoSensor: TiposSensores): Promise<TiposSensores>;
 
   abstract buscarPorId(id: number): Promise<TiposSensores | null>;
 

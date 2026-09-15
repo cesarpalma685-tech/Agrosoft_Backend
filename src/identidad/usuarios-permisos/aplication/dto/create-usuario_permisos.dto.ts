@@ -1,9 +1,9 @@
-import { IsInt } from 'class-validator';
+import { IsInt } from "class-validator";
 
 export class CreateUsuarioPermisoDto {
-@IsInt()
-usuarioId!: number;
+  @IsInt()
+  usuarioId!: number;
 
-@IsInt()
-permisoId!: number;
+  @IsInt()
+  permisoId!: number;
 }

@@ -1,43 +1,51 @@
-import { VentaOrmEntity } from 'src/comercial/ventas/infrastructure/persistence/venta.orm-entity';
-import {Entity,PrimaryGeneratedColumn,Column,CreateDateColumn,UpdateDateColumn,DeleteDateColumn, OneToOne, JoinColumn,
-} from 'typeorm';
+import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
 
-@Entity('facturas')
+@Entity("facturas")
 export class FacturaOrmEntity {
-    @PrimaryGeneratedColumn({ type: 'integer' })
-    id!: number;
+  @PrimaryGeneratedColumn({ type: "integer" })
+  id!: number;
 
-    @Column({ name: 'venta_id', type: 'integer' })
-    ventaId!: number;
+  @Column({ name: "venta_id", type: "integer" })
+  ventaId!: number;
 
-    @Column({ type: 'varchar', length: 50 })
-    numero!: string;
+  @Column({ type: "varchar", length: 50 })
+  numero!: string;
 
-    @Column({ type: 'varchar', length: 20, nullable: true })
-    prefijo?: string;
+  @Column({ type: "varchar", length: 20, nullable: true })
+  prefijo?: string;
 
-    @Column({ name: 'fecha_emision', type: 'timestamp' })
-    fechaEmision!: Date;
+  @Column({ name: "fecha_emision", type: "timestamp" })
+  fechaEmision!: Date;
 
-    @Column({ type: 'timestamp' })
-    vencimiento!: Date;
+  @Column({ type: "timestamp" })
+  vencimiento!: Date;
 
-    @Column({ name: 'qr_url', type: 'varchar', nullable: true })
-    qrUrl?: string;
+  @Column({ name: "qr_url", type: "varchar", nullable: true })
+  qrUrl?: string;
 
-    @Column({ name: 'pdf_url', type: 'varchar', nullable: true })
-    pdfUrl?: string;
+  @Column({ name: "pdf_url", type: "varchar", nullable: true })
+  pdfUrl?: string;
 
-    @CreateDateColumn({ name: 'created_at' })
-    createdAt!: Date;
+  @CreateDateColumn({ name: "created_at" })
+  createdAt!: Date;
 
-    @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt!: Date;
+  @UpdateDateColumn({ name: "updated_at" })
+  updatedAt!: Date;
 
-    @DeleteDateColumn({ name: 'deleted_at', nullable: true })
-    deletedAt?: Date;
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
+  deletedAt?: Date;
 
-    @OneToOne(() => VentaOrmEntity, { onDelete: 'CASCADE' })
-    @JoinColumn({ name: 'venta_id' })
-    venta!: VentaOrmEntity;
+  @OneToOne(() => VentaOrmEntity, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "venta_id" })
+  venta!: VentaOrmEntity;
 }

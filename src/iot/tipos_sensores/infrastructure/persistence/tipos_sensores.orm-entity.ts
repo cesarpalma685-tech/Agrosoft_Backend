@@ -9,30 +9,30 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
+@Entity("tipos_sensores")
 
-@Entity('tipos_sensores')
 export class TiposSensoresOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   nombre!: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   unidad!: string;
 
-  @Column({ type: 'integer' })
+  @Column({ type: "integer" })
   decimales!: number;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: "text", nullable: true })
   descripcion!: string | null;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   imagen!: string | null;
 
-  @Column({ type: 'integer' })
+  @Column({ type: "integer" })
   ttl_minutos!: number;
 
   @CreateDateColumn()
@@ -43,6 +43,7 @@ export class TiposSensoresOrmEntity {
 
   @DeleteDateColumn({ nullable: true })
   deleted_at!: Date | null;
+
 
 
   // relación con sensores

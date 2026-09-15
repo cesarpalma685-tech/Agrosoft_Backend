@@ -1,13 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { RolPermiso } from '../../domain/entities/rol_permisos.entity';
-import { RolPermisoRepository } from '../../aplication/ports/rol_permisos.repository';
-import { RolPermisoOrmEntity } from '../persistence/rol_permisos.orm-entity';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { RolPermiso } from "../../domain/entities/rol_permisos.entity";
+import { RolPermisoRepository } from "../../aplication/ports/rol_permisos.repository";
+import { RolPermisoOrmEntity } from "../persistence/rol_permisos.orm-entity";
 
 @Injectable()
 export class RolPermisoTypeOrmRepository extends RolPermisoRepository {
-
   constructor(
     @InjectRepository(RolPermisoOrmEntity)
     private readonly repo: Repository<RolPermisoOrmEntity>,
@@ -36,19 +35,14 @@ export class RolPermisoTypeOrmRepository extends RolPermisoRepository {
   }
 
   private aDominio(orm: RolPermisoOrmEntity): RolPermiso {
-    return new RolPermiso(
-    orm.id,
-    orm.rolId,
-    orm.permisoId,
-    orm.created_at,
-    );
+    return new RolPermiso(orm.id, orm.rolId, orm.permisoId, orm.created_at);
   }
 
   private aOrm(rolPermiso: RolPermiso): Partial<RolPermisoOrmEntity> {
     return {
-    id: rolPermiso.id ?? undefined,
-    rolId: rolPermiso.rolId,
-    permisoId: rolPermiso.permisoId,
+      id: rolPermiso.id ?? undefined,
+      rolId: rolPermiso.rolId,
+      permisoId: rolPermiso.permisoId,
     };
   }
 }

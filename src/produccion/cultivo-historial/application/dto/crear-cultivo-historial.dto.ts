@@ -1,4 +1,4 @@
-import { IsInt, IsOptional, IsString, IsObject } from 'class-validator';
+import { IsInt, IsOptional, IsString, IsObject } from "class-validator";
 
 export class CrearCultivoHistorialDto {
   @IsInt()

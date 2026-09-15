@@ -1,7 +1,13 @@
-import { IsEmail, IsInt, IsOptional, IsString, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsInt,
+  IsOptional,
+  IsString,
+  MinLength,
+} from "class-validator";
 
 export class CreateUsuarioDto {
-  @IsString() 
+  @IsString()
   nombre!: string;
 
   @IsString()
@@ -10,21 +16,21 @@ export class CreateUsuarioDto {
   @IsString()
   identificacion!: string;
 
-  @IsOptional() 
-  @IsString() 
-  programaFormacionId!: string; 
+  @IsOptional()
+  @IsString()
+  programaFormacionId!: string;
 
-  @IsInt() 
-  idFicha!: number; 
+  @IsInt()
+  idFicha!: number;
 
-  @IsOptional() 
-  @IsString() 
+  @IsOptional()
+  @IsString()
   telefono?: string;
 
-  @IsEmail() 
+  @IsEmail()
   correo!: string;
 
-  @IsString() 
-  @MinLength(8) 
+  @IsString()
+  @MinLength(8)
   password!: string;
 }

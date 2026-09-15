@@ -1,11 +1,11 @@
-import { IsInt, IsOptional } from 'class-validator';
+import { IsInt, IsOptional } from "class-validator";
 
 export class UpdateUsuarioPermisoDto {
-@IsOptional()
-@IsInt()
-usuarioId?: number;
+  @IsOptional()
+  @IsInt()
+  usuarioId?: number;
 
-@IsOptional()
-@IsInt()
-permisoId?: number;
+  @IsOptional()
+  @IsInt()
+  permisoId?: number;
 }

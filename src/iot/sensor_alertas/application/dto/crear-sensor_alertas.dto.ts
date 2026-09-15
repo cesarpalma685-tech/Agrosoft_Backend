@@ -4,7 +4,7 @@ import {
   IsNumber,
   IsString,
   MaxLength,
-} from 'class-validator';
+} from "class-validator";
 
 export class CrearSensorAlertasDto {
   @IsInt()
@@ -24,7 +24,7 @@ export class CrearSensorAlertasDto {
   fecha_alerta!: string;
 
   @IsInt()
-  lote_id! : number;
+  lote_id!: number;
 
   @IsInt()
   sub_lote_id!: number;

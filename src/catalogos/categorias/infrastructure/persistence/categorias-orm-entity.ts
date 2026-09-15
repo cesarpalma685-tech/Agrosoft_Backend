@@ -1,12 +1,14 @@
+import { InsumoOrmEntity } from "src/inventario/insumos/infrastructure/persistence/insumo.orm-entity";
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('categorias')
+@Entity("categorias")
 export class CategoriasPersistence {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -22,4 +24,7 @@ export class CategoriasPersistence {
 
   @UpdateDateColumn()
   updatedAt!: Date;
+
+  @OneToMany(()=> InsumoOrmEntity, (insumo) => insumo.categoriaid)
+  insumos!:InsumoOrmEntity[];
 }

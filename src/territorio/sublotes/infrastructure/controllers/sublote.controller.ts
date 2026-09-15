@@ -7,17 +7,17 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
-import { CrearSubloteUseCase } from '../../application/use-cases/crear-sublote.use-case';
-import { ActualizarSubloteUseCase } from '../../application/use-cases/actualizar-sublote.use-case';
-import { EliminarSubloteUseCase } from '../../application/use-cases/eliminar-sublote.use-case';
-import { ListarSublotesUseCase } from '../../application/use-cases/listar-sublote.use-case';
-import { ObtenerSublotePorIdUseCase } from '../../application/use-cases/obtener-sublote-por-id.use-case';
+import { CrearSubloteUseCase } from "../../application/use-cases/crear-sublote.use-case";
+import { ActualizarSubloteUseCase } from "../../application/use-cases/actualizar-sublote.use-case";
+import { EliminarSubloteUseCase } from "../../application/use-cases/eliminar-sublote.use-case";
+import { ListarSublotesUseCase } from "../../application/use-cases/listar-sublote.use-case";
+import { ObtenerSublotePorIdUseCase } from "../../application/use-cases/obtener-sublote-por-id.use-case";
 
-import { CrearSubloteDto } from '../../application/dto/crear-sublote.dto';
+import { CrearSubloteDto } from "../../application/dto/crear-sublote.dto";
 
-@Controller('sublotes')
+@Controller("sublotes")
 export class SubloteController {
   constructor(
     private readonly crearSubloteUseCase: CrearSubloteUseCase,
@@ -37,21 +37,21 @@ export class SubloteController {
     return await this.listarSublotesUseCase.execute();
   }
 
-  @Get(':id')
-  async obtener(@Param('id', ParseIntPipe) id: number) {
+  @Get(":id")
+  async obtener(@Param("id", ParseIntPipe) id: number) {
     return await this.obtenerSubloteUseCase.execute(id);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   async actualizar(
-    @Param('id', ParseIntPipe) id: number,
+    @Param("id", ParseIntPipe) id: number,
     @Body() datos: Partial<CrearSubloteDto>,
   ) {
     return await this.actualizarSubloteUseCase.execute(id, datos);
   }
 
-  @Delete(':id')
-  async eliminar(@Param('id', ParseIntPipe) id: number) {
+  @Delete(":id")
+  async eliminar(@Param("id", ParseIntPipe) id: number) {
     return await this.eliminarSubloteUseCase.execute(id);
   }
 }

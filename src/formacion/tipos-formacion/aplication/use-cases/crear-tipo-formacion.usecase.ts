@@ -1,6 +1,9 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { TipoFormacion } from '../../domain/entities/tipo-formacion.entity';
-import { TipoFormacionRepository,TIPO_FORMACION_REPOSITORY,} from '../ports/tipo-formacion.repository';
+import { Inject, Injectable } from "@nestjs/common";
+import { TipoFormacion } from "../../domain/entities/tipo-formacion.entity";
+import {
+  TipoFormacionRepository,
+  TIPO_FORMACION_REPOSITORY,
+} from "../ports/tipo-formacion.repository";
 
 interface CrearInput {
   codigo: string;
@@ -13,7 +16,8 @@ interface CrearInput {
 @Injectable()
 export class CrearTipoFormacionUseCase {
   constructor(
-    @Inject(TIPO_FORMACION_REPOSITORY) private readonly repo: TipoFormacionRepository,
+    @Inject(TIPO_FORMACION_REPOSITORY)
+    private readonly repo: TipoFormacionRepository,
   ) {}
 
   ejecutar(input: CrearInput): Promise<TipoFormacion> {

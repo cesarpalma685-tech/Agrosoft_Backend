@@ -1,31 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { TiposSensoresRepositoryPort } from '../../application/ports/tipos_sensores.repository.port';
-import { TiposSensores } from '../../domain/entities/tipos_sensores.dto';
-import { TiposSensoresOrmEntity } from '../persistence/tipos_sensores.orm-entity';
+import { TiposSensoresRepositoryPort } from "../../application/ports/tipos_sensores.repository.port";
+import { TiposSensores } from "../../domain/entities/tipos_sensores.dto";
+import { TiposSensoresOrmEntity } from "../persistence/tipos_sensores.orm-entity";
 
 @Injectable()
-export class TiposSensoresTypeormRepository
-  implements TiposSensoresRepositoryPort
-{
+export class TiposSensoresTypeormRepository implements TiposSensoresRepositoryPort {
   constructor(
     @InjectRepository(TiposSensoresOrmEntity)
     private readonly repository: Repository<TiposSensoresOrmEntity>,
   ) {}
 
-  async crear(
-    tipoSensor: TiposSensores,
-  ): Promise<TiposSensores> {
+  async crear(tipoSensor: TiposSensores): Promise<TiposSensores> {
     const entity = this.repository.create(tipoSensor);
 
     return await this.repository.save(entity);
   }
 
-  async buscarPorId(
-    id: number,
-  ): Promise<TiposSensores | null> {
+  async buscarPorId(id: number): Promise<TiposSensores | null> {
     return await this.repository.findOne({
       where: { id },
     });
@@ -45,7 +39,7 @@ export class TiposSensoresTypeormRepository
     if (!actualizado) {
       throw new Error(`El tipo de sensor con ID no existe`);
     }
-    
+
     return actualizado;
   }
 

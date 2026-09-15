@@ -1,23 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { SensorAlertasRepositoryPort } from '../../application/ports/sensor_alertas.repository.port';
-import { SensorAlertas } from '../../domain/entities/sensor_alertas.dto';
-import { SensorAlertasPersistence } from '../persistence/sensor_alertas.orm-entity';
+import { SensorAlertasRepositoryPort } from "../../application/ports/sensor_alertas.repository.port";
+import { SensorAlertas } from "../../domain/entities/sensor_alertas.dto";
+import { SensorAlertasPersistence } from "../persistence/sensor_alertas.orm-entity";
 
 @Injectable()
-export class SensorAlertasRepository
-  implements SensorAlertasRepositoryPort
-{
+export class SensorAlertasRepository implements SensorAlertasRepositoryPort {
   constructor(
     @InjectRepository(SensorAlertasPersistence)
     private readonly repository: Repository<SensorAlertasPersistence>,
   ) {}
 
-  async crear(
-    sensorAlertas: SensorAlertas,
-  ): Promise<SensorAlertas> {
+  async crear(sensorAlertas: SensorAlertas): Promise<SensorAlertas> {
     const alerta = this.repository.create({
       sensor_id: sensorAlertas.sensor_id,
       valor: sensorAlertas.valor,
@@ -39,9 +35,7 @@ export class SensorAlertasRepository
     return alertas.map((alerta) => this.toDomain(alerta));
   }
 
-  async buscarPorId(
-    id: number,
-  ): Promise<SensorAlertas | null> {
+  async buscarPorId(id: number): Promise<SensorAlertas | null> {
     const alerta = await this.repository.findOne({
       where: { id },
     });
@@ -50,37 +44,33 @@ export class SensorAlertasRepository
   }
 
   async actualizar(
-  id: number,
-  datos: Partial<SensorAlertas>,
-): Promise<SensorAlertas | null> {
-  const datosActualizados = {
-    sensor_id: datos.sensor_id,
-    valor: datos.valor,
-    umbral: datos.umbral,
-    tipo: datos.tipo,
-    fecha_alerta: datos.fecha_alerta,
-    lote_id: datos.lote_id,
-    sub_lote_id: datos.sub_lote_id,
-  };
+    id: number,
+    datos: Partial<SensorAlertas>,
+  ): Promise<SensorAlertas | null> {
+    const datosActualizados = {
+      sensor_id: datos.sensor_id,
+      valor: datos.valor,
+      umbral: datos.umbral,
+      tipo: datos.tipo,
+      fecha_alerta: datos.fecha_alerta,
+      lote_id: datos.lote_id,
+      sub_lote_id: datos.sub_lote_id,
+    };
 
-  await this.repository.update(id, datosActualizados);
+    await this.repository.update(id, datosActualizados);
 
-  const actualizada = await this.repository.findOne({
-    where: { id },
-  });
+    const actualizada = await this.repository.findOne({
+      where: { id },
+    });
 
-  return actualizada
-    ? this.toDomain(actualizada)
-    : null;
-}
+    return actualizada ? this.toDomain(actualizada) : null;
+  }
 
   async eliminar(id: number): Promise<void> {
     await this.repository.softDelete(id);
   }
 
-  private toDomain(
-    alerta: SensorAlertasPersistence,
-  ): SensorAlertas {
+  private toDomain(alerta: SensorAlertasPersistence): SensorAlertas {
     return new SensorAlertas(
       alerta.id,
       alerta.created_at,

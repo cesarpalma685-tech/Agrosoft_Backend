@@ -3,44 +3,44 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('clientes')
+@Entity("clientes")
 export class ClienteOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column({
-    type: 'varchar',
+    type: "varchar",
   })
   nombre!: string;
 
   @Column({
-    type: 'varchar',
+    type: "varchar",
     nullable: true,
   })
   identificacion!: string | null;
 
   @Column({
-    type: 'varchar',
+    type: "varchar",
     nullable: true,
   })
   telefono!: string | null;
 
   @Column({
-    type: 'varchar',
+    type: "varchar",
     nullable: true,
   })
   email!: string | null;
 
   @Column({
-    type: 'varchar',
+    type: "varchar",
     nullable: true,
   })
   direccion!: string | null;
 
   @Column({
-    type: 'text',
+    type: "text",
     nullable: true,
   })
   notas!: string | null;

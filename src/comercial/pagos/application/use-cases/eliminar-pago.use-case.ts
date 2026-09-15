@@ -1,11 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PagoRepositoryPort } from '../ports/pago.repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PagoRepositoryPort } from "../ports/pago.repository.port";
 
 @Injectable()
 export class EliminarPagoUseCase {
-  constructor(
-    private readonly repository: PagoRepositoryPort,
-  ) {}
+  constructor(private readonly repository: PagoRepositoryPort) {}
 
   async execute(id: number): Promise<void> {
     const existe = await this.repository.findById(id);

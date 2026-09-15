@@ -1,22 +1,22 @@
-import { 
-  Controller, 
-  Get, 
-  Post, 
-  Put, 
-  Delete, 
-  Body, 
-  Param, 
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
   Query,
-  ParseIntPipe 
-} from '@nestjs/common';
-import { CrearTransaccionFinancieraUseCase } from '../../application/use-cases/crear-transaccion-financiera.use-case';
-import { ListarTransaccionesFinancierasUseCase } from '../../application/use-cases/listar-transacciones-financieras.use-case';
-import { ActualizarTransaccionFinancieraUseCase } from '../../application/use-cases/actualizar-transaccion-financiera.use-case';
-import { EliminarTransaccionFinancieraUseCase } from '../../application/use-cases/eliminar-transaccion-financiera.use-case';
-import { CrearTransaccionFinancieraDto } from '../../application/dto/crear-transaccion-financiera.dto';
-import { ObtenerTransaccionFinancieraPorIdUseCase } from '../../application/use-cases/obtener-transaccion-financiera.use-case';
+  ParseIntPipe,
+} from "@nestjs/common";
+import { CrearTransaccionFinancieraUseCase } from "../../application/use-cases/crear-transaccion-financiera.use-case";
+import { ListarTransaccionesFinancierasUseCase } from "../../application/use-cases/listar-transacciones-financieras.use-case";
+import { ActualizarTransaccionFinancieraUseCase } from "../../application/use-cases/actualizar-transaccion-financiera.use-case";
+import { EliminarTransaccionFinancieraUseCase } from "../../application/use-cases/eliminar-transaccion-financiera.use-case";
+import { CrearTransaccionFinancieraDto } from "../../application/dto/crear-transaccion-financiera.dto";
+import { ObtenerTransaccionFinancieraPorIdUseCase } from "../../application/use-cases/obtener-transaccion-financiera.use-case";
 
-@Controller('transacciones-financieras')
+@Controller("transacciones-financieras")
 export class TransaccionFinancieraController {
   constructor(
     private readonly crearUseCase: CrearTransaccionFinancieraUseCase,
@@ -36,21 +36,21 @@ export class TransaccionFinancieraController {
     return await this.listarUseCase.execute();
   }
 
-  @Get(':id')
-  async obtenerPorId(@Param('id', ParseIntPipe) id: number) {
+  @Get(":id")
+  async obtenerPorId(@Param("id", ParseIntPipe) id: number) {
     return await this.obtenerPorIdUseCase.execute(id);
   }
 
-  @Put(':id')
+  @Put(":id")
   async actualizar(
-    @Param('id', ParseIntPipe) id: number,
+    @Param("id", ParseIntPipe) id: number,
     @Body() dto: Partial<CrearTransaccionFinancieraDto>,
   ) {
     return await this.actualizarUseCase.execute(id, dto);
   }
 
-  @Delete(':id')
-  async eliminar(@Param('id', ParseIntPipe) id: number) {
+  @Delete(":id")
+  async eliminar(@Param("id", ParseIntPipe) id: number) {
     return await this.eliminarUseCase.execute(id);
   }
 }

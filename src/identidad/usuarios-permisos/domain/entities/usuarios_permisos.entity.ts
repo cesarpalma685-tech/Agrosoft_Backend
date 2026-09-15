@@ -1,7 +1,7 @@
 export class UsuarioPermiso {
-constructor(
+  constructor(
     public readonly id: number | null,
     public usuarioId: number,
     public permisoId: number,
-) {}
+  ) {}
 }

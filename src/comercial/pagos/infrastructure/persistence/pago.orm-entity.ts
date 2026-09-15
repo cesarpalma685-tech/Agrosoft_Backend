@@ -1,4 +1,4 @@
-import { VentaOrmEntity } from 'src/comercial/ventas/infrastructure/persistence/venta.orm-entity';
+import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -8,38 +8,40 @@ import {
   DeleteDateColumn,
   ManyToOne,
   JoinColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('pagos')
+@Entity("pagos")
 export class PagoOrmEntity {
-  @PrimaryGeneratedColumn({ type: 'integer' })
+  @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
 
-  @Column({ name: 'venta_id', type: 'integer' })
+  @Column({ name: "venta_id", type: "integer" })
   ventaId!: number;
 
-  @Column({ type: 'varchar', length: 50 })
+  @Column({ type: "varchar", length: 50 })
   metodo!: string;
 
-  @Column({ type: 'double precision' })
+  @Column({ type: "double precision" })
   monto!: number;
 
-  @Column({ type: 'varchar', length: 10 })
+  @Column({ type: "varchar", length: 10 })
   moneda!: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column({ type: "varchar", length: 100, nullable: true })
   referencia?: string;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
 
-    @ManyToOne(() => VentaOrmEntity, (venta) => venta.pagos, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'venta_id' })
+  @ManyToOne(() => VentaOrmEntity, (venta) => venta.pagos, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn({ name: "venta_id" })
   venta!: VentaOrmEntity;
 }

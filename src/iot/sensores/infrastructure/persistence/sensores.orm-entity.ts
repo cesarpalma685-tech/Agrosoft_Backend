@@ -68,7 +68,7 @@ export class SensorOrmEntity {
 
   // --- FK externas (a los módulos de mis compañeros de trabajo en el modulo cultivo)
 
-  @Column({ type: 'integer', insert: false, update: false })
+  @Column({ type: 'integer',name:'cultivoId', insert: false, update: false })
   cultivoId!: number;
 
   @ManyToOne(() => CultivoOrmEntity)

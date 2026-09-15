@@ -1,11 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { LoteRepositoryPort } from '../ports/lote.repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { LoteRepositoryPort } from "../ports/lote.repository.port";
 
 @Injectable()
 export class EliminarLoteUseCase {
-  constructor(
-    private readonly loteRepository: LoteRepositoryPort,
-  ) {}
+  constructor(private readonly loteRepository: LoteRepositoryPort) {}
 
   async execute(id: number): Promise<void> {
     const lote = await this.loteRepository.findById(id);

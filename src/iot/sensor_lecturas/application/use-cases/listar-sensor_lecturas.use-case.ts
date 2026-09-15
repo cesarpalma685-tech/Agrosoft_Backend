@@ -1,19 +1,11 @@
-import{ Injectable }  from '@nestjs/common';
-import { SensorLecturasRepositoryPort } from '../ports/sensor_lecturas.repository.port';
+import { Injectable } from "@nestjs/common";
+import { SensorLecturasRepositoryPort } from "../ports/sensor_lecturas.repository.port";
 
 @Injectable()
-
 export class ListarSensorLecturasUseCase {
+  constructor(private readonly repository: SensorLecturasRepositoryPort) {}
 
-  constructor(
-    private readonly repository: SensorLecturasRepositoryPort,
-  ) {}
-
-async execute() {
-
+  async execute() {
     return await this.repository.listar();
-    
- 
-}
-
+  }
 }

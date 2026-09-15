@@ -1,7 +1,10 @@
-import { Injectable, ConflictException, Inject } from '@nestjs/common';
-import * as bcrypt from 'bcryptjs';
-import { USUARIO_REPOSITORY, UsuarioRepository } from '../ports/usuario.repository';
-import { Usuario } from '../../domain/entities/usuario.entity';
+import { Injectable, ConflictException, Inject } from "@nestjs/common";
+import * as bcrypt from "bcryptjs";
+import {
+  USUARIO_REPOSITORY,
+  UsuarioRepository,
+} from "../ports/usuario.repository";
+import { Usuario } from "../../domain/entities/usuario.entity";
 
 export interface CrearUsuarioInput {
   nombre: string;
@@ -18,12 +21,13 @@ export interface CrearUsuarioInput {
 export class CrearUsuarioUseCase {
   constructor(
     @Inject(USUARIO_REPOSITORY)
-    private readonly repository: UsuarioRepository) {}
+    private readonly repository: UsuarioRepository,
+  ) {}
 
   async ejecutar(datos: CrearUsuarioInput): Promise<Usuario> {
     const existente = await this.repository.buscarPorCorreo(datos.correo);
     if (existente) {
-      throw new ConflictException('Ya existe un usuario con ese correo');
+      throw new ConflictException("Ya existe un usuario con ese correo");
     }
 
     const passwordHash = await bcrypt.hash(datos.password, 10);
@@ -38,7 +42,7 @@ export class CrearUsuarioUseCase {
       datos.idFicha,
       datos.programaFormacionId ?? null,
       datos.telefono ?? null,
-      'activo',
+      "activo",
       null,
       null,
       new Date(),

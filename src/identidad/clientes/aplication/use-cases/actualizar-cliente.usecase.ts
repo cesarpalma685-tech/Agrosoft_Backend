@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { ClienteRepository } from '../ports/cliente.repository';
-import { Cliente } from '../../domain/entities/cliente.entity';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { ClienteRepository } from "../ports/cliente.repository";
+import { Cliente } from "../../domain/entities/cliente.entity";
 
 export interface ActualizarClienteInput {
   nombre?: string;
@@ -13,20 +13,13 @@ export interface ActualizarClienteInput {
 
 @Injectable()
 export class ActualizarClienteUseCase {
-  constructor(
-    private readonly repository: ClienteRepository,
-  ) {}
+  constructor(private readonly repository: ClienteRepository) {}
 
-  async ejecutar(
-    id: number,
-    datos: ActualizarClienteInput,
-  ): Promise<Cliente> {
+  async ejecutar(id: number, datos: ActualizarClienteInput): Promise<Cliente> {
     const cliente = await this.repository.buscarPorId(id);
 
     if (!cliente) {
-      throw new NotFoundException(
-        'Cliente no encontrado',
-      );
+      throw new NotFoundException("Cliente no encontrado");
     }
 
     const actualizado = new Cliente(

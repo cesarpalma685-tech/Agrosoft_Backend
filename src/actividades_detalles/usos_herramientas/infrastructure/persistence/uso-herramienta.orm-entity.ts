@@ -1,3 +1,5 @@
+import { InsumoOrmEntity } from "src/inventario/insumos/infrastructure/persistence/insumo.orm-entity";
+import { ActividadOrmEntity } from "src/produccion/actividad/infrastructure/persistence/actividad.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,40 +7,55 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-} from 'typeorm';
+  JoinColumn,
+  ManyToOne,
+} from "typeorm";
 
-@Entity('usos_herramientas')
+@Entity("usos_herramientas")
 export class UsoHerramientaOrmEntity {
-  @PrimaryGeneratedColumn({ type: 'integer' })
+  @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
 
-  @Column({ name: 'actividadId', type: 'integer' })
+  @Column({ name: "actividadId", type: "integer" })
   actividadId!: number;
 
-  @Column({ name: 'insumoId', type: 'integer' })
+  @Column({ name: "insumoId", type: "integer" })
   insumoId!: number;
 
-  @Column({ name: 'horasUsadas', type: 'float' })
+  @Column({ name: "horasUsadas", type: "float" })
   horasUsadas!: number;
 
-  @Column({ name: 'depreciacionGenerada', type: 'float' })
+  @Column({ name: "depreciacionGenerada", type: "float" })
   depreciacionGenerada!: number;
 
-  @Column({ name: 'valorEnLibrosAntes', type: 'float' })
+  @Column({ name: "valorEnLibrosAntes", type: "float" })
   valorEnLibrosAntes!: number;
 
-  @Column({ name: 'valorEnLibrosDespues', type: 'float' })
+  @Column({ name: "valorEnLibrosDespues", type: "float" })
   valorEnLibrosDespues!: number;
 
-  @Column({ name: 'fechaUso', type: 'timestamp' })
+  @Column({ name: "fechaUso", type: "timestamp" })
   fechaUso!: Date;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
+
+  @ManyToOne(() => ActividadOrmEntity,(actividad) => actividad.usosHerramientas,
+    { onDelete: "CASCADE" },
+  )
+  @JoinColumn({ name: "actividadId" })
+  actividad!: ActividadOrmEntity;
+
+
+  @ManyToOne(() => InsumoOrmEntity, (insumo) => insumo.usosHerramientas, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn({ name: "insumoId" })
+  insumo!: InsumoOrmEntity;
 }

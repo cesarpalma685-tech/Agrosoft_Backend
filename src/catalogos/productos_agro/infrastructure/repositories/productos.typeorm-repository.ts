@@ -1,15 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { ProductosAgroDto } from '../../application/dto/crear-productos_agro.dto';
-import { ProductosAgroRepositoryPort } from '../../application/ports/productos_agro-repository.port';
-import { ProductosAgroPersistence } from '../persistence/productos_agro.orm-entity';
+import { ProductosAgroDto } from "../../application/dto/crear-productos_agro.dto";
+import { ProductosAgroRepositoryPort } from "../../application/ports/productos_agro-repository.port";
+import { ProductosAgroPersistence } from "../persistence/productos_agro.orm-entity";
 
 @Injectable()
-export class ProductosAgroRepository
-  implements ProductosAgroRepositoryPort
-{
+export class ProductosAgroRepository implements ProductosAgroRepositoryPort {
   constructor(
     @InjectRepository(ProductosAgroPersistence)
     private readonly repository: Repository<ProductosAgroPersistence>,
@@ -56,9 +54,7 @@ export class ProductosAgroRepository
     return resultado.affected !== 0;
   }
 
-  private toDomain(
-    producto: ProductosAgroPersistence,
-  ): ProductosAgroDto {
+  private toDomain(producto: ProductosAgroPersistence): ProductosAgroDto {
     const domain = new ProductosAgroDto();
 
     domain.nombre = producto.nombre;

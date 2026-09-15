@@ -1,23 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { IotGlobalConfigRepositoryPort } from '../../application/ports/iot_global_config.repository.port';
-import { IotGlobalConfig } from '../../domain/entities/iot_global_config.dto';
-import { IotGlobalConfigPersistence } from '../persistence/iot_global_config.orm-entity';
+import { IotGlobalConfigRepositoryPort } from "../../application/ports/iot_global_config.repository.port";
+import { IotGlobalConfig } from "../../domain/entities/iot_global_config.dto";
+import { IotGlobalConfigPersistence } from "../persistence/iot_global_config.orm-entity";
 
 @Injectable()
-export class IotGlobalConfigRepository
-  implements IotGlobalConfigRepositoryPort
-{
+export class IotGlobalConfigRepository implements IotGlobalConfigRepositoryPort {
   constructor(
     @InjectRepository(IotGlobalConfigPersistence)
     private readonly repository: Repository<IotGlobalConfigPersistence>,
   ) {}
 
-  async crear(
-    iot_global_config: IotGlobalConfig,
-  ): Promise<IotGlobalConfig> {
+  async crear(iot_global_config: IotGlobalConfig): Promise<IotGlobalConfig> {
     const config = this.repository.create({
       name: iot_global_config.name,
       broker: iot_global_config.broker,
@@ -47,9 +43,7 @@ export class IotGlobalConfigRepository
     return configs.map((config) => this.toDomain(config));
   }
 
-  async obtenerPorId(
-    id: number,
-  ): Promise<IotGlobalConfig | null> {
+  async obtenerPorId(id: number): Promise<IotGlobalConfig | null> {
     const config = await this.repository.findOne({
       where: { id },
     });
@@ -58,29 +52,25 @@ export class IotGlobalConfigRepository
   }
 
   async actualizar(
-  id: number,
-  datos: Partial<IotGlobalConfig>,
-): Promise<IotGlobalConfig | null> {
-  await this.repository.update(id, {
-    ...datos,
-  } as Partial<IotGlobalConfigPersistence>);
+    id: number,
+    datos: Partial<IotGlobalConfig>,
+  ): Promise<IotGlobalConfig | null> {
+    await this.repository.update(id, {
+      ...datos,
+    } as Partial<IotGlobalConfigPersistence>);
 
-  const actualizada = await this.repository.findOne({
-    where: { id },
-  });
+    const actualizada = await this.repository.findOne({
+      where: { id },
+    });
 
-  return actualizada
-    ? this.toDomain(actualizada)
-    : null;
-}
+    return actualizada ? this.toDomain(actualizada) : null;
+  }
 
   async eliminar(id: number): Promise<void> {
     await this.repository.softDelete(id);
   }
 
-  private toDomain(
-    config: IotGlobalConfigPersistence,
-  ): IotGlobalConfig {
+  private toDomain(config: IotGlobalConfigPersistence): IotGlobalConfig {
     return new IotGlobalConfig(
       config.id,
       config.created_at,

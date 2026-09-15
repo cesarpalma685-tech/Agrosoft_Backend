@@ -10,9 +10,9 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('sensor_alertas')
+@Entity("sensor_alertas")
 export class SensorAlertasPersistence {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -29,14 +29,17 @@ export class SensorAlertasPersistence {
   @Column({ insert: false, update: false })
   sensor_id!: number;
 
+
   @ManyToOne(() => SensorOrmEntity, (sensor: SensorOrmEntity) => sensor.alertas)
   @JoinColumn({ name: 'sensor_id' })
   sensor!: SensorOrmEntity;
 
   @Column('double precision')
+  @Column("double precision")
+
   valor!: number;
 
-  @Column('double precision')
+  @Column("double precision")
   umbral!: number;
 
   @Column({ length: 10 })
@@ -54,6 +57,7 @@ export class SensorAlertasPersistence {
 
   @Column({ insert: false, update: false })
   sub_lote_id!: number;
+
 
   @ManyToOne(() => SubloteOrmEntity, (sublote: SubloteOrmEntity) => sublote.alertas)
   @JoinColumn({ name: 'sub_lote_id' })

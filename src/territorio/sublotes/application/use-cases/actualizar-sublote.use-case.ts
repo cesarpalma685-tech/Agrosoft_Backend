@@ -1,15 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Sublote } from '../../domain/entities/sublote.dto';
-import { SubloteRepositoryPort } from '../ports/sublote.repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { Sublote } from "../../domain/entities/sublote.dto";
+import { SubloteRepositoryPort } from "../ports/sublote.repository.port";
 
 @Injectable()
 export class ActualizarSubloteUseCase {
-  constructor(
-    private readonly subloteRepository: SubloteRepositoryPort,
-  ) {}
+  constructor(private readonly subloteRepository: SubloteRepositoryPort) {}
 
-  async execute(
-    id: number,dto: Partial<Sublote>,): Promise<Sublote | null> {
+  async execute(id: number, dto: Partial<Sublote>): Promise<Sublote | null> {
     // Verificar que el sublote exista
     const existe = await this.subloteRepository.findById(id);
 
@@ -31,4 +28,3 @@ export class ActualizarSubloteUseCase {
     return subloteActualizado;
   }
 }
-

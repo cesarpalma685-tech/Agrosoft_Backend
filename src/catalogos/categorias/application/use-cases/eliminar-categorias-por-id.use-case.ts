@@ -1,4 +1,4 @@
-import { CategoriasRepositoryPort } from '../ports/categorias-repository.port';
+import { CategoriasRepositoryPort } from "../ports/categorias-repository.port";
 
 export class EliminarCategoriaUseCase {
   constructor(

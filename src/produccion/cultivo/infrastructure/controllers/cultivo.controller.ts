@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CrearCultivoUseCase } from '../../application/use-cases/crear-cultivo.use-case';
-import { ListarCultivoUseCase } from '../../application/use-cases/listar-cultivo.use-case';
-import { CrearCultivoDto } from '../../application/dto/crear-cultivo.dto';
+import { Body, Controller, Get, Post } from "@nestjs/common";
+import { CrearCultivoUseCase } from "../../application/use-cases/crear-cultivo.use-case";
+import { ListarCultivoUseCase } from "../../application/use-cases/listar-cultivo.use-case";
+import { CrearCultivoDto } from "../../application/dto/crear-cultivo.dto";
 
-@Controller('cultivos')
+@Controller("cultivos")
 export class CultivoController {
   constructor(
     private readonly crearCultivoUseCase: CrearCultivoUseCase,

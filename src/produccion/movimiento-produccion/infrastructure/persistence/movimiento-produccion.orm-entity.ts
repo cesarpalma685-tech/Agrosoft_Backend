@@ -7,51 +7,68 @@ import {
   DeleteDateColumn,
   ManyToOne,
   JoinColumn,
-} from 'typeorm';
-import { LoteProduccionOrmEntity } from '../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity';
+  OneToMany,
+} from "typeorm";
 
-@Entity('movimientos_produccion')
+import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
+import { VentaOrmEntity } from "../../../../comercial/ventas/infrastructure/persistence/venta.orm-entity";
+
+@Entity("movimientos_produccion")
 export class MovimientoProduccionOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ name: 'lote_produccion_id', type: 'int' })
+  @Column({ name: "lote_produccion_id", type: "int" })
   loteProduccionId!: number;
 
   @ManyToOne(() => LoteProduccionOrmEntity)
-  @JoinColumn({ name: 'lote_produccion_id' })
+  @JoinColumn({ name: "lote_produccion_id" })
   loteProduccion!: LoteProduccionOrmEntity;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   tipo!: string;
 
-  @Column({ name: 'cantidad_kg', type: 'double precision' })
+  @Column({ name: "cantidad_kg", type: "double precision" })
   cantidadKg!: number;
 
-  @Column({ name: 'costo_unitario_kg', type: 'double precision', nullable: true })
+  @Column({
+    name: "costo_unitario_kg",
+    type: "double precision",
+    nullable: true,
+  })
   costoUnitarioKg!: number | null;
 
-  @Column({ name: 'costo_total', type: 'double precision', nullable: true })
+  @Column({ name: "costo_total", type: "double precision", nullable: true })
   costoTotal!: number | null;
 
-  @Column({ name: 'venta_id', type: 'int', nullable: true })
-  ventaId!: number | null;
+  @Column({ name: "venta_id", type: "int", nullable: true })
+  ventaId?: number | null;
 
-  @Column({ type: 'text', nullable: true })
+
+  @Column({ type: "text", nullable: true })
   descripcion!: string | null;
 
-  @Column({ name: 'usuario_id', type: 'int', nullable: true })
+  @Column({ name: "usuarioId", type: "int", nullable: true })
   usuarioId!: number | null;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: "timestamp" })
   fecha!: Date;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at' })
+  @DeleteDateColumn({ name: "deleted_at" })
   deletedAt!: Date | null;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: "usuarioId" })
+  usuario!: UsuarioOrmEntity;
+
+  @ManyToOne(() => VentaOrmEntity, (venta) => venta.movimientoProduccion)
+  @JoinColumn({name:'venta_id'})
+  venta!: VentaOrmEntity;
 }

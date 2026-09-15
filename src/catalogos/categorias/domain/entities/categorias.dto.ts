@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class CategoriasDto {
-    id!: number
+  id!: number;
   @IsString()
   @IsNotEmpty()
   nombre!: string;

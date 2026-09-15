@@ -1,4 +1,4 @@
-import { WikiTipoEpa } from '../../domain/entities/wiki-tipo-epa.entity';
+import { WikiTipoEpa } from "../../domain/entities/wiki-tipo-epa.entity";
 
 export abstract class WikiTipoEpaRepositoryPort {
   abstract save(wikiTipoEpa: WikiTipoEpa): Promise<WikiTipoEpa>;

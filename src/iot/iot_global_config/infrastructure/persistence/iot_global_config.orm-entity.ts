@@ -11,10 +11,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
 
-@Entity('iot_global_config')
+@Entity("iot_global_config")
+
 export class IotGlobalConfigPersistence {
   @PrimaryGeneratedColumn()
   id!: number;

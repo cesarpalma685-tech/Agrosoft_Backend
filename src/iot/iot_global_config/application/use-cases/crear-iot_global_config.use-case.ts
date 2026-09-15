@@ -1,13 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { IotGlobalConfigRepositoryPort } from '../ports/iot_global_config.repository.port';
-import { IotGlobalConfig } from '../../domain/entities/iot_global_config.dto';
-import { CrearIotGlobalConfigDto } from '../dto/crear-iot_global_config.dto';
+import { Injectable } from "@nestjs/common";
+import { IotGlobalConfigRepositoryPort } from "../ports/iot_global_config.repository.port";
+import { IotGlobalConfig } from "../../domain/entities/iot_global_config.dto";
+import { CrearIotGlobalConfigDto } from "../dto/crear-iot_global_config.dto";
 
 @Injectable()
 export class CrearIotGlobalConfigUseCase {
-  constructor(
-    private readonly repository: IotGlobalConfigRepositoryPort,
-  ) {}
+  constructor(private readonly repository: IotGlobalConfigRepositoryPort) {}
 
   async execute(datos: CrearIotGlobalConfigDto) {
     const iot_global_config = new IotGlobalConfig(

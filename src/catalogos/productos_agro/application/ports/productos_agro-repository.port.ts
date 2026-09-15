@@ -1,4 +1,4 @@
-import { ProductosAgroDto } from '../dto/crear-productos_agro.dto';
+import { ProductosAgroDto } from "../dto/crear-productos_agro.dto";
 
 export abstract class ProductosAgroRepositoryPort {
   abstract crear(producto: ProductosAgroDto): Promise<ProductosAgroDto>;

@@ -1,4 +1,4 @@
-import { ProveedoresDto } from '../dto/crear-proveedores.dto';
+import { ProveedoresDto } from "../dto/crear-proveedores.dto";
 
 export abstract class ProveedoresRepositoryPort {
   abstract crear(proveedor: ProveedoresDto): Promise<ProveedoresDto>;

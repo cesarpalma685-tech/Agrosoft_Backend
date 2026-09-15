@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { Permiso } from '../../domain/entities/permisos.entity';
-import { PermisoRepository } from '../../aplication/ports/permisos.repository';
-import { PermisoOrmEntity } from '../persistence/permiso.orm-entity';
+import { Permiso } from "../../domain/entities/permisos.entity";
+import { PermisoRepository } from "../../aplication/ports/permisos.repository";
+import { PermisoOrmEntity } from "../persistence/permiso.orm-entity";
 
 @Injectable()
 export class PermisoTypeOrmRepository extends PermisoRepository {
@@ -30,30 +30,30 @@ export class PermisoTypeOrmRepository extends PermisoRepository {
     await this.repo.delete(id);
   }
 
-async buscarPorId(id: number): Promise<Permiso | null> {
+  async buscarPorId(id: number): Promise<Permiso | null> {
     const permiso = await this.repo.findOne({
-        where: { id },
+      where: { id },
     });
 
     return permiso ? this.aDominio(permiso) : null;
-}
+  }
 
-private aDominio(orm: PermisoOrmEntity): Permiso {
+  private aDominio(orm: PermisoOrmEntity): Permiso {
     return new Permiso(
-        orm.id,
-        orm.modulo,
-        orm.accion,
-        orm.clave,
-        orm.created_at,
+      orm.id,
+      orm.modulo,
+      orm.accion,
+      orm.clave,
+      orm.created_at,
     );
-}
+  }
 
-private aOrm(permiso: Permiso): Partial<PermisoOrmEntity> {
+  private aOrm(permiso: Permiso): Partial<PermisoOrmEntity> {
     return {
-        id: permiso.id ?? undefined,
-        modulo: permiso.modulo,
-        accion: permiso.accion,
-        clave: permiso.clave,
+      id: permiso.id ?? undefined,
+      modulo: permiso.modulo,
+      accion: permiso.accion,
+      clave: permiso.clave,
     };
-}
+  }
 }

@@ -1,4 +1,4 @@
-import { CultivoHistorial } from '../../domain/entities/cultivo-historial.entity';
+import { CultivoHistorial } from "../../domain/entities/cultivo-historial.entity";
 
 export abstract class CultivoHistorialRepositoryPort {
   abstract save(cultivoHistorial: CultivoHistorial): Promise<CultivoHistorial>;

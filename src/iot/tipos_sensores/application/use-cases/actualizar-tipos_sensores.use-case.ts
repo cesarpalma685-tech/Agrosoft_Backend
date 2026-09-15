@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { TiposSensoresRepositoryPort } from '../ports/tipos_sensores.repository.port';
-import { TiposSensores } from '../../domain/entities/tipos_sensores.dto';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { TiposSensoresRepositoryPort } from "../ports/tipos_sensores.repository.port";
+import { TiposSensores } from "../../domain/entities/tipos_sensores.dto";
 
 @Injectable()
 export class ActualizarTiposSensoresUseCase {
@@ -9,7 +9,9 @@ export class ActualizarTiposSensoresUseCase {
   ) {}
 
   async execute(
-    id: number,dto: Partial<TiposSensores>,): Promise<TiposSensores> {
+    id: number,
+    dto: Partial<TiposSensores>,
+  ): Promise<TiposSensores> {
     // Verificar que el tipo de sensor exista
     const existe = await this.tiposSensoresRepository.buscarPorId(id);
 
@@ -20,7 +22,8 @@ export class ActualizarTiposSensoresUseCase {
     }
 
     // Actualizar el tipo de sensor
-    const tiposSensoresActualizado = await this.tiposSensoresRepository.actualizar(id, dto);
+    const tiposSensoresActualizado =
+      await this.tiposSensoresRepository.actualizar(id, dto);
 
     if (!tiposSensoresActualizado) {
       throw new NotFoundException(

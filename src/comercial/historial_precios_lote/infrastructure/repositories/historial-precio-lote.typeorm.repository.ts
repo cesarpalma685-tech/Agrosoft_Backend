@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { HistorialPrecioLoteRepositoryPort } from '../../application/ports/historial-precio-lote.repository.port';
-import { HistorialPrecioLote } from '../../domain/entities/historial-precio-lote.entity';
-import { HistorialPrecioLoteOrmEntity } from '../persistence/historial-precio-lote.orm-entity';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { HistorialPrecioLoteRepositoryPort } from "../../application/ports/historial-precio-lote.repository.port";
+import { HistorialPrecioLote } from "../../domain/entities/historial-precio-lote.entity";
+import { HistorialPrecioLoteOrmEntity } from "../persistence/historial-precio-lote.orm-entity";
 
 @Injectable()
 export class HistorialPrecioLoteTypeOrmRepository extends HistorialPrecioLoteRepositoryPort {
@@ -15,31 +15,42 @@ export class HistorialPrecioLoteTypeOrmRepository extends HistorialPrecioLoteRep
   }
 
   async save(historial: HistorialPrecioLote): Promise<HistorialPrecioLote> {
-    const entity = this.repository.create(historial as Partial<HistorialPrecioLoteOrmEntity>);
+    const entity = this.repository.create(
+      historial as Partial<HistorialPrecioLoteOrmEntity>,
+    );
     const saved = await this.repository.save(entity);
-    return saved as unknown as HistorialPrecioLote;
+    return saved;
   }
 
   async findById(id: number): Promise<HistorialPrecioLote | null> {
     const entity = await this.repository.findOne({ where: { id } });
-    return entity ? (entity as unknown as HistorialPrecioLote) : null;
+    return entity ? entity : null;
   }
 
   async findAll(): Promise<HistorialPrecioLote[]> {
     const entities = await this.repository.find();
-    return entities as unknown as HistorialPrecioLote[];
+    return entities;
   }
 
-  async findByLoteProduccionId(loteProduccionId: number): Promise<HistorialPrecioLote[]> {
-    const entities = await this.repository.find({ where: { loteProduccionId } });
-    return entities as unknown as HistorialPrecioLote[];
+  async findByLoteProduccionId(
+    loteProduccionId: number,
+  ): Promise<HistorialPrecioLote[]> {
+    const entities = await this.repository.find({
+      where: { loteProduccionId },
+    });
+    return entities;
   }
 
-  async update(id: number, historial: Partial<HistorialPrecioLote>): Promise<HistorialPrecioLote> {
-    await this.repository.update(id, historial as Partial<HistorialPrecioLoteOrmEntity>);
+  async update(
+    id: number,
+    historial: Partial<HistorialPrecioLote>,
+  ): Promise<HistorialPrecioLote> {
+    await this.repository.update(id, historial);
     const updated = await this.findById(id);
     if (!updated) {
-      throw new NotFoundException(`Historial de precio con ID ${id} no encontrado`);
+      throw new NotFoundException(
+        `Historial de precio con ID ${id} no encontrado`,
+      );
     }
     return updated;
   }

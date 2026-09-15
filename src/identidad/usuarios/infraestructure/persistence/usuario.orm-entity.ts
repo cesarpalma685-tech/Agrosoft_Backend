@@ -1,43 +1,64 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+} from 'typeorm';
+
 import { RolOrmEntity } from '../../../roles/infraestructure/persistence/rol.orm-entity';
 import { ProgramaFormacionOrmEntity } from '../../../../formacion/programas-formacion/infraestructure/persistence/programa-formacion.orm-entity';
+import { NotificacionOrmEntity } from 'src/identidad/notificaciones/infraestructure/persistence/notificaciones.orm-entity';
+import { ActividadHistorialOrmEntity } from 'src/actividades_detalles/actividades_historial/infrastructure/persistence/actividad-historial.orm-entity';
+import { ActividadResponsableOrmEntity } from 'src/actividades_detalles/actividades_responsable/infrastructure/persistence/actividad-responsable.orm-entity';
+import { MovimientoProduccionOrmEntity } from 'src/produccion/movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity';
+import { TransaccionFinancieraOrmEntity } from 'src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity';
+import { ReservaOrmEntity } from 'src/inventario/reservas/infrastructure/persistence/reserva.orm-entity';
+import { VentaOrmEntity } from 'src/comercial/ventas/infrastructure/persistence/venta.orm-entity';
+import { MovimientoInsumoOrmEntity } from 'src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity';
+import { CultivoHistorialOrmEntity } from '../../../../produccion/cultivo-historial/infrastructure/persistence/cultivo-historial.orm-entity';
+import { HistorialPrecioLoteOrmEntity } from 'src/comercial/historial_precios_lote/infrastructure/persistence/historial-precio-lote.orm-entity';
 
-@Entity('usuarios')
+@Entity("usuarios")
 export class UsuarioOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   nombre!: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   apellido!: string;
 
-  @Column({ type: 'varchar', unique: true, nullable: true })
+  @Column({ type: "varchar", unique: true, nullable: true })
   identificacion!: string;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({ type: "int", nullable: true })
   idFicha!: number;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   programaFormacionId!: string | null;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: "varchar", nullable: true })
   telefono!: string | null;
 
-  @Column({ type: 'varchar', unique: true })
+  @Column({ type: "varchar", unique: true })
   correo!: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   passwordHash!: string;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   lastLoginAt!: Date | null;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   emailVerifiedAt!: Date | null;
 
-  @Column({ type: 'varchar', default: 'activo' })
+  @Column({ type: "varchar", default: "activo" })
   estado!: string;
 
   @CreateDateColumn()
@@ -50,13 +71,67 @@ export class UsuarioOrmEntity {
   deleted_at!: Date;
 
   @ManyToOne(() => RolOrmEntity)
-  @JoinColumn({ name: 'rolId' })
+  @JoinColumn({ name: "rolId" })
   rol!: RolOrmEntity;
 
-  @ManyToOne(() => ProgramaFormacionOrmEntity )
+  @ManyToOne(() => ProgramaFormacionOrmEntity)
   @JoinColumn({ name: 'programaFormacionId' })
   programaFormacion!: ProgramaFormacionOrmEntity;
-  movimientosInsumos: any;
 
-  
+  @OneToMany(
+    () => NotificacionOrmEntity,
+    (notificacion) => notificacion.usuario
+  )
+  notificaciones!: NotificacionOrmEntity[];
+
+  @OneToMany(
+    () => ActividadHistorialOrmEntity,
+    (actividadHistorial) => actividadHistorial.usuario
+  )
+  actividadesHistorial!: ActividadHistorialOrmEntity[];
+
+  @OneToMany(
+    () => ActividadResponsableOrmEntity,
+    (actividadResponsable) => actividadResponsable.usuario
+  )
+  actividadesResponsables!: ActividadResponsableOrmEntity[];
+
+  @OneToMany(
+    () => MovimientoProduccionOrmEntity,
+    (movimientoProduccion) => movimientoProduccion.usuario
+  )
+  movimientosProduccion!: MovimientoProduccionOrmEntity[];
+
+  @OneToMany(
+    () => TransaccionFinancieraOrmEntity,
+    (transaccionFinanciera) => transaccionFinanciera.usuario
+  )
+  transaccionesFinancieras!: TransaccionFinancieraOrmEntity[];
+
+  @OneToMany(
+    () => ReservaOrmEntity,
+    (reserva) => reserva.usuario
+  )
+  reservas!: ReservaOrmEntity[];
+
+  @OneToMany(
+    () => VentaOrmEntity,
+    (venta) => venta.usuario
+  )
+  ventas!: VentaOrmEntity[];
+
+  @OneToMany(
+    () => CultivoHistorialOrmEntity,
+    (cultivoHistorial) => cultivoHistorial.usuario
+  )
+  cultivosHistorial!: CultivoHistorialOrmEntity[];
+
+  @OneToMany(
+    () => MovimientoInsumoOrmEntity,
+    (movimientoInsumo) => movimientoInsumo.usuario
+  )
+  movimientosInsumos!: MovimientoInsumoOrmEntity[];
+
+  @OneToMany(() => HistorialPrecioLoteOrmEntity,(historialPrecioLote) => historialPrecioLote.usuario)
+  historialesPreciosLotes!: HistorialPrecioLoteOrmEntity[];
 }

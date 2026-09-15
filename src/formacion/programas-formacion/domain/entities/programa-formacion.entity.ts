@@ -7,12 +7,12 @@ export class ProgramaFormacion {
     public descripcion?: string,
     public fechaInicio?: Date,
     public fechaFin?: Date,
-    public estado: string = 'activo',
+    public estado: string = "activo",
     public cantidadAprendices: number = 0,
     public readonly createdAt?: Date,
   ) {}
 
   finalizar(): void {
-    this.estado = 'finalizado';
+    this.estado = "finalizado";
   }
 }

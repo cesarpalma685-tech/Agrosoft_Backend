@@ -1,4 +1,4 @@
-import { LoteDto } from '../../domain/entities/lote.dto';
+import { LoteDto } from "../../domain/entities/lote.dto";
 
 export abstract class LoteRepositoryPort {
   abstract save(lote: LoteDto): Promise<LoteDto>;

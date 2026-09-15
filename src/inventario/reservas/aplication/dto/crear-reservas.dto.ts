@@ -1,5 +1,13 @@
 import { Type } from "class-transformer";
-import { IsDateString, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString } from "class-validator";
+import {
+  IsDateString,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsPositive,
+  IsString,
+} from "class-validator";
 import { ReservaEstadoEnum } from "../../domain/enums/reserva-estado.enum";
 
 export class CrearReservaDto {
@@ -23,7 +31,7 @@ export class CrearReservaDto {
   motivo!: string;
 
   @IsEnum(ReservaEstadoEnum)
-  estado!: ReservaEstadoEnum 
+  estado!: ReservaEstadoEnum;
 
   @Type(() => Number)
   @IsNumber()

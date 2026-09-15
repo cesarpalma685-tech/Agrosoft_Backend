@@ -14,13 +14,12 @@ import { EliminarInsumoUseCase } from "./application/use-cases/eliminar-insumo.u
   imports: [TypeOrmModule.forFeature([InsumoOrmEntity])],
   controllers: [InsumoController],
   providers: [
-    
     CrearInsumoUseCase,
     ListarInsumosUseCase,
-    ObtenerInsumoPorIdUseCase, 
-    ActualizarInsumoUseCase,   
+    ObtenerInsumoPorIdUseCase,
+    ActualizarInsumoUseCase,
     EliminarInsumoUseCase,
-    
+
     {
       provide: InsumoRepositoryPort,
       useClass: InsumoTypeOrmRepository,

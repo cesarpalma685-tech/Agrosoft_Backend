@@ -1,35 +1,28 @@
-import {
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from "@nestjs/common";
 
-import { EmailCode } from '../../domain/entities/mail-codes.entity';
-import { EmailCodeRepository } from '../ports/mail-codes.repository';
+import { EmailCode } from "../../domain/entities/mail-codes.entity";
+import { EmailCodeRepository } from "../ports/mail-codes.repository";
 
 export interface ActualizarEmailCodeInput {
-usuarioId?: number;
-tipo?: string;
-code?: string;
-expiresAt?: Date;
-usedAt?: Date;
+  usuarioId?: number;
+  tipo?: string;
+  code?: string;
+  expiresAt?: Date;
+  usedAt?: Date;
 }
 
 @Injectable()
 export class ActualizarEmailCodeUseCase {
-constructor(
-    private readonly repository: EmailCodeRepository,
-) {}
+  constructor(private readonly repository: EmailCodeRepository) {}
 
-async ejecutar(
+  async ejecutar(
     id: number,
     datos: ActualizarEmailCodeInput,
-): Promise<EmailCode> {
+  ): Promise<EmailCode> {
     const existente = await this.repository.buscarPorId(id);
 
     if (!existente) {
-    throw new NotFoundException(
-        'EmailCode no encontrado',
-    );
+      throw new NotFoundException("EmailCode no encontrado");
     }
 
     const emailCode = new EmailCode(

@@ -1,4 +1,4 @@
-import { RolPermiso } from '../../domain/entities/rol_permisos.entity';
+import { RolPermiso } from "../../domain/entities/rol_permisos.entity";
 
 export abstract class RolPermisoRepository {
   abstract crear(rolPermiso: RolPermiso): Promise<RolPermiso>;

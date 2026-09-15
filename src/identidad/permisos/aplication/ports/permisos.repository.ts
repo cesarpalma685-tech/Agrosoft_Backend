@@ -1,4 +1,4 @@
-import { Permiso } from '../../domain/entities/permisos.entity';
+import { Permiso } from "../../domain/entities/permisos.entity";
 
 export abstract class PermisoRepository {
   abstract crear(permiso: Permiso): Promise<Permiso>;

@@ -1,23 +1,16 @@
-import {
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from "@nestjs/common";
 
-import { NotificacionRepository } from '../ports/notificaciones.repository';
+import { NotificacionRepository } from "../ports/notificaciones.repository";
 
 @Injectable()
 export class EliminarNotificacionUseCase {
-  constructor(
-    private readonly repository: NotificacionRepository,
-  ) {}
+  constructor(private readonly repository: NotificacionRepository) {}
 
   async ejecutar(id: number): Promise<void> {
     const existente = await this.repository.buscarPorId(id);
 
     if (!existente) {
-      throw new NotFoundException(
-        'Notificación no encontrada',
-      );
+      throw new NotFoundException("Notificación no encontrada");
     }
 
     await this.repository.eliminar(id);

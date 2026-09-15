@@ -5,5 +5,5 @@ export class Rol {
     public descripcion: string,
     public es_sistema: boolean,
     public estado: string,
-  ){}
+  ) {}
 }

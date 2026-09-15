@@ -1,4 +1,4 @@
-import { ReservaEstadoEnum } from '../enums/reserva-estado.enum';
+import { ReservaEstadoEnum } from "../enums/reserva-estado.enum";
 
 export class Reserva {
   id!: number;

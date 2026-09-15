@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { ProgramaFormacion } from '../../domain/entities/programa-formacion.entity';
-import { ProgramaFormacionRepository } from '../ports/programa-formacion.repository';
+import { Injectable } from "@nestjs/common";
+import { ProgramaFormacion } from "../../domain/entities/programa-formacion.entity";
+import { ProgramaFormacionRepository } from "../ports/programa-formacion.repository";
 
 export interface CrearProgramaFormacionInput {
   numeroFicha: string;
@@ -15,9 +15,7 @@ export interface CrearProgramaFormacionInput {
 
 @Injectable()
 export class CrearProgramaFormacionUseCase {
-  constructor(
-    private readonly repository: ProgramaFormacionRepository,
-  ) {}
+  constructor(private readonly repository: ProgramaFormacionRepository) {}
 
   async ejecutar(
     datos: CrearProgramaFormacionInput,
@@ -30,7 +28,7 @@ export class CrearProgramaFormacionUseCase {
       datos.descripcion,
       datos.fechaInicio,
       datos.fechaFin,
-      datos.estado ?? 'activo',
+      datos.estado ?? "activo",
       datos.cantidadAprendices ?? 0,
       new Date(),
     );

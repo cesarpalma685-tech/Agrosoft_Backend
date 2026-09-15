@@ -1,6 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,} from 'typeorm';
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
 
-@Entity('notificaciones')
+@Entity("notificaciones")
 export class NotificacionOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -11,24 +19,28 @@ export class NotificacionOrmEntity {
   @Column()
   titulo!: string;
 
-  @Column('text')
+  @Column("text")
   mensaje!: string;
 
   @Column({ default: false })
   leida!: boolean;
 
   @Column({
-    type: 'varchar',
+    type: "varchar",
     nullable: true,
   })
   tipo!: string | null;
 
   @Column({
-    type: 'json',
+    type: "json",
     nullable: true,
   })
   metadata!: Record<string, any> | null;
 
   @CreateDateColumn()
   created_at!: Date;
+
+  @ManyToOne(() => UsuarioOrmEntity)
+  @JoinColumn({ name: "usuarioId" })
+  usuario!: UsuarioOrmEntity;
 }

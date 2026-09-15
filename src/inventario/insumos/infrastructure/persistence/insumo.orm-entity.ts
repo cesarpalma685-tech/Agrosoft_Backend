@@ -1,136 +1,246 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { TipoInsumoEnum } from "../../domain/enums/tipo-insumo.enum";
 import { EstadoInsumoEnum } from "../../domain/enums/estado-insumo.enum";
 import { AlmacenOrmEntity } from "src/inventario/almacenes/infrastructure/persistence/almacen.orm-entity";
 import { MovimientoInsumoOrmEntity } from "src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity";
 import { ReservaOrmEntity } from "src/inventario/reservas/infrastructure/persistence/reserva.orm-entity";
+import { ActividadInsumoOrmEntity } from "src/actividades_detalles/actividades_insumos/infrastructure/persistence/actividad-insumo.orm-entity";
+import { ActividadInsumoReservaOrmEntity } from "src/actividades_detalles/actividades_insumos_reversa/infrastructure/persistence/actividad-insumo-reserva.orm-entity";
+import { ActividadInsumoUsoOrmEntity } from "src/actividades_detalles/actividades_insumos_uso/infrastructure/persistence/actividad-insumo-uso.orm-entity";
+import { UsoHerramientaOrmEntity } from "src/actividades_detalles/usos_herramientas/infrastructure/persistence/uso-herramienta.orm-entity";
+import { ProveedoresPersistence } from "src/catalogos/proveedores/infrastructure/persistence/proveedores.orm-entity";
+import { CategoriasPersistence } from "src/catalogos/categorias/infrastructure/persistence/categorias-orm-entity";
+import { TransaccionFinancieraOrmEntity } from "src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity";
 
-@Entity('insumos')
+@Entity("insumos")
 export class InsumoOrmEntity {
-  @PrimaryGeneratedColumn({ type: 'integer' })
+  @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: "varchar", length: 255 })
   nombre!: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: "text" })
   descripcion!: string;
 
-  @Column({ type: 'text', nullable: true, name: 'foto_url' })
+  @Column({ type: "text", nullable: true, name: "foto_url" })
   fotoUrl?: string;
 
-  @Column({ type: 'varchar', length: 100, name: 'presentacion_tipo' })
+  @Column({ type: "varchar", length: 100, name: "presentacion_tipo" })
   presentacionTipo!: string;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'presentacion_cantidad' })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "presentacion_cantidad",
+  })
   presentacionCantidad!: number;
 
-  @Column({ type: 'varchar', length: 50, name: 'presentacion_unidad' })
+  @Column({ type: "varchar", length: 50, name: "presentacion_unidad" })
   presentacionUnidad!: string;
 
-  @Column({ type: 'varchar', length: 50, name: 'unidad_uso' })
+  @Column({ type: "varchar", length: 50, name: "unidad_uso" })
   unidadUso!: string;
 
-  @Column({ type: 'varchar', length: 100, name: 'tipo_materia' })
+  @Column({ type: "varchar", length: 100, name: "tipo_materia" })
   tipoMateria!: string;
 
-  @Column({ type: 'numeric', precision: 12, scale: 4, name: 'factor_conversion_uso' })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 4,
+    name: "factor_conversion_uso",
+  })
   factorConversionUso!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'stock_presentacion', default: 0 })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "stock_presentacion",
+    default: 0,
+  })
   stockPresentacion!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'stock_uso', default: 0 })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "stock_uso",
+    default: 0,
+  })
   stockUso!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'stock_reservado', default: 0 })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "stock_reservado",
+    default: 0,
+  })
   stockReservado!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'stock_minimo', default: 0 })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "stock_minimo",
+    default: 0,
+  })
   stockMinimo!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'precio_unitario_presentacion' })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "precio_unitario_presentacion",
+  })
   precioUnitarioPresentacion!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'precio_unitario_uso' })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "precio_unitario_uso",
+  })
   precioUnitarioUso!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'costo_unitario' })
+  @Column({ type: "numeric", precision: 12, scale: 2, name: "costo_unitario" })
   costoUnitario!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'costo_adquisicion' })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "costo_adquisicion",
+  })
   costoAdquisicion!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'valor_inventario', default: 0 })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "valor_inventario",
+    default: 0,
+  })
   valorInventario!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'valor_residual', default: 0 })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "valor_residual",
+    default: 0,
+  })
   valorResidual!: number;
 
-  @Column({ type: 'integer', name: 'vida_util_horas', default: 0 })
+  @Column({ type: "integer", name: "vida_util_horas", default: 0 })
   vidaUtilHoras!: number;
 
-  @Column({ type: 'integer', name: 'horas_usadas', default: 0 })
+  @Column({ type: "integer", name: "horas_usadas", default: 0 })
   horasUsadas!: number;
 
-  @Column({ type: 'numeric', precision: 12, scale: 2, name: 'depreciacion_acumulada', default: 0 })
+  @Column({
+    type: "numeric",
+    precision: 12,
+    scale: 2,
+    name: "depreciacion_acumulada",
+    default: 0,
+  })
   depreciacionAcumulada!: number;
 
-  @Column({ type: 'integer', name: 'almacen_id' })
-  almacenId!: number;
-
-  @Column({ type: 'integer', name: 'proveedor_id' })
-  proveedorId!: number;
-
-  @Column({ type: 'integer', name: 'categoria_id' })
+  @Column({ type: "integer", name: "categoria_id" })
   categoriaId!: number;
 
-  @Column({ type: 'integer', name: 'creado_por_usuario_id' })
+  @Column({ type: "integer", name: "almacen_id" })
+  almacenId!: number;
+
+  @Column({ type: "integer", name: "proveedor_id" })
+  proveedorId!: number;
+
+  @Column({ type: "integer", name: "creado_por_usuario_id" })
   creadoPorUsuarioId!: number;
 
   @Column({
-    type: 'enum',
+    type: "enum",
     enum: TipoInsumoEnum,
-    name: 'tipo_insumo',
+    name: "tipo_insumo",
   })
   tipoInsumo!: TipoInsumoEnum;
 
   @Column({
-    type: 'enum',
+    type: "enum",
     enum: EstadoInsumoEnum,
-    name: 'estado',
+    name: "estado",
     default: EstadoInsumoEnum.ACTIVO,
   })
   estado!: EstadoInsumoEnum;
 
-  @Column({ type: 'timestamp', name: 'fecha_registro' })
+  @Column({ type: "timestamp", name: "fecha_registro" })
   fechaRegistro!: Date;
 
-  @Column({ type: 'timestamp', nullable: true, name: 'fecha_adquisicion' })
+  @Column({ type: "timestamp", nullable: true, name: "fecha_adquisicion" })
   fechaAdquisicion?: Date;
 
-  @Column({ type: 'timestamp', nullable: true, name: 'fecha_ultimo_mantenimiento' })
+  @Column({
+    type: "timestamp",
+    nullable: true,
+    name: "fecha_ultimo_mantenimiento",
+  })
   fechaUltimoMantenimiento?: Date;
 
-  @Column({ type: 'timestamp', nullable: true, name: 'fecha_baja' })
+  @Column({ type: "timestamp", nullable: true, name: "fecha_baja" })
   fechaBaja?: Date;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({ name: "deleted_at", nullable: true })
   deletedAt?: Date;
 
   @ManyToOne(() => AlmacenOrmEntity)
-  @JoinColumn({ name: 'almacen_id' })
+  @JoinColumn({ name: "almacen_id" })
   almacen!: AlmacenOrmEntity;
 
   @OneToMany(() => MovimientoInsumoOrmEntity, (movimiento) => movimiento.insumo)
-movimientos!: MovimientoInsumoOrmEntity[];
+  movimientos!: MovimientoInsumoOrmEntity[];
 
   @OneToMany(() => ReservaOrmEntity, (reserva) => reserva.insumo)
-reservas!: ReservaOrmEntity[];
+  reservas!: ReservaOrmEntity[];
+
+  @OneToMany(() => ActividadInsumoOrmEntity, (actividadInsumo) => actividadInsumo.insumo)
+  actividadesInsumos!: ActividadInsumoOrmEntity[];
+
+  @OneToMany(() => ActividadInsumoReservaOrmEntity, (reserva) => reserva.insumo)
+  reservasInsumos!: ActividadInsumoReservaOrmEntity[];
+
+  @OneToMany(() => ActividadInsumoUsoOrmEntity, (uso) => uso.insumo)
+  usosInsumos!: ActividadInsumoUsoOrmEntity[];
+
+  @OneToMany(() => UsoHerramientaOrmEntity, (uso) => uso.insumo)
+  usosHerramientas!: UsoHerramientaOrmEntity[];
+  @ManyToOne(()=>ProveedoresPersistence, (proveedor) => proveedor.insumos)
+  @JoinColumn({ name: "proveedor_id" })
+  proveedorid!: ProveedoresPersistence;
+
+  @ManyToOne(()=> CategoriasPersistence, (categoria)=> categoria.insumos)
+  @JoinColumn({name: "categoria_id"})
+  categoriaid!: CategoriasPersistence;
+
+  @OneToMany(() => TransaccionFinancieraOrmEntity, (transaccion) => transaccion.insumo)
+  transacciones!: TransaccionFinancieraOrmEntity[];
 }

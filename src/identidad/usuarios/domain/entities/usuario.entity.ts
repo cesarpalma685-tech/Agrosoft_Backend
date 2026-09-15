@@ -6,9 +6,9 @@ export class Usuario {
     public identificacion: string,
     public correo: string,
     public passwordHash: string,
-    public idFicha:number,
-    public programaFormacionId:string | null,
-    public telefono:string | null,
+    public idFicha: number,
+    public programaFormacionId: string | null,
+    public telefono: string | null,
     public estado: string,
 
     public emailVerifiedAt: Date | null,
@@ -16,5 +16,4 @@ export class Usuario {
 
     public readonly createdAt: Date,
   ) {}
-
 }

@@ -1,12 +1,9 @@
-
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { SubloteRepositoryPort } from '../ports/sublote.repository.port';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { SubloteRepositoryPort } from "../ports/sublote.repository.port";
 
 @Injectable()
 export class EliminarSubloteUseCase {
-  constructor(
-    private readonly subloteRepository: SubloteRepositoryPort,
-  ) {}
+  constructor(private readonly subloteRepository: SubloteRepositoryPort) {}
 
   async execute(id: number): Promise<void> {
     const sublote = await this.subloteRepository.findById(id);

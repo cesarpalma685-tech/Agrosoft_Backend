@@ -1,4 +1,4 @@
-import { EmailCode } from '../../domain/entities/mail-codes.entity';
+import { EmailCode } from "../../domain/entities/mail-codes.entity";
 
 export abstract class EmailCodeRepository {
   abstract crear(emailCode: EmailCode): Promise<EmailCode>;

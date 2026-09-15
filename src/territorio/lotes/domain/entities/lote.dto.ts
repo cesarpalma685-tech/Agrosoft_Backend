@@ -1,7 +1,7 @@
 export class LoteDto {
   id!: number;
   created_at!: Date;
-  updated_at! : Date;
+  updated_at!: Date;
   deleted_at!: Date | null;
 
   nombre!: string;

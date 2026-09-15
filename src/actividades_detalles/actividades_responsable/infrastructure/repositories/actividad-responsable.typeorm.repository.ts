@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { ActividadResponsableRepositoryPort } from '../../application/ports/actividad-responsable.repository.port';
-import { ActividadResponsable } from '../../domain/entities/actividad_responsable.entity';
-import { ActividadResponsableOrmEntity } from '../persistence/actividad-responsable.orm-entity';
+import { ActividadResponsableRepositoryPort } from "../../application/ports/actividad-responsable.repository.port";
+import { ActividadResponsable } from "../../domain/entities/actividad_responsable.entity";
+import { ActividadResponsableOrmEntity } from "../persistence/actividad-responsable.orm-entity";
 
 @Injectable()
 export class ActividadResponsableTypeOrmRepository extends ActividadResponsableRepositoryPort {
@@ -22,7 +22,7 @@ export class ActividadResponsableTypeOrmRepository extends ActividadResponsableR
 
   async findAll(): Promise<ActividadResponsable[]> {
     return await this.actividadResponsableRepository.find({
-      order: { createdAt: 'DESC' },
+      order: { createdAt: "DESC" },
     });
   }
 }

@@ -4,63 +4,59 @@ import {
   Column,
   CreateDateColumn,
   OneToMany,
-} from 'typeorm';
+} from "typeorm";
 
-
-@Entity('programas_formacion')
+@Entity("programas_formacion")
 export class ProgramaFormacionOrmEntity {
-
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column({
-    type: 'varchar',
+    type: "varchar",
   })
   numeroFicha!: string;
 
   @Column({
-    type: 'varchar',
+    type: "varchar",
   })
   nombre!: string;
 
   @Column({
-    type: 'varchar',
+    type: "varchar",
     nullable: true,
   })
   tipo!: string | null;
 
   @Column({
-    type: 'text',
+    type: "text",
     nullable: true,
   })
   descripcion!: string | null;
 
   @Column({
-    type: 'date',
+    type: "date",
     nullable: true,
   })
   fechaInicio!: Date | null;
 
   @Column({
-    type: 'date',
+    type: "date",
     nullable: true,
   })
   fechaFin!: Date | null;
 
   @Column({
-    type: 'varchar',
-    default: 'activo',
+    type: "varchar",
+    default: "activo",
   })
   estado!: string;
 
   @Column({
-    type: 'integer',
+    type: "integer",
     default: 0,
   })
   cantidadAprendices!: number;
 
   @CreateDateColumn()
   created_at!: Date;
-
-
 }
