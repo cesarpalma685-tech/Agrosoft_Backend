@@ -9,9 +9,10 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
+
 import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
-import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
+import { VentaOrmEntity } from "../../../../comercial/ventas/infrastructure/persistence/venta.orm-entity";
 
 @Entity("movimientos_produccion")
 export class MovimientoProduccionOrmEntity {
@@ -44,6 +45,7 @@ export class MovimientoProduccionOrmEntity {
   @Column({ name: "venta_id", type: "int", nullable: true })
   ventaId?: number | null;
 
+
   @Column({ type: "text", nullable: true })
   descripcion!: string | null;
 
@@ -63,7 +65,7 @@ export class MovimientoProduccionOrmEntity {
   deletedAt!: Date | null;
 
   @ManyToOne(() => UsuarioOrmEntity)
-  @JoinColumn({ name: 'usuarioId' })
+  @JoinColumn({ name: "usuarioId" })
   usuario!: UsuarioOrmEntity;
 
   @OneToMany(()=>VentaOrmEntity , (venta) => venta.movimientoProduccion)

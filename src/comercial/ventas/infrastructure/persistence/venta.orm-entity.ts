@@ -79,9 +79,12 @@ export class VentaOrmEntity {
   factura!: FacturaOrmEntity;
 
   @ManyToOne(() => UsuarioOrmEntity)
-  @JoinColumn({ name: 'usuarioId' })
+  @JoinColumn({ name: "usuarioId" })
   usuario!: UsuarioOrmEntity;
 
-  @OneToMany(() => MovimientoProduccionOrmEntity, (movimiento) => movimiento.venta)
+  @OneToMany(
+    () => MovimientoProduccionOrmEntity,
+    (movimientoProduccion) => movimientoProduccion.venta,
+  )
   movimientoProduccion!: MovimientoProduccionOrmEntity[];
 }
