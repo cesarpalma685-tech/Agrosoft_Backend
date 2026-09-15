@@ -12,6 +12,7 @@ import { TipoMovimientoInsumoEnum } from "../../domain/enum/tipo-movimiento-insu
 import { AlmacenOrmEntity } from "src/inventario/almacenes/infrastructure/persistence/almacen.orm-entity";
 import { InsumoOrmEntity } from "src/inventario/insumos/infrastructure/persistence/insumo.orm-entity";
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
+import { ActividadOrmEntity } from "src/produccion/actividad/infrastructure/persistence/actividad.orm-entity";
 
 @Entity("movimientos_insumos")
 export class MovimientoInsumoOrmEntity {
@@ -99,4 +100,8 @@ export class MovimientoInsumoOrmEntity {
   })
   @JoinColumn({ name: "usuarioId" })
   usuario!: UsuarioOrmEntity;
+
+  @ManyToOne(() => ActividadOrmEntity, (actividad) => actividad.movimientosInsumos)
+  @JoinColumn({ name: "actividadId" })
+  actividad!: ActividadOrmEntity;
 }
