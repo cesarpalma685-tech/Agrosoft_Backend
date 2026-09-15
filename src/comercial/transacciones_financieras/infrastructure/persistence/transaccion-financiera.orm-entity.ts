@@ -1,6 +1,7 @@
 import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 import { InsumoOrmEntity } from "src/inventario/insumos/infrastructure/persistence/insumo.orm-entity";
+import { ActividadOrmEntity } from "src/produccion/actividad/infrastructure/persistence/actividad.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -64,4 +65,8 @@ export class TransaccionFinancieraOrmEntity {
   @ManyToOne(() => InsumoOrmEntity)
   @JoinColumn({ name: 'insumo_id' })
   insumo!: InsumoOrmEntity;
+
+  @ManyToOne(() => ActividadOrmEntity)
+  @JoinColumn({ name: 'actividad_id' })
+  actividad!: ActividadOrmEntity;
 }
