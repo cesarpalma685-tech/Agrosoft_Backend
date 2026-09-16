@@ -2,6 +2,7 @@ import { IotGlobalConfigPersistence } from 'src/iot/iot_global_config/infrastruc
 import { SensorAlertasPersistence } from 'src/iot/sensor_alertas/infrastructure/persistence/sensor_alertas.orm-entity';
 import { SensorOrmEntity } from 'src/iot/sensores/infrastructure/persistence/sensores.orm-entity';
 import { LoteOrmEntity } from 'src/territorio/lotes/infrastructure/persistence/lote.orm-entity';
+import { ActividadOrmEntity } from 'src/produccion/actividad/infrastructure/persistence/actividad.orm-entity';
 import {
   Column,
   CreateDateColumn,
@@ -78,4 +79,10 @@ export class SubloteOrmEntity {
     (alerta: SensorAlertasPersistence) => alerta.sublote
   )
   alertas!: SensorAlertasPersistence[];
+
+  @OneToMany(
+  () => ActividadOrmEntity,
+  (actividad: ActividadOrmEntity) => actividad.sublote
+  )
+  actividades!: ActividadOrmEntity[];
 }

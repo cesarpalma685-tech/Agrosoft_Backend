@@ -25,6 +25,8 @@ import { UsoHerramientaOrmEntity } from "src/actividades_detalles/usos_herramien
 import { ReservaOrmEntity } from "src/inventario/reservas/infrastructure/persistence/reserva.orm-entity";
 import { MovimientoInsumoOrmEntity } from "src/inventario/movimientos_isumos/infrastructure/persistence/movimiento-insumo.orm-entity";
 import { TransaccionFinancieraOrmEntity } from "src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity";
+import { LoteOrmEntity } from 'src/territorio/lotes/infrastructure/persistence/lote.orm-entity';
+import { SubloteOrmEntity } from 'src/territorio/sublotes/infrastructure/persistence/sublote.orm-entity';
 
 @Entity("actividades")
 export class ActividadOrmEntity {
@@ -43,8 +45,20 @@ export class ActividadOrmEntity {
   @Column({ name: "lote_id", type: "int" })
   loteId!: number;
 
+  @ManyToOne(() => LoteOrmEntity, (lote: LoteOrmEntity) => lote.actividades)
+  @JoinColumn({ name: "lote_id" })
+  lote!: LoteOrmEntity;
+
   @Column({ name: "sub_lote_id", type: "int", nullable: true })
   subLoteId!: number | null;
+
+  @ManyToOne(
+  () => SubloteOrmEntity,
+  (sublote: SubloteOrmEntity) => sublote.actividades,
+  { nullable: true }
+  )
+  @JoinColumn({ name: "sub_lote_id" })
+  sublote!: SubloteOrmEntity | null;
 
   @Column({ name: "cultivo_id", type: "int" })
   cultivoId!: number;
