@@ -9,12 +9,15 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
+
 import { CultivoOrmEntity } from "../../../cultivo/infrastructure/persistence/cultivo.orm-entity";
 import { ActividadOrmEntity } from "../../../actividad/infrastructure/persistence/actividad.orm-entity";
 import { MovimientoProduccionOrmEntity } from "../../../movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity";
 import { ProductosAgroPersistence } from "../../../../catalogos/productos_agro/infrastructure/persistence/productos_agro.orm-entity";
 import { HistorialPrecioLoteOrmEntity } from "src/comercial/historial_precios_lote/infrastructure/persistence/historial-precio-lote.orm-entity";
 import { VentaDetalleOrmEntity } from "src/comercial/ventas_detalles/infrastructure/persistence/venta-detalle.orm-entity";
+import { LoteOrmEntity } from "src/territorio/lotes/infrastructure/persistence/lote.orm-entity";
+import { SubloteOrmEntity } from "src/territorio/sublotes/infrastructure/persistence/sublote.orm-entity";
 
 @Entity("lotes_produccion")
 export class LoteProduccionOrmEntity {
@@ -38,8 +41,23 @@ export class LoteProduccionOrmEntity {
   @Column({ name: "lote_id", type: "int" })
   loteId!: number;
 
+  @ManyToOne(
+    () => LoteOrmEntity,
+    (lote: LoteOrmEntity) => lote.lotesProduccion
+  )
+  @JoinColumn({ name: "lote_id" })
+  lote!: LoteOrmEntity;
+
   @Column({ name: "sub_lote_id", type: "int", nullable: true })
   subLoteId!: number | null;
+
+  @ManyToOne(
+    () => SubloteOrmEntity,
+    (sublote: SubloteOrmEntity) => sublote.lotesProduccion,
+    { nullable: true }
+  )
+  @JoinColumn({ name: "sub_lote_id" })
+  sublote!: SubloteOrmEntity | null;
 
   @Column({ name: "actividad_cosecha_id", type: "int", nullable: true })
   actividadCosechaId!: number | null;
@@ -86,9 +104,15 @@ export class LoteProduccionOrmEntity {
   @OneToMany(() => MovimientoProduccionOrmEntity, (m) => m.loteProduccion)
   movimientos!: MovimientoProduccionOrmEntity[];
 
-  @OneToMany(() => HistorialPrecioLoteOrmEntity, (historial) => historial.loteproduccion)
+  @OneToMany(
+    () => HistorialPrecioLoteOrmEntity,
+    (historial) => historial.loteproduccion
+  )
   historialpreciolote!: HistorialPrecioLoteOrmEntity[];
 
-  @OneToMany(() => VentaDetalleOrmEntity, (ventaDetalle) => ventaDetalle.loteProduccion)
+  @OneToMany(
+    () => VentaDetalleOrmEntity,
+    (ventaDetalle) => ventaDetalle.loteProduccion
+  )
   ventasDetalles!: VentaDetalleOrmEntity[];
 }

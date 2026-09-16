@@ -3,6 +3,8 @@ import { SensorAlertasPersistence } from 'src/iot/sensor_alertas/infrastructure/
 import { SensorOrmEntity } from 'src/iot/sensores/infrastructure/persistence/sensores.orm-entity';
 import { SubloteOrmEntity } from 'src/territorio/sublotes/infrastructure/persistence/sublote.orm-entity';
 import { ActividadOrmEntity } from 'src/produccion/actividad/infrastructure/persistence/actividad.orm-entity';
+import { LoteProduccionOrmEntity } from 'src/produccion/lote-produccion/infrastructure/persistence/lote-produccion.orm-entity';
+
 import {
   Column,
   CreateDateColumn,
@@ -58,21 +60,40 @@ export class LoteOrmEntity {
 
   // --- relaciones ---
 
-  @OneToMany(() => SubloteOrmEntity, (sublote: SubloteOrmEntity) => sublote.lote)
+  @OneToMany(
+    () => SubloteOrmEntity,
+    (sublote: SubloteOrmEntity) => sublote.lote
+  )
   sublotes!: SubloteOrmEntity[];
 
-  @OneToMany(() => SensorOrmEntity, (sensor: SensorOrmEntity) => sensor.lote)
-  sensores!: SensorOrmEntity[];
-
-  @OneToMany(() => SensorAlertasPersistence, (alerta: SensorAlertasPersistence) => alerta.lote)
-  alertas!: SensorAlertasPersistence[];
-
-  @OneToMany(() => IotGlobalConfigPersistence, (config: IotGlobalConfigPersistence) => config.lote)
-  iotConfigs!: IotGlobalConfigPersistence[];
+  @OneToMany(
+    () => LoteProduccionOrmEntity,
+    (loteProduccion: LoteProduccionOrmEntity) =>
+      loteProduccion.lote
+  )
+  lotesProduccion!: LoteProduccionOrmEntity[];
 
   @OneToMany(
-  () => ActividadOrmEntity,
-  (actividad: ActividadOrmEntity) => actividad.lote
+    () => ActividadOrmEntity,
+    (actividad: ActividadOrmEntity) => actividad.lote
   )
   actividades!: ActividadOrmEntity[];
+
+  @OneToMany(
+    () => SensorOrmEntity,
+    (sensor: SensorOrmEntity) => sensor.lote
+  )
+  sensores!: SensorOrmEntity[];
+
+  @OneToMany(
+    () => SensorAlertasPersistence,
+    (alerta: SensorAlertasPersistence) => alerta.lote
+  )
+  alertas!: SensorAlertasPersistence[];
+
+  @OneToMany(
+    () => IotGlobalConfigPersistence,
+    (config: IotGlobalConfigPersistence) => config.lote
+  )
+  iotConfigs!: IotGlobalConfigPersistence[];
 }

@@ -3,6 +3,8 @@ import { SensorAlertasPersistence } from 'src/iot/sensor_alertas/infrastructure/
 import { SensorOrmEntity } from 'src/iot/sensores/infrastructure/persistence/sensores.orm-entity';
 import { LoteOrmEntity } from 'src/territorio/lotes/infrastructure/persistence/lote.orm-entity';
 import { ActividadOrmEntity } from 'src/produccion/actividad/infrastructure/persistence/actividad.orm-entity';
+import { LoteProduccionOrmEntity } from 'src/produccion/lote-produccion/infrastructure/persistence/lote-produccion.orm-entity';
+
 import {
   Column,
   CreateDateColumn,
@@ -26,7 +28,10 @@ export class SubloteOrmEntity {
   @Column({ type: "integer" })
   lote_id!: number;
 
-  @ManyToOne(() => LoteOrmEntity, (lote: LoteOrmEntity) => lote.sublotes)
+  @ManyToOne(
+    () => LoteOrmEntity,
+    (lote: LoteOrmEntity) => lote.sublotes
+  )
   @JoinColumn({ name: "lote_id" })
   lote!: LoteOrmEntity;
 
@@ -65,7 +70,23 @@ export class SubloteOrmEntity {
   @DeleteDateColumn({ type: "timestamp", nullable: true })
   deleted_at!: Date | null;
 
-  @OneToMany(() => SensorOrmEntity, (sensor: SensorOrmEntity) => sensor.sublote)
+  @OneToMany(
+    () => ActividadOrmEntity,
+    (actividad: ActividadOrmEntity) => actividad.sublote
+  )
+  actividades!: ActividadOrmEntity[];
+
+  @OneToMany(
+    () => LoteProduccionOrmEntity,
+    (loteProduccion: LoteProduccionOrmEntity) =>
+      loteProduccion.sublote
+  )
+  lotesProduccion!: LoteProduccionOrmEntity[];
+
+  @OneToMany(
+    () => SensorOrmEntity,
+    (sensor: SensorOrmEntity) => sensor.sublote
+  )
   sensores!: SensorOrmEntity[];
 
   @OneToMany(
@@ -79,10 +100,4 @@ export class SubloteOrmEntity {
     (alerta: SensorAlertasPersistence) => alerta.sublote
   )
   alertas!: SensorAlertasPersistence[];
-
-  @OneToMany(
-  () => ActividadOrmEntity,
-  (actividad: ActividadOrmEntity) => actividad.sublote
-  )
-  actividades!: ActividadOrmEntity[];
 }
