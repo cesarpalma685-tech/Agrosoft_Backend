@@ -69,4 +69,3 @@ export class LoteOrmEntity {
   @OneToMany(() => IotGlobalConfigPersistence, (config: IotGlobalConfigPersistence) => config.lote)
   iotConfigs!: IotGlobalConfigPersistence[];
 }
-

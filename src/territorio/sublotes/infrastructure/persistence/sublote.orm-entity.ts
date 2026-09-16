@@ -13,10 +13,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-  
 
 @Entity("sublotes")
-
 export class SubloteOrmEntity {
   @PrimaryGeneratedColumn({ type: "integer" })
   id!: number;
@@ -24,14 +22,11 @@ export class SubloteOrmEntity {
   @Column({ type: "varchar" })
   nombre!: string;
 
-
-  @Column({ type: 'integer', insert: false, update: false })
-
   @Column({ type: "integer" })
   lote_id!: number;
 
   @ManyToOne(() => LoteOrmEntity, (lote: LoteOrmEntity) => lote.sublotes)
-  @JoinColumn({ name: 'lote_id' })
+  @JoinColumn({ name: "lote_id" })
   lote!: LoteOrmEntity;
 
   @Column({
@@ -72,9 +67,15 @@ export class SubloteOrmEntity {
   @OneToMany(() => SensorOrmEntity, (sensor: SensorOrmEntity) => sensor.sublote)
   sensores!: SensorOrmEntity[];
 
-  @OneToMany(() => IotGlobalConfigPersistence, (config: IotGlobalConfigPersistence) => config.sublote)
+  @OneToMany(
+    () => IotGlobalConfigPersistence,
+    (config: IotGlobalConfigPersistence) => config.sublote
+  )
   iotConfigs!: IotGlobalConfigPersistence[];
 
-  @OneToMany(() => SensorAlertasPersistence, (alerta: SensorAlertasPersistence) => alerta.sublote)
+  @OneToMany(
+    () => SensorAlertasPersistence,
+    (alerta: SensorAlertasPersistence) => alerta.sublote
+  )
   alertas!: SensorAlertasPersistence[];
 }
