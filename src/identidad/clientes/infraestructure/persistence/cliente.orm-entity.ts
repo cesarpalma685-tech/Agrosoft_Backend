@@ -1,8 +1,10 @@
+import { VentaOrmEntity } from "src/comercial/ventas/infrastructure/persistence/venta.orm-entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  OneToMany,
 } from "typeorm";
 
 @Entity("clientes")
@@ -47,4 +49,7 @@ export class ClienteOrmEntity {
 
   @CreateDateColumn()
   created_at!: Date;
+
+  @OneToMany(() => VentaOrmEntity, (venta) => venta.cliente)
+  venta!: VentaOrmEntity[];
 }

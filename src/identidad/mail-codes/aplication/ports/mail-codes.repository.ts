@@ -5,4 +5,5 @@ export abstract class EmailCodeRepository {
   abstract actualizar(emailCode: EmailCode): Promise<EmailCode>;
   abstract eliminar(id: number): Promise<void>;
   abstract buscarPorId(id: number): Promise<EmailCode | null>;
+  abstract buscarPorCodigo(codigo: string): Promise<EmailCode | null>;
 }

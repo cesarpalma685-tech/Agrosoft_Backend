@@ -32,9 +32,12 @@ export class EmailCodeTypeOrmRepository extends EmailCodeRepository {
 
   async buscarPorId(id: number): Promise<EmailCode | null> {
     const emailCode = await this.repo.findOne({ where: { id } });
-
     return emailCode ? this.aDominio(emailCode) : null;
   }
+
+  async buscarPorCodigo(code: string): Promise<EmailCode | null> {
+    const emailCode = await this.repo.findOne({ where: { code } });
+    return emailCode ? this.aDominio(emailCode) : null;}
 
   private aDominio(orm: EmailCodeOrmEntity): EmailCode {
     return new EmailCode(
@@ -58,4 +61,5 @@ export class EmailCodeTypeOrmRepository extends EmailCodeRepository {
       usedAt: emailCode.usedAt ?? null,
     };
   }
+  
 }

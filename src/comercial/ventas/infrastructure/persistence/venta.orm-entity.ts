@@ -2,6 +2,7 @@ import { FacturaOrmEntity } from "src/comercial/factura/infrastructure/persisten
 import { PagoOrmEntity } from "src/comercial/pagos/infrastructure/persistence/pago.orm-entity";
 import { TransaccionFinancieraOrmEntity } from "src/comercial/transacciones_financieras/infrastructure/persistence/transaccion-financiera.orm-entity";
 import { VentaDetalleOrmEntity } from "src/comercial/ventas_detalles/infrastructure/persistence/venta-detalle.orm-entity";
+import { ClienteOrmEntity } from "src/identidad/clientes/infraestructure/persistence/cliente.orm-entity";
 import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 import { MovimientoProduccionOrmEntity } from "src/produccion/movimiento-produccion/infrastructure/persistence/movimiento-produccion.orm-entity";
 import {
@@ -87,4 +88,8 @@ export class VentaOrmEntity {
     (movimientoProduccion) => movimientoProduccion.venta,
   )
   movimientoProduccion!: MovimientoProduccionOrmEntity[];
+
+  @ManyToOne(() => ClienteOrmEntity, (cliente) => cliente.venta,)
+  @JoinColumn({ name: "cliente_id" })
+  cliente!: ClienteOrmEntity
 }
