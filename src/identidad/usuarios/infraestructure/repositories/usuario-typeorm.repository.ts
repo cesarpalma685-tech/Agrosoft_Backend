@@ -55,12 +55,15 @@ export class UsuarioTypeOrmRepository extends UsuarioRepository {
       orm.correo,
       orm.passwordHash,
       orm.idFicha,
-      orm.programaFormacionId,
+      orm.programaFormacion,
       orm.telefono,
       orm.estado,
       orm.emailVerifiedAt,
       orm.lastLoginAt,
       orm.created_at,
+      orm.rolId,
+      orm.fotoPerfil,
+      orm.passwordActualizadoAt,
     );
   }
 
@@ -71,9 +74,12 @@ export class UsuarioTypeOrmRepository extends UsuarioRepository {
       apellido: usuario.apellido,
       correo: usuario.correo,
       passwordHash: usuario.passwordHash,
+      passwordActualizadoAt: usuario.passwordActualizadoAt,
       idFicha: usuario.idFicha,
       telefono: usuario.telefono,
-      programaFormacionId: usuario.programaFormacionId,
+      fotoPerfil: usuario.fotoPerfil,
+      programaFormacion: usuario.programaFormacion,
+      rolId: usuario.rolId,
       estado: usuario.estado,
       identificacion: usuario.identificacion,
     };

@@ -1,10 +1,14 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { ProgramaFormacion } from "../../domain/entities/programa-formacion.entity";
 import { ProgramaFormacionRepository } from "../ports/programa-formacion.repository";
+import {
+  esProgramaFormacionNombre,
+  ProgramaFormacionNombre,
+} from "../../domain/enums/programa-formacion-nombre.enum";
 
 export interface CrearProgramaFormacionInput {
   numeroFicha: string;
-  nombre: string;
+  nombre: ProgramaFormacionNombre;
   tipo?: string;
   descripcion?: string;
   fechaInicio?: Date;
@@ -20,6 +24,12 @@ export class CrearProgramaFormacionUseCase {
   async ejecutar(
     datos: CrearProgramaFormacionInput,
   ): Promise<ProgramaFormacion> {
+    if (!esProgramaFormacionNombre(datos.nombre)) {
+      throw new BadRequestException(
+        `Programa de formación no permitido: ${datos.nombre}`,
+      );
+    }
+
     const programa = new ProgramaFormacion(
       null,
       datos.numeroFicha,

@@ -1,8 +1,10 @@
+import { ProgramaFormacionNombre } from "../enums/programa-formacion-nombre.enum";
+
 export class ProgramaFormacion {
   constructor(
     public readonly id: number | null,
     public numeroFicha: string,
-    public nombre: string,
+    public nombre: ProgramaFormacionNombre,
     public tipo?: string,
     public descripcion?: string,
     public fechaInicio?: Date,

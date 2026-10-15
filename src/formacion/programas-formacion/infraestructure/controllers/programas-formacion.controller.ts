@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Param,
   ParseIntPipe,
   Patch,
@@ -14,6 +15,10 @@ import { EliminarProgramaFormacionUseCase } from "../../aplication/use-cases/eli
 
 import { CreateProgramaFormacionDto } from "../../aplication/dto/create-programa-formacion.dto";
 import { UpdateProgramaFormacionDto } from "../../aplication/dto/update-programa-formacion.dto";
+import {
+  PROGRAMA_FORMACION_LABELS,
+  ProgramaFormacionNombre,
+} from "../../domain/enums/programa-formacion-nombre.enum";
 
 @Controller("programas-formacion")
 export class ProgramasFormacionController {
@@ -22,6 +27,15 @@ export class ProgramasFormacionController {
     private readonly actualizarPrograma: ActualizarProgramaFormacionUseCase,
     private readonly eliminarPrograma: EliminarProgramaFormacionUseCase,
   ) {}
+
+  // Opciones para el <select> de programa de formación
+  @Get("opciones")
+  opciones() {
+    return Object.values(ProgramaFormacionNombre).map((value) => ({
+      value,
+      label: PROGRAMA_FORMACION_LABELS[value],
+    }));
+  }
 
   @Post()
   crear(@Body() dto: CreateProgramaFormacionDto) {

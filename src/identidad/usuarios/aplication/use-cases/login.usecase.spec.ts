@@ -4,6 +4,7 @@ import { LoginUseCase } from "./login.usecase";
 import { Usuario } from "../../domain/entities/usuario.entity";
 import { UsuarioRepository } from "../ports/usuario.repository";
 import { IAuthServicePort } from "../ports/auth-service.port";
+import { RolRepository } from "../../../roles/aplication/ports/rol.repository";
 
 describe("LoginUseCase", () => {
   const usuarioRepository = {
@@ -12,7 +13,14 @@ describe("LoginUseCase", () => {
   const authService = {
     generateToken: jest.fn().mockReturnValue("token-de-prueba"),
   } as unknown as IAuthServicePort;
-  const loginUseCase = new LoginUseCase(usuarioRepository, authService);
+  const rolRepository = {
+    buscarPorId: jest.fn().mockResolvedValue(null),
+  } as unknown as RolRepository;
+  const loginUseCase = new LoginUseCase(
+    usuarioRepository,
+    authService,
+    rolRepository,
+  );
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -70,7 +78,22 @@ describe("LoginUseCase", () => {
 
     await expect(
       loginUseCase.execute("ana@example.com", "Correcta123!"),
-    ).resolves.toEqual({ token: "token-de-prueba" });
+    ).resolves.toEqual({
+      token: "token-de-prueba",
+      usuario: {
+        id: 1,
+        nombre: "Ana",
+        apellido: "Perez",
+        correo: "ana@example.com",
+        telefono: null,
+        identificacion: "123",
+        estado: "activo",
+        rol: null,
+        rolLabel: null,
+        fotoPerfil: null,
+        passwordActualizadoAt: null,
+      },
+    });
     expect(authService.generateToken).toHaveBeenCalledWith({
       id: "1",
       email: "ana@example.com",

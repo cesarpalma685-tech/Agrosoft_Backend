@@ -1,10 +1,18 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { ProgramaFormacionRepository } from "../ports/programa-formacion.repository";
 import { ProgramaFormacion } from "../../domain/entities/programa-formacion.entity";
+import {
+  esProgramaFormacionNombre,
+  ProgramaFormacionNombre,
+} from "../../domain/enums/programa-formacion-nombre.enum";
 
 export interface ActualizarProgramaFormacionInput {
   numeroFicha?: string;
-  nombre?: string;
+  nombre?: ProgramaFormacionNombre;
   tipo?: string;
   descripcion?: string;
   fechaInicio?: Date;
@@ -21,6 +29,12 @@ export class ActualizarProgramaFormacionUseCase {
     id: number,
     datos: ActualizarProgramaFormacionInput,
   ): Promise<ProgramaFormacion> {
+    if (datos.nombre !== undefined && !esProgramaFormacionNombre(datos.nombre)) {
+      throw new BadRequestException(
+        `Programa de formación no permitido: ${datos.nombre}`,
+      );
+    }
+
     const programa = await this.repository.buscarPorId(id);
 
     if (!programa) {

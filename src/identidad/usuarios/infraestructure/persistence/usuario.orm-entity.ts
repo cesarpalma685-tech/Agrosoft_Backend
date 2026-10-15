@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 
 import { RolOrmEntity } from '../../../roles/infraestructure/persistence/rol.orm-entity';
-import { ProgramaFormacionOrmEntity } from '../../../../formacion/programas-formacion/infraestructure/persistence/programa-formacion.orm-entity';
+import { ProgramaFormacionNombre } from '../../../../formacion/programas-formacion/domain/enums/programa-formacion-nombre.enum';
 import { NotificacionOrmEntity } from 'src/identidad/notificaciones/infraestructure/persistence/notificaciones.orm-entity';
 import { ActividadHistorialOrmEntity } from 'src/actividades_detalles/actividades_historial/infrastructure/persistence/actividad-historial.orm-entity';
 import { ActividadResponsableOrmEntity } from 'src/actividades_detalles/actividades_responsable/infrastructure/persistence/actividad-responsable.orm-entity';
@@ -38,19 +38,31 @@ export class UsuarioOrmEntity {
   identificacion!: string;
 
   @Column({ type: "int", nullable: true })
-  idFicha!: number;
+  idFicha!: number | null;
 
-  @Column({ type: "varchar", nullable: true })
-  programaFormacionId!: string | null;
+  @Column({
+    type: "enum",
+    enum: ProgramaFormacionNombre,
+    enumName: "programa_formacion_nombre_enum",
+    nullable: true,
+  })
+  programaFormacion!: ProgramaFormacionNombre | null;
 
   @Column({ type: "varchar", nullable: true })
   telefono!: string | null;
+
+  // Imagen en base64 (data URL)
+  @Column({ type: "text", nullable: true })
+  fotoPerfil!: string | null;
 
   @Column({ type: "varchar", unique: true })
   correo!: string;
 
   @Column({ type: "varchar" })
   passwordHash!: string;
+
+  @Column({ type: "timestamp", nullable: true })
+  passwordActualizadoAt!: Date | null;
 
   @Column({ type: "timestamp", nullable: true })
   lastLoginAt!: Date | null;
@@ -70,13 +82,12 @@ export class UsuarioOrmEntity {
   @DeleteDateColumn()
   deleted_at!: Date;
 
+  @Column({ type: "int", nullable: true })
+  rolId!: number | null;
+
   @ManyToOne(() => RolOrmEntity)
   @JoinColumn({ name: "rolId" })
   rol!: RolOrmEntity;
-
-  @ManyToOne(() => ProgramaFormacionOrmEntity)
-  @JoinColumn({ name: 'programaFormacionId' })
-  programaFormacion!: ProgramaFormacionOrmEntity;
 
   @OneToMany(
     () => NotificacionOrmEntity,

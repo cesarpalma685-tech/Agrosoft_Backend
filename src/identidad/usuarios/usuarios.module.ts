@@ -9,19 +9,28 @@ import { ActualizarUsuarioUseCase } from "./aplication/use-cases/actualizar-usua
 import { EliminarUsuarioUseCase } from "./aplication/use-cases/eliminar-usuario.usecase";
 import { AuthController } from "./infraestructure/controllers/auth.controller";
 import { LoginUseCase } from "./aplication/use-cases/login.usecase";
+import { CambiarPasswordUseCase } from "./aplication/use-cases/cambiar-password.usecase";
 import { AUTH_SERVICE_PORT } from "./aplication/ports/auth-service.port";
 import { JwtModule } from "@nestjs/jwt";
 import { JwtAuthService } from "./infraestructure/security/jwt-auth.service";
 import { PassportModule } from "@nestjs/passport";
 import { JwtStrategy } from "./infraestructure/security/jwt.strategy";
+import { RolModule } from "../roles/roles.module";
+import { AdminSeeder } from "./infraestructure/seeders/admin.seeder";
 
 @Module({
   imports: [
     PassportModule,
+    RolModule,
     TypeOrmModule.forFeature([UsuarioOrmEntity]),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || "secreto_super_seguro",
-      signOptions: { expiresIn: "24h" },
+    // registerAsync: el secreto se lee cuando ConfigModule ya cargó el .env.
+    // Con register() se leía al importar el archivo (antes del .env), así que
+    // el token se firmaba con el valor por defecto y JwtStrategy lo rechazaba (401).
+    JwtModule.registerAsync({
+      useFactory: () => ({
+        secret: process.env.JWT_SECRET || "secreto_super_seguro",
+        signOptions: { expiresIn: "24h" },
+      }),
     }),
   ],
   controllers: [AuthController, UsuariosController],
@@ -30,7 +39,9 @@ import { JwtStrategy } from "./infraestructure/security/jwt.strategy";
     ActualizarUsuarioUseCase,
     EliminarUsuarioUseCase,
     LoginUseCase,
+    CambiarPasswordUseCase,
     JwtStrategy,
+    AdminSeeder,
     {
       provide: AUTH_SERVICE_PORT,
       useClass: JwtAuthService,

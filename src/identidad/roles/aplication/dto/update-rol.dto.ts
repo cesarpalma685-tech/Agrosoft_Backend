@@ -1,10 +1,7 @@
 import { IsBoolean, IsOptional, IsString } from "class-validator";
 
+// El nombre no se puede cambiar: los 3 roles son fijos y los crea el seeder.
 export class UpdateRolDto {
-  @IsOptional()
-  @IsString()
-  nombre?: string;
-
   @IsOptional()
   @IsString()
   descripcion?: string;

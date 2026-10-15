@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { RolPermisoOrmEntity } from "../../../rol-permisos/infraestructure/persistence/rol_permisos.orm-entity";
 import { UsuarioOrmEntity } from "../../../usuarios/infraestructure/persistence/usuario.orm-entity";
+import { RolNombre } from "../../domain/enums/rol-nombre.enum";
 
 @Entity("roles")
 export class RolOrmEntity {
@@ -16,10 +17,12 @@ export class RolOrmEntity {
   id!: number;
 
   @Column({
-    type: "varchar",
+    type: "enum",
+    enum: RolNombre,
+    enumName: "rol_nombre_enum",
     unique: true,
   })
-  nombre!: string;
+  nombre!: RolNombre;
 
   @Column({
     type: "varchar",

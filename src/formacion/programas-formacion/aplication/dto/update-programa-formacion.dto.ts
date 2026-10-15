@@ -1,4 +1,11 @@
-import { IsDateString, IsInt, IsOptional, IsString } from "class-validator";
+import {
+  IsDateString,
+  IsEnum,
+  IsInt,
+  IsOptional,
+  IsString,
+} from "class-validator";
+import { ProgramaFormacionNombre } from "../../domain/enums/programa-formacion-nombre.enum";
 
 export class UpdateProgramaFormacionDto {
   @IsOptional()
@@ -6,8 +13,10 @@ export class UpdateProgramaFormacionDto {
   numeroFicha?: string;
 
   @IsOptional()
-  @IsString()
-  nombre?: string;
+  @IsEnum(ProgramaFormacionNombre, {
+    message: `nombre debe ser uno de: ${Object.values(ProgramaFormacionNombre).join(", ")}`,
+  })
+  nombre?: ProgramaFormacionNombre;
 
   @IsOptional()
   @IsString()

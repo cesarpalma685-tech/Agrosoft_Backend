@@ -3,7 +3,6 @@ import { RolRepository } from "../ports/rol.repository";
 import { Rol } from "../../domain/entities/rol.entity";
 
 export interface ActualizarRolInput {
-  nombre?: string;
   descripcion?: string;
   es_sistema?: boolean;
   estado?: string;
@@ -22,7 +21,7 @@ export class ActualizarRolUseCase {
 
     const rolActualizado = new Rol(
       rol.id,
-      datos.nombre ?? rol.nombre,
+      rol.nombre,
       datos.descripcion ?? rol.descripcion,
       datos.es_sistema ?? rol.es_sistema,
       datos.estado ?? rol.estado,

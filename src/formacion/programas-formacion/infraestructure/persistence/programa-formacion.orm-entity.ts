@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   OneToMany,
 } from "typeorm";
+import { ProgramaFormacionNombre } from "../../domain/enums/programa-formacion-nombre.enum";
 
 @Entity("programas_formacion")
 export class ProgramaFormacionOrmEntity {
@@ -17,9 +18,11 @@ export class ProgramaFormacionOrmEntity {
   numeroFicha!: string;
 
   @Column({
-    type: "varchar",
+    type: "enum",
+    enum: ProgramaFormacionNombre,
+    enumName: "programa_formacion_nombre_enum",
   })
-  nombre!: string;
+  nombre!: ProgramaFormacionNombre;
 
   @Column({
     type: "varchar",

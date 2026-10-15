@@ -8,6 +8,8 @@ import {
   AUTH_SERVICE_PORT,
   IAuthServicePort,
 } from "../ports/auth-service.port";
+import { RolRepository } from "../../../roles/aplication/ports/rol.repository";
+import { ROL_NOMBRE_LABELS } from "../../../roles/domain/enums/rol-nombre.enum";
 
 @Injectable()
 export class LoginUseCase {
@@ -16,6 +18,7 @@ export class LoginUseCase {
     private readonly usuarioRepository: UsuarioRepository,
     @Inject(AUTH_SERVICE_PORT)
     private readonly authService: IAuthServicePort,
+    private readonly rolRepository: RolRepository,
   ) {}
 
   async execute(correo: string, pass: string) {
@@ -37,6 +40,27 @@ export class LoginUseCase {
       email: usuario.correo,
     });
 
-    return { token };
+    const rol = usuario.rolId
+      ? await this.rolRepository.buscarPorId(usuario.rolId)
+      : null;
+
+    // Datos públicos para mostrar en el frontend (nunca el passwordHash).
+    // La foto va aquí y no en el JWT para no inflar el token.
+    return {
+      token,
+      usuario: {
+        id: usuario.id,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        correo: usuario.correo,
+        telefono: usuario.telefono,
+        identificacion: usuario.identificacion,
+        estado: usuario.estado,
+        rol: rol?.nombre ?? null,
+        rolLabel: rol ? ROL_NOMBRE_LABELS[rol.nombre] : null,
+        fotoPerfil: usuario.fotoPerfil,
+        passwordActualizadoAt: usuario.passwordActualizadoAt,
+      },
+    };
   }
 }

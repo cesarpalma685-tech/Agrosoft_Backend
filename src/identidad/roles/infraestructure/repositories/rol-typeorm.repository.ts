@@ -5,6 +5,7 @@ import { Repository } from "typeorm";
 import { Rol } from "../../domain/entities/rol.entity";
 import { RolRepository } from "../../aplication/ports/rol.repository";
 import { RolOrmEntity } from "../persistence/rol.orm-entity";
+import { RolNombre } from "../../domain/enums/rol-nombre.enum";
 
 @Injectable()
 export class RolTypeOrmRepository extends RolRepository {
@@ -43,7 +44,7 @@ export class RolTypeOrmRepository extends RolRepository {
     return rol ? this.aDominio(rol) : null;
   }
 
-  async buscarPorNombre(nombre: string): Promise<Rol | null> {
+  async buscarPorNombre(nombre: RolNombre): Promise<Rol | null> {
     const rol = await this.repo.findOne({
       where: { nombre },
     });

@@ -8,6 +8,7 @@ import { RolesController } from "./infraestructure/controllers/roles.controller"
 import { CrearRolUseCase } from "./aplication/use-cases/crear-rol.usecase";
 import { ActualizarRolUseCase } from "./aplication/use-cases/actualizar-rol.usecase";
 import { EliminarRolUseCase } from "./aplication/use-cases/eliminar-rol.usecase";
+import { RolesSeeder } from "./infraestructure/seeders/roles.seeder";
 
 @Module({
   imports: [TypeOrmModule.forFeature([RolOrmEntity])],
@@ -18,12 +19,13 @@ import { EliminarRolUseCase } from "./aplication/use-cases/eliminar-rol.usecase"
     CrearRolUseCase,
     ActualizarRolUseCase,
     EliminarRolUseCase,
+    RolesSeeder,
     {
       provide: RolRepository,
       useClass: RolTypeOrmRepository,
     },
   ],
 
-  exports: [RolRepository],
+  exports: [RolRepository, RolesSeeder],
 })
 export class RolModule {}
