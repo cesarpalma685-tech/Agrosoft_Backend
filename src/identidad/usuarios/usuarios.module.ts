@@ -17,11 +17,17 @@ import { PassportModule } from "@nestjs/passport";
 import { JwtStrategy } from "./infraestructure/security/jwt.strategy";
 import { RolModule } from "../roles/roles.module";
 import { AdminSeeder } from "./infraestructure/seeders/admin.seeder";
+import { EmailCodeModule } from "../mail-codes/mail-codes.module";
+import { SolicitarRecuperacionUseCase } from "./aplication/use-cases/solicitar-recuperacion.usecase";
+import { RestablecerPasswordUseCase } from "./aplication/use-cases/restablecer-password.usecase";
+import { EMAIL_SENDER_PORT } from "./aplication/ports/email-sender.port";
+import { NodemailerEmailService } from "./infraestructure/mail/nodemailer-email.service";
 
 @Module({
   imports: [
     PassportModule,
     RolModule,
+    EmailCodeModule,
     TypeOrmModule.forFeature([UsuarioOrmEntity]),
     // registerAsync: el secreto se lee cuando ConfigModule ya cargó el .env.
     // Con register() se leía al importar el archivo (antes del .env), así que
@@ -40,6 +46,9 @@ import { AdminSeeder } from "./infraestructure/seeders/admin.seeder";
     EliminarUsuarioUseCase,
     LoginUseCase,
     CambiarPasswordUseCase,
+    SolicitarRecuperacionUseCase,
+    RestablecerPasswordUseCase,
+    { provide: EMAIL_SENDER_PORT, useClass: NodemailerEmailService },
     JwtStrategy,
     AdminSeeder,
     {
