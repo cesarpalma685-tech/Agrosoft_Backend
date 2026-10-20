@@ -44,6 +44,14 @@ export class AdminSeeder implements OnApplicationBootstrap {
       this.logger.log(`Administrador ${correo} creado`);
     } catch (error) {
       if ((error as { status?: number }).status === 409) return; // ya existe
+      // 23505 = violación de UNIQUE en Postgres (ej. la identificación ya está en uso)
+      if ((error as { driverError?: { code?: string } }).driverError?.code === "23505") {
+        this.logger.error(
+          "No se creó el administrador: ya existe un usuario con esa identificación. " +
+            "Cambia ADMIN_IDENTIFICACION en el .env por un valor que no esté en uso.",
+        );
+        return;
+      }
       throw error;
     }
   }
