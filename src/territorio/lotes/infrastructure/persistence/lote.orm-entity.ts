@@ -3,6 +3,7 @@ import { SensorAlertasPersistence } from 'src/iot/sensor_alertas/infrastructure/
 import { SensorOrmEntity } from 'src/iot/sensores/infrastructure/persistence/sensores.orm-entity';
 import { SubloteOrmEntity } from 'src/territorio/sublotes/infrastructure/persistence/sublote.orm-entity';
 import { ActividadOrmEntity } from 'src/produccion/actividad/infrastructure/persistence/actividad.orm-entity';
+import { UnidadProductivaOrmEntity } from 'src/territorio/unidades_productivas/infrastructure/persistence/unidad-productiva.orm-entity';
 import { LoteProduccionOrmEntity } from 'src/produccion/lote-produccion/infrastructure/persistence/lote-produccion.orm-entity';
 
 import {
@@ -10,6 +11,8 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -23,12 +26,25 @@ export class LoteOrmEntity {
   @Column({ type: "varchar" })
   nombre!: string;
 
+  // Nullable para no romper lotes que ya existían antes de crear las unidades
+  @Column({ type: "integer", nullable: true })
+  unidad_productiva_id!: number | null;
+
+  @ManyToOne(
+    () => UnidadProductivaOrmEntity,
+    (unidad: UnidadProductivaOrmEntity) => unidad.lotes,
+    { nullable: true },
+  )
+  @JoinColumn({ name: "unidad_productiva_id" })
+  unidadProductiva!: UnidadProductivaOrmEntity | null;
+
   @Column({
     type: "geometry",
     spatialFeatureType: "Polygon",
     srid: 4326,
+    nullable: true,
   })
-  geom!: object;
+  geom!: object | null;
 
   @Column({ type: "numeric", precision: 12, scale: 2 })
   areaM2!: number;
@@ -40,11 +56,12 @@ export class LoteOrmEntity {
     type: "geometry",
     spatialFeatureType: "Point",
     srid: 4326,
+    nullable: true,
   })
-  centroide!: object;
+  centroide!: object | null;
 
-  @Column({ type: "varchar" })
-  descripcion!: string;
+  @Column({ type: "varchar", nullable: true })
+  descripcion!: string | null;
 
   @Column({ type: "varchar" })
   estado!: string;

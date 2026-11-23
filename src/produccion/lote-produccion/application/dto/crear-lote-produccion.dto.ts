@@ -5,11 +5,14 @@ export class CrearLoteProduccionDto {
   @IsOptional()
   productoAgroId?: number;
 
+  // Si viene actividadCosechaId, estos campos se toman de la actividad
   @IsInt()
-  cultivoId!: number;
+  @IsOptional()
+  cultivoId?: number;
 
   @IsInt()
-  loteId!: number;
+  @IsOptional()
+  loteId?: number;
 
   @IsInt()
   @IsOptional()
@@ -23,8 +26,10 @@ export class CrearLoteProduccionDto {
   @IsOptional()
   calidad?: string;
 
+  // Si viene actividadCosechaId, se toma de kgRecolectados de la actividad
   @IsNumber()
-  cantidadKg!: number;
+  @IsOptional()
+  cantidadKg?: number;
 
   @IsNumber()
   @IsOptional()

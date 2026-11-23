@@ -13,4 +13,10 @@ export abstract class SubloteRepositoryPort {
   ): Promise<Sublote | null>;
 
   abstract softDelete(id: number): Promise<void>;
+
+  abstract calcularMetricas(geom: object): Promise<{
+    areaM2: number;
+    areaHa: number;
+    centroide: object;
+  }>;
 }

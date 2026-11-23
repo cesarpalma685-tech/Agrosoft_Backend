@@ -8,6 +8,7 @@ import { CrearUsuarioUseCase } from "./aplication/use-cases/crear-usuario.usecas
 import { ActualizarUsuarioUseCase } from "./aplication/use-cases/actualizar-usuario.usecase";
 import { EliminarUsuarioUseCase } from "./aplication/use-cases/eliminar-usuario.usecase";
 import { AuthController } from "./infraestructure/controllers/auth.controller";
+import { ListarUsuariosUseCase } from "./aplication/use-cases/listar-usuarios.usecase";
 import { LoginUseCase } from "./aplication/use-cases/login.usecase";
 import { CambiarPasswordUseCase } from "./aplication/use-cases/cambiar-password.usecase";
 import { AUTH_SERVICE_PORT } from "./aplication/ports/auth-service.port";
@@ -45,6 +46,7 @@ import { NodemailerEmailService } from "./infraestructure/mail/nodemailer-email.
     ActualizarUsuarioUseCase,
     EliminarUsuarioUseCase,
     LoginUseCase,
+    ListarUsuariosUseCase,
     CambiarPasswordUseCase,
     SolicitarRecuperacionUseCase,
     RestablecerPasswordUseCase,

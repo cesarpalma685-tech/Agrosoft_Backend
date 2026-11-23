@@ -8,4 +8,5 @@ export abstract class UsuarioRepository {
   abstract eliminar(id: number): Promise<void>;
   abstract buscarPorId(id: number): Promise<Usuario | null>;
   abstract buscarPorCorreo(correo: string): Promise<Usuario | null>;
+  abstract listar(): Promise<Usuario[]>;
 }

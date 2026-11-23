@@ -1,4 +1,11 @@
-import { IsInt, IsNumber, IsObject, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import {
+  ArrayMinSize,
+  IsInt,
+  IsString,
+  ValidateNested,
+} from "class-validator";
+import { CoordenadaDto } from "./coordenada.dto";
 
 export class CrearSubloteDto {
   @IsString()
@@ -7,17 +14,12 @@ export class CrearSubloteDto {
   @IsInt()
   lote_id!: number;
 
-  @IsObject()
-  geom!: object;
-
-  @IsNumber()
-  areaM2!: number;
-
-  @IsNumber()
-  areaHa!: number;
-
-  @IsObject()
-  centroide!: object;
+  // Puntos que digita el usuario (mínimo 3). El polígono, el área y el
+  // centroide se calculan en el backend.
+  @ArrayMinSize(3)
+  @ValidateNested({ each: true })
+  @Type(() => CoordenadaDto)
+  coordenadas!: CoordenadaDto[];
 
   @IsString()
   descripcion!: string;

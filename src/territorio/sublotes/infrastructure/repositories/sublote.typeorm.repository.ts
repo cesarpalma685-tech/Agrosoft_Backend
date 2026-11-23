@@ -37,4 +37,21 @@ export class SubloteTypeormRepository implements SubloteRepositoryPort {
   async softDelete(id: number): Promise<void> {
     await this.repository.softDelete(id);
   }
+
+  async calcularMetricas(geom: object) {
+    const [fila] = await this.repository.query(
+      `SELECT ST_Area(g::geography) AS area,
+              ST_AsGeoJSON(ST_Centroid(g))::json AS centroide
+         FROM (SELECT ST_SetSRID(ST_GeomFromGeoJSON($1), 4326) AS g) t`,
+      [JSON.stringify(geom)],
+    );
+
+    const areaM2 = Number(Number(fila.area).toFixed(2));
+
+    return {
+      areaM2,
+      areaHa: Number((areaM2 / 10000).toFixed(4)),
+      centroide: fila.centroide,
+    };
+  }
 }

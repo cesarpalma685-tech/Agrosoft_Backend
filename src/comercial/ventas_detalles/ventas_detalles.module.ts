@@ -9,9 +9,13 @@ import { ActualizarVentaDetalleUseCase } from "./application/use-cases/actualiza
 import { ObtenerVentaDetallePorIdUseCase } from "./application/use-cases/obtener-venta-detalle.use-case";
 import { EliminarVentaDetalleUseCase } from "./application/use-cases/eliminar.venta-detalle.use-case";
 import { VentaDetalleTypeOrmRepository } from "./infrastructure/repositories/venta-detalle.typeorm.entity";
+import { MovimientoProduccionModule } from "../../produccion/movimiento-produccion/movimiento-produccion.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([VentaDetalleOrmEntity])],
+  imports: [
+    TypeOrmModule.forFeature([VentaDetalleOrmEntity]),
+    MovimientoProduccionModule,
+  ],
   controllers: [VentaDetalleController],
   providers: [
     CrearVentaDetalleUseCase,

@@ -4,11 +4,12 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
 } from "@nestjs/common";
 
 import { CrearLoteDto } from "../../application/dto/crear-lote.dto";
+import { ActualizarLoteDto } from "../../application/dto/actualizar-lote.dto";
 
 import { CrearLoteUseCase } from "../../application/use-cases/crear-lote.use-case";
 import { ListarLotesUseCase } from "../../application/use-cases/listar-lotes.use-case";
@@ -41,8 +42,8 @@ export class LoteController {
     return this.obtenerLotePorIdUseCase.execute(Number(id));
   }
 
-  @Put(":id")
-  actualizar(@Param("id") id: string, @Body() dto: CrearLoteDto) {
+  @Patch(":id")
+  actualizar(@Param("id") id: string, @Body() dto: ActualizarLoteDto) {
     return this.actualizarLoteUseCase.execute(Number(id), dto);
   }
 

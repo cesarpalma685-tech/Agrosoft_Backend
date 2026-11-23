@@ -6,6 +6,8 @@ export class LoteDto {
 
   nombre!: string;
 
+  unidad_productiva_id!: number | null;
+
   geom: any;
 
   areaM2!: number;
@@ -13,6 +15,6 @@ export class LoteDto {
 
   centroide: any;
 
-  descripcion!: string;
+  descripcion!: string | null;
   estado!: string;
 }

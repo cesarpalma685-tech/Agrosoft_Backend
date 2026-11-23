@@ -10,6 +10,7 @@ import {
   Req,
   UseGuards,
 } from "@nestjs/common";
+import { ListarUsuariosUseCase } from "../../aplication/use-cases/listar-usuarios.usecase";
 import { CrearUsuarioUseCase } from "../../aplication/use-cases/crear-usuario.usecase";
 import { ActualizarUsuarioUseCase } from "../../aplication/use-cases/actualizar-usuario.usecase";
 import { EliminarUsuarioUseCase } from "../../aplication/use-cases/eliminar-usuario.usecase";
@@ -26,7 +27,15 @@ export class UsuariosController {
     private readonly actualizarUsuario: ActualizarUsuarioUseCase,
     private readonly eliminarUsuario: EliminarUsuarioUseCase,
     private readonly cambiarPassword: CambiarPasswordUseCase,
+    private readonly listarUsuarios: ListarUsuariosUseCase,
   ) {}
+
+  // PROTEGIDO: lista pública de usuarios (para elegir responsables, etc.)
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  list() {
+    return this.listarUsuarios.ejecutar();
+  }
 
   @Post()
   create(@Body() dto: CreateUsuarioDto) {

@@ -24,6 +24,6 @@ import { LoteProduccionOrmEntity } from "../lote-produccion/infrastructure/persi
       useClass: MovimientoProduccionTypeOrmRepository,
     },
   ],
-  exports: [MovimientoProduccionRepositoryPort],
+  exports: [MovimientoProduccionRepositoryPort, CrearMovimientoProduccionUseCase],
 })
 export class MovimientoProduccionModule {}

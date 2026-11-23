@@ -6,9 +6,15 @@ import { ListarLoteProduccionUseCase } from "./application/use-cases/listar-lote
 import { LoteProduccionRepositoryPort } from "./application/ports/lote-produccion.repository.port";
 import { LoteProduccionTypeOrmRepository } from "./infrastructure/repositories/lote-produccion.typeorm.repository";
 import { LoteProduccionOrmEntity } from "./infrastructure/persistence/lote-produccion.orm-entity";
+import { ActividadModule } from "../actividad/actividad.module";
+import { MovimientoProduccionModule } from "../movimiento-produccion/movimiento-produccion.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([LoteProduccionOrmEntity])],
+  imports: [
+    TypeOrmModule.forFeature([LoteProduccionOrmEntity]),
+    ActividadModule,
+    MovimientoProduccionModule,
+  ],
   controllers: [LoteProduccionController],
   providers: [
     CrearLoteProduccionUseCase,

@@ -16,6 +16,7 @@ import { ListarSublotesUseCase } from "../../application/use-cases/listar-sublot
 import { ObtenerSublotePorIdUseCase } from "../../application/use-cases/obtener-sublote-por-id.use-case";
 
 import { CrearSubloteDto } from "../../application/dto/crear-sublote.dto";
+import { ActualizarSubloteDto } from "../../application/dto/actualizar-sublote.dto";
 
 @Controller("sublotes")
 export class SubloteController {
@@ -45,7 +46,7 @@ export class SubloteController {
   @Patch(":id")
   async actualizar(
     @Param("id", ParseIntPipe) id: number,
-    @Body() datos: Partial<CrearSubloteDto>,
+    @Body() datos: ActualizarSubloteDto,
   ) {
     return await this.actualizarSubloteUseCase.execute(id, datos);
   }

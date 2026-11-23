@@ -10,4 +10,9 @@ export abstract class LoteRepositoryPort {
   abstract update(id: number, lote: Partial<LoteDto>): Promise<LoteDto | null>;
 
   abstract softDelete(id: number): Promise<void>;
+
+  // Área (m² y ha) y centroide de un polígono GeoJSON, calculados con PostGIS
+  abstract calcularMetricas(
+    geom: object,
+  ): Promise<{ areaM2: number; areaHa: number; centroide: object }>;
 }
