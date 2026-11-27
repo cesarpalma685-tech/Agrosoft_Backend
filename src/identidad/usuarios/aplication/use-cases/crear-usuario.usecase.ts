@@ -38,6 +38,8 @@ export interface CrearUsuarioInput {
 export interface CrearUsuarioOpciones {
   // Solo el seeder puede crear administradores
   permitirAdministrador?: boolean;
+  // Por defecto la cuenta nace activa (la crea un administrador). El registro público usa "pendiente".
+  estadoInicial?: string;
 }
 
 @Injectable()
@@ -105,7 +107,7 @@ export class CrearUsuarioUseCase {
       datos.idFicha ?? null,
       programaFormacion,
       datos.telefono ?? null,
-      "activo",
+      opciones.estadoInicial ?? "activo",
       null,
       null,
       new Date(),

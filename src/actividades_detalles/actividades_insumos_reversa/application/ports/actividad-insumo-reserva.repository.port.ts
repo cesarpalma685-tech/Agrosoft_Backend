@@ -5,4 +5,5 @@ export abstract class ActividadInsumoReservaRepositoryPort {
     reserva: ActividadInsumoReserva,
   ): Promise<ActividadInsumoReserva>;
   abstract findAll(): Promise<ActividadInsumoReserva[]>;
+  abstract findByActividadIds(ids: number[]): Promise<ActividadInsumoReserva[]>;
 }

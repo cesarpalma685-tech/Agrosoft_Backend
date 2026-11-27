@@ -26,7 +26,11 @@ export class SensorOrmEntity {
   @Column({ type: 'varchar' })
   nombre_sensor!: string;
 
-  @Column({ type: 'integer', insert: false, update: false })
+  // Código del sensor (p. ej. TMP-001)
+  @Column({ type: 'varchar', nullable: true })
+  codigo!: string | null;
+
+  @Column({ type: 'integer' })
   tipo_sensor_id!: number;
 
   @ManyToOne(() => TiposSensoresOrmEntity, (tipo) => tipo.sensores)
@@ -68,10 +72,10 @@ export class SensorOrmEntity {
 
   // --- FK externas (a los módulos de mis compañeros de trabajo en el modulo cultivo)
 
-  @Column({ type: 'integer',name:'cultivoId', insert: false, update: false })
-  cultivoId!: number;
+  @Column({ type: 'integer', name: 'cultivoId', nullable: true })
+  cultivoId!: number | null;
 
-  @ManyToOne(() => CultivoOrmEntity)
+  @ManyToOne(() => CultivoOrmEntity, { nullable: true })
   @JoinColumn({ name: 'cultivoId' })
   cultivo!: CultivoOrmEntity;
 
@@ -80,24 +84,24 @@ export class SensorOrmEntity {
 
   // --- FK internas (con mis 10 módulos) ---
 
-  @Column({ type: 'integer', insert: false, update: false })
-  global_config_id!: number;
+  @Column({ type: 'integer', nullable: true })
+  global_config_id!: number | null;
 
-  @ManyToOne(() => IotGlobalConfigPersistence, (config) => config.sensores)
+  @ManyToOne(() => IotGlobalConfigPersistence, (config) => config.sensores, { nullable: true })
   @JoinColumn({ name: 'global_config_id' })
   globalConfig!: IotGlobalConfigPersistence;
 
-  @Column({ type: 'integer', insert: false, update: false })
-  lote_id!: number;
+  @Column({ type: 'integer', nullable: true })
+  lote_id!: number | null;
 
-  @ManyToOne(() => LoteOrmEntity, (lote) => lote.sensores)
+  @ManyToOne(() => LoteOrmEntity, (lote) => lote.sensores, { nullable: true })
   @JoinColumn({ name: 'lote_id' })
   lote!: LoteOrmEntity;
 
-  @Column({ type: 'integer', insert: false, update: false })
-  sub_lote_id!: number;
+  @Column({ type: 'integer', nullable: true })
+  sub_lote_id!: number | null;
 
-  @ManyToOne(() => SubloteOrmEntity, (sublote) => sublote.sensores)
+  @ManyToOne(() => SubloteOrmEntity, (sublote) => sublote.sensores, { nullable: true })
   @JoinColumn({ name: 'sub_lote_id' })
   sublote!: SubloteOrmEntity;
 

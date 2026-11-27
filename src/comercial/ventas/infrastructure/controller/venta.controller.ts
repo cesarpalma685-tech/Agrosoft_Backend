@@ -1,55 +1,55 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Post,
-  Put,
-} from "@nestjs/common";
-import { CrearVentaUseCase } from "../../application/use-cases/crear-venta.use-case";
-import { ListarVentasUseCase } from "../../application/use-cases/listar-ventas.use-case";
-import { ObtenerVentaPorIdUseCase } from "../../application/use-cases/obtener-venta.use-case";
-import { ActualizarVentaUseCase } from "../../application/use-cases/actualizar-venta.use-case";
-import { EliminarVentaUseCase } from "../../application/use-cases/eliminar-venta.use-case";
-import { CrearVentaDto } from "../../application/dto/crear-venta.dto";
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Req, UseGuards } from "@nestjs/common";
+import { ConsultarVentasUseCase } from "../../application/use-cases/consultar-ventas.use-case";
+import { RegistrarVentaUseCase } from "../../application/use-cases/registrar-venta.use-case";
+import { RegistrarPagoVentaUseCase } from "../../application/use-cases/registrar-pago-venta.use-case";
+import { AnularVentaUseCase } from "../../application/use-cases/anular-venta.use-case";
+import { AnularVentaDto, CrearVentaDto, RegistrarPagoDto } from "../../application/dto/crear-venta.dto";
+import { JwtAuthGuard } from "../../../../identidad/usuarios/infraestructure/security/jwt-auth.guard";
+
+type ReqUsuario = { user: { userId: number | string } };
 
 @Controller("ventas")
 export class VentaController {
   constructor(
-    private readonly crearUseCase: CrearVentaUseCase,
-    private readonly listarUseCase: ListarVentasUseCase,
-    private readonly obtenerPorIdUseCase: ObtenerVentaPorIdUseCase,
-    private readonly actualizarUseCase: ActualizarVentaUseCase,
-    private readonly eliminarUseCase: EliminarVentaUseCase,
+    private readonly consultar: ConsultarVentasUseCase,
+    private readonly registrar: RegistrarVentaUseCase,
+    private readonly registrarPago: RegistrarPagoVentaUseCase,
+    private readonly anular: AnularVentaUseCase,
   ) {}
 
+  // PROTEGIDO: el token dice quién vende. Descuenta el stock y genera la factura.
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async crear(@Body() dto: CrearVentaDto) {
-    return await this.crearUseCase.execute(dto);
+  crear(@Body() dto: CrearVentaDto, @Req() req: ReqUsuario) {
+    return this.registrar.execute(dto, Number(req.user.userId));
   }
 
   @Get()
-  async obtenerTodas() {
-    return await this.listarUseCase.execute();
+  listar() {
+    return this.consultar.listar();
+  }
+
+  // PÚBLICO: lo abre quien escanea el QR de la factura (el código lleva una firma)
+  @Get("factura-publica/:codigo")
+  facturaPublica(@Param("codigo") codigo: string) {
+    return this.consultar.facturaPublica(codigo);
   }
 
   @Get(":id")
-  async obtenerPorId(@Param("id", ParseIntPipe) id: number) {
-    return await this.obtenerPorIdUseCase.execute(id);
+  obtener(@Param("id", ParseIntPipe) id: number) {
+    return this.consultar.obtener(id);
   }
 
-  @Put(":id")
-  async actualizar(
-    @Param("id", ParseIntPipe) id: number,
-    @Body() dto: Partial<CrearVentaDto>,
-  ) {
-    return await this.actualizarUseCase.execute(id, dto);
+  @UseGuards(JwtAuthGuard)
+  @Post(":id/pagos")
+  pagar(@Param("id", ParseIntPipe) id: number, @Body() dto: RegistrarPagoDto) {
+    return this.registrarPago.execute(id, dto);
   }
 
-  @Delete(":id")
-  async eliminar(@Param("id", ParseIntPipe) id: number) {
-    return await this.eliminarUseCase.execute(id);
+  // PROTEGIDO: reintegra los kg y deja quién y cuándo anuló
+  @UseGuards(JwtAuthGuard)
+  @Post(":id/anular")
+  anularVenta(@Param("id", ParseIntPipe) id: number, @Body() dto: AnularVentaDto, @Req() req: ReqUsuario) {
+    return this.anular.execute(id, dto.motivo, Number(req.user.userId));
   }
 }

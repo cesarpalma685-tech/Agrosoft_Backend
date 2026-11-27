@@ -9,6 +9,7 @@ import { RolRepository } from "../../../roles/aplication/ports/rol.repository";
 describe("LoginUseCase", () => {
   const usuarioRepository = {
     buscarPorCorreo: jest.fn(),
+    actualizar: jest.fn().mockImplementation(async (u) => u),
   } as unknown as UsuarioRepository;
   const authService = {
     generateToken: jest.fn().mockReturnValue("token-de-prueba"),

@@ -6,6 +6,10 @@ export class LoteProduccion {
   subLoteId?: number;
   actividadCosechaId?: number;
   calidad?: string;
+  fechaCosecha?: string | null;
+  responsable?: string | null;
+  observaciones?: string | null;
+  creadoPorUsuarioId?: number | null;
   cantidadKg!: number;
   stockDisponibleKg!: number;
   costoUnitarioKg?: number;

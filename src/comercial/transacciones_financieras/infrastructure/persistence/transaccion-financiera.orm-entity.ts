@@ -33,6 +33,14 @@ export class TransaccionFinancieraOrmEntity {
   @Column({ type: "timestamp" })
   fecha!: Date;
 
+  // manual | venta | actividad | compra
+  @Column({ type: "varchar", length: 20, default: "manual" })
+  origen!: string;
+
+  // Documento que la originó (AGS-000001, ACT-000002, MOV-3…): evita generarla dos veces
+  @Column({ type: "varchar", length: 60, nullable: true })
+  referencia?: string;
+
   @Column({ name: "actividad_id", type: "integer", nullable: true })
   actividadId?: number;
 

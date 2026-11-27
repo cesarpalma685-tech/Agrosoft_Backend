@@ -19,6 +19,10 @@ export class CategoriasPersistence {
   @Column()
   descripcion!: string;
 
+  // Insumo | Herramienta: a qué tipo de producto clasifica
+  @Column({ type: "varchar", default: "Insumo" })
+  tipo!: string;
+
   @CreateDateColumn()
   createdAt!: Date;
 

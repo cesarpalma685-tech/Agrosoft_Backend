@@ -15,10 +15,6 @@ export class CrearTipoSensoresDto {
   @IsString()
   descripcion?: string;
 
-  @IsOptional()
-  @IsString()
-  imagen?: string;
-
   @IsInt()
   @Min(1)
   ttl_minutos!: number;

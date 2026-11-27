@@ -3,4 +3,5 @@ import { ActividadInsumoUso } from "../../domain/entities/actividad-insumo-uso.e
 export abstract class ActividadInsumoUsoRepositoryPort {
   abstract save(uso: ActividadInsumoUso): Promise<ActividadInsumoUso>;
   abstract findAll(): Promise<ActividadInsumoUso[]>;
+  abstract findByActividadIds(ids: number[]): Promise<ActividadInsumoUso[]>;
 }

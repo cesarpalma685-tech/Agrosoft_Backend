@@ -1,63 +1,64 @@
+import { Type } from "class-transformer";
 import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  IsArray,
+  IsDateString,
+  IsIn,
+  IsInt,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsPositive,
   IsString,
-  IsDateString,
-  IsOptional,
   Min,
+  ValidateNested,
 } from "class-validator";
-import { Type } from "class-transformer";
 
+export class LineaVentaDto {
+  // Cosecha (lote de producción) de la que sale lo que se vende
+  @Type(() => Number) @IsInt()
+  loteProduccionId!: number;
+
+  @Type(() => Number) @IsNumber() @IsPositive()
+  cantidadKg!: number;
+
+  @Type(() => Number) @IsNumber() @Min(0)
+  precioUnitarioKg!: number;
+}
+
+// El subtotal, el total, el costo y el estado los calcula el servidor (RF8.3 y RF8.7).
 export class CrearVentaDto {
   @IsDateString()
-  @IsNotEmpty()
   fecha!: string;
 
-  @Type(() => Number)
-  @IsNumber()
-  @IsNotEmpty()
+  @Type(() => Number) @IsInt()
   clienteId!: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  @IsNotEmpty()
-  subtotal!: number;
+  @IsOptional() @Type(() => Number) @IsNumber() @Min(0)
+  descuento?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  @IsNotEmpty()
-  impuestos!: number;
+  @IsOptional() @Type(() => Number) @IsNumber() @Min(0)
+  impuestos?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  @IsNotEmpty()
-  descuento!: number;
+  @IsArray() @ArrayMinSize(1) @ArrayMaxSize(50) @ValidateNested({ each: true }) @Type(() => LineaVentaDto)
+  detalles!: LineaVentaDto[];
+}
 
-  @Type(() => Number)
-  @IsNumber()
-  @IsPositive()
-  @IsNotEmpty()
-  total!: number;
+export const METODOS_PAGO = ["Transferencia", "Consignación"] as const;
 
-  @IsString()
-  @IsNotEmpty()
-  estado!: string;
+export class RegistrarPagoDto {
+  @IsIn(METODOS_PAGO, { message: `metodo debe ser uno de: ${METODOS_PAGO.join(", ")}` })
+  metodo!: string;
 
-  @Type(() => Number)
-  @IsNumber()
-  @IsNotEmpty()
-  usuarioId!: number;
+  @Type(() => Number) @IsNumber() @IsPositive()
+  monto!: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @IsOptional()
-  anuladaPorUsuarioId?: number;
+  @IsOptional() @IsString() @IsNotEmpty()
+  referencia?: string;
+}
 
-  @IsDateString()
-  @IsOptional()
-  fechaAnulacion?: string;
+export class AnularVentaDto {
+  @IsString() @IsNotEmpty()
+  motivo!: string;
 }

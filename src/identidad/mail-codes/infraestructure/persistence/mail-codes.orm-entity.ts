@@ -28,6 +28,9 @@ export class EmailCodeOrmEntity {
   @Column({ type: "timestamp", nullable: true })
   usedAt!: Date | null;
 
+  @Column({ type: "int", default: 0 })
+  intentos!: number;
+
   @CreateDateColumn()
   created_at!: Date;
 

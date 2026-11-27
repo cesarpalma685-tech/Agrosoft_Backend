@@ -8,7 +8,8 @@ export class ListarActividadServiciosUseCase {
     private readonly actividadServicioRepository: ActividadServicioRepositoryPort,
   ) {}
 
-  async execute(): Promise<ActividadServicio[]> {
+  async execute(actividadId?: number): Promise<ActividadServicio[]> {
+    if (actividadId !== undefined) return await this.actividadServicioRepository.findByActividadIds([actividadId]);
     return await this.actividadServicioRepository.findAll();
   }
 }

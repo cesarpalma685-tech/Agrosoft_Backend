@@ -57,6 +57,7 @@ export class ProveedoresRepository implements ProveedoresRepositoryPort {
   private toDomain(proveedor: ProveedoresPersistence): Proveedores {
     const domain = new Proveedores();
 
+    domain.id = proveedor.id;
     domain.nombre = proveedor.nombre;
 
     return domain;

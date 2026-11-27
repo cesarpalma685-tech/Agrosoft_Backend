@@ -1,63 +1,31 @@
-import {
-  IsEnum,
-  IsInt,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsPositive,
-  IsString,
-} from "class-validator";
+import { Type } from "class-transformer";
+import { IsEnum, IsInt, IsNumber, IsOptional, IsString, Min } from "class-validator";
 import { TipoMovimientoInsumoEnum } from "../../domain/enum/tipo-movimiento-insumo.enum";
 
+// La cantidad en unidad de uso, los costos derivados y el valor resultante los calcula el servidor.
 export class CrearMovimientoIsumoDto {
-  @IsInt()
-  @IsNotEmpty()
+  @Type(() => Number) @IsInt()
   insumoId!: number;
 
   @IsEnum(TipoMovimientoInsumoEnum)
-  @IsNotEmpty()
   tipo!: TipoMovimientoInsumoEnum;
 
-  @IsNumber()
+  // ENTRADA/SALIDA: cantidad que entra o sale. AJUSTE: conteo real que queda. TRASLADO: cantidad que se mueve.
+  @Type(() => Number) @IsNumber() @Min(0)
   cantidadPresentacion!: number;
 
-  @IsNumber()
-  @IsPositive()
-  cantidadUso!: number;
+  @IsOptional() @Type(() => Number) @IsNumber() @Min(0)
+  costoUnitarioPresentacion?: number;
 
-  @IsNumber()
-  @IsPositive()
-  costoUnitarioPresentacion!: number;
-
-  @IsNumber()
-  @IsPositive()
-  costoUnitarioUso!: number;
-
-  @IsNumber()
-  @IsPositive()
-  costoTotal!: number;
-
-  @IsNumber()
-  @IsPositive()
-  valorInventarioResultante!: number;
-
-  @IsString()
-  @IsOptional()
+  @IsOptional() @IsString()
   descripcion?: string;
 
-  @IsNumber()
-  actividadId!: number;
+  @IsOptional() @Type(() => Number) @IsInt()
+  actividadId?: number;
 
-  @IsNumber()
-  usuarioId!: number;
+  @IsOptional() @Type(() => Number) @IsInt()
+  almacenOrigenId?: number;
 
-  @IsNumber()
-  almacenOrigenId!: number;
-
-  @IsNumber()
-  almacenDestinoId!: number;
-
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
+  @IsOptional() @Type(() => Number) @IsInt()
+  almacenDestinoId?: number;
 }

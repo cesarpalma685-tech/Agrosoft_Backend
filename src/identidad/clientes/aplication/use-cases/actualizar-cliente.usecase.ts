@@ -9,6 +9,7 @@ export interface ActualizarClienteInput {
   email?: string;
   direccion?: string;
   notas?: string;
+  tipoIdentificacion?: string;
 }
 
 @Injectable()
@@ -31,6 +32,7 @@ export class ActualizarClienteUseCase {
       datos.direccion ?? cliente.direccion,
       datos.notas ?? cliente.notas,
       cliente.createdAt,
+      datos.tipoIdentificacion ?? cliente.tipoIdentificacion,
     );
 
     return this.repository.actualizar(actualizado);

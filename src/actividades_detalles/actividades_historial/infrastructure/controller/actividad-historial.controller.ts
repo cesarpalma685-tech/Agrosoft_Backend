@@ -27,7 +27,7 @@ export class ActividadHistorialController {
   }
 
   @Get()
-  async obtenerTodos() {
-    return await this.listarUseCase.execute();
+  async obtenerTodos(@Param("actividadId", ParseIntPipe) actividadId: number) {
+    return await this.listarUseCase.execute(actividadId);
   }
 }

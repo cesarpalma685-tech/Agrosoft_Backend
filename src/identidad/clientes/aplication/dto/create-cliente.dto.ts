@@ -1,6 +1,10 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsIn, IsOptional, IsString } from "class-validator";
 
 export class CreateClienteDto {
+  @IsOptional()
+  @IsIn(["NIT", "CC"])
+  tipoIdentificacion?: string;
+
   @IsString()
   nombre!: string;
 

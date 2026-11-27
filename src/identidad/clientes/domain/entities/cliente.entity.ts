@@ -8,5 +8,6 @@ export class Cliente {
     public direccion?: string,
     public notas?: string,
     public readonly createdAt?: Date,
+    public tipoIdentificacion?: string,
   ) {}
 }

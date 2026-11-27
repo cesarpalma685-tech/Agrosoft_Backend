@@ -1,7 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { SensorAlertasController } from "./infrastructure/controllers/sensor_alertas.controller";
 import { SensorAlertasPersistence } from "./infrastructure/persistence/sensor_alertas.orm-entity";
 import { SensorAlertasRepositoryPort } from "./application/ports/sensor_alertas.repository.port";
 
@@ -15,7 +14,6 @@ import { SensorAlertasRepository } from "./infrastructure/repositories/sensor_al
 @Module({
   imports: [TypeOrmModule.forFeature([SensorAlertasPersistence])],
 
-  controllers: [SensorAlertasController],
 
   providers: [
     CrearSensorAlertasUseCase,

@@ -81,6 +81,7 @@ export class UsuarioTypeOrmRepository extends UsuarioRepository {
       programaFormacion: usuario.programaFormacion,
       rolId: usuario.rolId,
       estado: usuario.estado,
+      lastLoginAt: usuario.lastLoginAt,
       identificacion: usuario.identificacion,
     };
   }

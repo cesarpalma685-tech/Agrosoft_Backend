@@ -27,6 +27,11 @@ export class ActividadTypeOrmRepository extends ActividadRepositoryPort {
     return rows as unknown as Actividad[];
   }
 
+  async update(id: number, cambios: Partial<Actividad>): Promise<Actividad | null> {
+    await this.repository.update(id, cambios as Partial<ActividadOrmEntity>);
+    return await this.findById(id);
+  }
+
   async findById(id: number): Promise<Actividad | null> {
     const row = await this.repository.findOne({
       where: { id, deletedAt: IsNull() },

@@ -7,7 +7,11 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
 } from "@nestjs/common";
+import { JwtAuthGuard } from "../../../../identidad/usuarios/infraestructure/security/jwt-auth.guard";
+import { AdminGuard } from "../../../../identidad/usuarios/infraestructure/security/admin.guard";
+import { EliminacionTerritorioService } from "../../../eliminacion/eliminacion-territorio.service";
 
 import { CrearSubloteUseCase } from "../../application/use-cases/crear-sublote.use-case";
 import { ActualizarSubloteUseCase } from "../../application/use-cases/actualizar-sublote.use-case";
@@ -26,6 +30,7 @@ export class SubloteController {
     private readonly eliminarSubloteUseCase: EliminarSubloteUseCase,
     private readonly listarSublotesUseCase: ListarSublotesUseCase,
     private readonly obtenerSubloteUseCase: ObtenerSublotePorIdUseCase,
+    private readonly eliminacion: EliminacionTerritorioService,
   ) {}
 
   @Post()
@@ -51,8 +56,10 @@ export class SubloteController {
     return await this.actualizarSubloteUseCase.execute(id, datos);
   }
 
+  // Solo el administrador; no se elimina un sublote con cultivos o sensores
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Delete(":id")
   async eliminar(@Param("id", ParseIntPipe) id: number) {
-    return await this.eliminarSubloteUseCase.execute(id);
+    return await this.eliminacion.eliminar("sublote", id);
   }
 }

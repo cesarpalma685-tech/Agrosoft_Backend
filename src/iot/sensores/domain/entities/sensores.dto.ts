@@ -3,6 +3,8 @@ export class Sensor {
 
   nombre_sensor!: string;
 
+  codigo?: string | null;
+
   tipo_sensor_id!: number;
 
   protocolo!: string;
@@ -27,15 +29,15 @@ export class Sensor {
 
   last_seen_at?: Date;
 
-  cultivoId!: number;
+  cultivoId?: number | null;
 
   creadoPorUsuarioId!: number;
 
-  global_config_id!: number;
+  global_config_id?: number | null;
 
-  lote_id!: number;
+  lote_id?: number | null;
 
-  sub_lote_id!: number;
+  sub_lote_id?: number | null;
 
   created_at?: Date;
 

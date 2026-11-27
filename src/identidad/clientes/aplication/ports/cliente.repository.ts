@@ -5,4 +5,5 @@ export abstract class ClienteRepository {
   abstract actualizar(cliente: Cliente): Promise<Cliente>;
   abstract eliminar(id: number): Promise<void>;
   abstract buscarPorId(id: number): Promise<Cliente | null>;
+  abstract listar(): Promise<Cliente[]>;
 }

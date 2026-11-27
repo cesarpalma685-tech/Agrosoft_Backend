@@ -1,3 +1,4 @@
+import { EliminacionTerritorioModule } from "../eliminacion/eliminacion-territorio.module";
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
@@ -14,7 +15,7 @@ import {
 } from "./application/use-cases/unidad-productiva.use-cases";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UnidadProductivaOrmEntity])],
+  imports: [TypeOrmModule.forFeature([UnidadProductivaOrmEntity]), EliminacionTerritorioModule],
   controllers: [UnidadProductivaController],
   providers: [
     CrearUnidadProductivaUseCase,

@@ -3,4 +3,5 @@ export enum EstadoInsumoEnum {
   INACTIVO = "INACTIVO",
   AGOTADO = "AGOTADO",
   DADO_DE_BAJA = "DADO_DE_BAJA",
+  MANTENIMIENTO = "MANTENIMIENTO",
 }

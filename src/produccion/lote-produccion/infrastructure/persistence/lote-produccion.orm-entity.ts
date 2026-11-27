@@ -69,6 +69,18 @@ export class LoteProduccionOrmEntity {
   @Column({ type: "varchar", nullable: true })
   calidad!: string | null;
 
+  @Column({ name: "fecha_cosecha", type: "date", nullable: true })
+  fechaCosecha!: string | null;
+
+  @Column({ type: "varchar", nullable: true })
+  responsable!: string | null;
+
+  @Column({ type: "text", nullable: true })
+  observaciones!: string | null;
+
+  @Column({ name: "creado_por_usuario_id", type: "int", nullable: true })
+  creadoPorUsuarioId!: number | null;
+
   @Column({ name: "cantidad_kg", type: "double precision" })
   cantidadKg!: number;
 

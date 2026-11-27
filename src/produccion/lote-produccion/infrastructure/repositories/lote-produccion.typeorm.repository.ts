@@ -27,6 +27,20 @@ export class LoteProduccionTypeOrmRepository extends LoteProduccionRepositoryPor
     return rows as unknown as LoteProduccion[];
   }
 
+  async findByCultivoId(cultivoId: number): Promise<LoteProduccion[]> {
+    const rows = await this.repository.find({ where: { cultivoId, deletedAt: IsNull() } });
+    return rows as unknown as LoteProduccion[];
+  }
+
+  async update(id: number, cambios: Partial<LoteProduccion>): Promise<LoteProduccion | null> {
+    await this.repository.update(id, cambios as Partial<LoteProduccionOrmEntity>);
+    return await this.findById(id);
+  }
+
+  async softDelete(id: number): Promise<void> {
+    await this.repository.softDelete(id);
+  }
+
   async findById(id: number): Promise<LoteProduccion | null> {
     const row = await this.repository.findOne({
       where: { id, deletedAt: IsNull() },

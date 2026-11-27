@@ -14,6 +14,7 @@ import { ActividadOrmEntity } from "../../../actividad/infrastructure/persistenc
 import { LoteProduccionOrmEntity } from "../../../lote-produccion/infrastructure/persistence/lote-produccion.orm-entity";
 import { SubloteOrmEntity } from "../../../../territorio/sublotes/infrastructure/persistence/sublote.orm-entity";
 import { LoteOrmEntity } from "../../../../territorio/lotes/infrastructure/persistence/lote.orm-entity";
+import { UsuarioOrmEntity } from "src/identidad/usuarios/infraestructure/persistence/usuario.orm-entity";
 import { VentaDetalleOrmEntity } from "src/comercial/ventas_detalles/infrastructure/persistence/venta-detalle.orm-entity";
 import { SensorOrmEntity } from "src/iot/sensores/infrastructure/persistence/sensores.orm-entity";
 
@@ -44,6 +45,13 @@ export class CultivoOrmEntity {
   @ManyToOne(() => SubloteOrmEntity, { nullable: true })
   @JoinColumn({ name: "sublote_id" })
   sublote!: SubloteOrmEntity | null;
+
+  @Column({ name: "encargado_id", type: "int", nullable: true })
+  encargadoId!: number | null;
+
+  @ManyToOne(() => UsuarioOrmEntity, { nullable: true, onDelete: "SET NULL" })
+  @JoinColumn({ name: "encargado_id" })
+  encargado!: UsuarioOrmEntity | null;
 
   @Column({ name: "img_cultivo", type: "varchar", nullable: true })
   imgCultivo!: string | null;

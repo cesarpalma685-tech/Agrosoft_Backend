@@ -5,6 +5,7 @@ export class Cultivo {
   descripcion?: string;
   loteId!: number;
   subloteId?: number;
+  encargadoId?: number | null;
   imgCultivo?: string;
   fechaSiembra!: Date;
   fechaFinalizacion?: Date;

@@ -28,7 +28,9 @@ export class ActividadResponsableController {
   }
 
   @Get()
-  async obtenerTodos(): Promise<ActividadResponsable[]> {
-    return await this.listarUseCase.execute();
+  async obtenerTodos(
+    @Param("actividadId", ParseIntPipe) actividadId: number,
+  ): Promise<ActividadResponsable[]> {
+    return await this.listarUseCase.execute(actividadId);
   }
 }

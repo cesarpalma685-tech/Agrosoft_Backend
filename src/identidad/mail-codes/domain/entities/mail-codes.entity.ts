@@ -7,5 +7,7 @@ export class EmailCode {
     public expiresAt: Date,
     public usedAt?: Date,
     public readonly createdAt?: Date,
+    // Intentos fallidos al verificar (aplica a los códigos cortos)
+    public intentos: number = 0,
   ) {}
 }

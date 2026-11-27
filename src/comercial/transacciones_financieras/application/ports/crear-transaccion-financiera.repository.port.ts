@@ -6,6 +6,7 @@ export abstract class TransaccionFinancieraRepositoryPort {
   ): Promise<TransaccionFinanciera>;
   abstract findById(id: number): Promise<TransaccionFinanciera | null>;
   abstract findAll(): Promise<TransaccionFinanciera[]>;
+  abstract findAllConUsuario(): Promise<(TransaccionFinanciera & { usuarioNombre: string })[]>;
   abstract findByVentaId(ventaId: number): Promise<TransaccionFinanciera[]>;
   abstract update(
     id: number,

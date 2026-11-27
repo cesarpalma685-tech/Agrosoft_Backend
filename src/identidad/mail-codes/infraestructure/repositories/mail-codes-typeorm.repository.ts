@@ -37,7 +37,13 @@ export class EmailCodeTypeOrmRepository extends EmailCodeRepository {
 
   async buscarPorCodigo(code: string): Promise<EmailCode | null> {
     const emailCode = await this.repo.findOne({ where: { code } });
-    return emailCode ? this.aDominio(emailCode) : null;}
+    return emailCode ? this.aDominio(emailCode) : null;
+  }
+
+  async buscarUltimo(usuarioId: number, tipo: string): Promise<EmailCode | null> {
+    const emailCode = await this.repo.findOne({ where: { usuarioId, tipo }, order: { id: "DESC" } });
+    return emailCode ? this.aDominio(emailCode) : null;
+  }
 
   private aDominio(orm: EmailCodeOrmEntity): EmailCode {
     return new EmailCode(
@@ -48,6 +54,7 @@ export class EmailCodeTypeOrmRepository extends EmailCodeRepository {
       orm.expiresAt,
       orm.usedAt ?? undefined,
       orm.created_at,
+      orm.intentos ?? 0,
     );
   }
 
@@ -59,6 +66,7 @@ export class EmailCodeTypeOrmRepository extends EmailCodeRepository {
       code: emailCode.code,
       expiresAt: emailCode.expiresAt,
       usedAt: emailCode.usedAt ?? null,
+      intentos: emailCode.intentos,
     };
   }
   

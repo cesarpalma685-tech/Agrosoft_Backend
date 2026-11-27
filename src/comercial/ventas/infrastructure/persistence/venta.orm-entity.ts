@@ -53,6 +53,9 @@ export class VentaOrmEntity {
   @Column({ name: "fecha_anulacion", type: "timestamp", nullable: true })
   fechaAnulacion?: Date;
 
+  @Column({ name: "motivo_anulacion", type: "text", nullable: true })
+  motivoAnulacion?: string;
+
   @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
 

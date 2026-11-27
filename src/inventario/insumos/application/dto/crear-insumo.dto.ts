@@ -1,5 +1,9 @@
+import { PartialType } from "@nestjs/mapped-types";
+import { Type } from "class-transformer";
 import {
+  IsDateString,
   IsEnum,
+  IsInt,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -7,133 +11,91 @@ import {
   IsString,
   Min,
 } from "class-validator";
-import { Type } from "class-transformer";
 import { TipoInsumoEnum } from "../../domain/enums/tipo-insumo.enum";
 import { EstadoInsumoEnum } from "../../domain/enums/estado-insumo.enum";
 
+const num = () => Type(() => Number);
+
+// Lo que no se envía se completa con valores por defecto y los derivados
+// (stock en unidad de uso, precio de uso, valor del inventario) los calcula el servidor.
 export class CrearInsumoDto {
-  @IsString()
-  @IsNotEmpty()
+  @IsString() @IsNotEmpty()
   nombre!: string;
 
-  @IsString()
-  @IsNotEmpty()
-  descripcion!: string;
+  @IsOptional() @IsString()
+  descripcion?: string;
 
-  @IsString()
-  @IsOptional()
-  fotourl?: string;
+  @IsOptional() @IsString()
+  fotoUrl?: string;
 
-  @IsString()
-  @IsNotEmpty()
-  presentacionTipo!: string;
+  @IsOptional() @IsString()
+  presentacionTipo?: string;
 
-  @Type(() => Number)
-  @IsNumber({}, { message: "La cantidad de presentación debe ser un número" })
-  @IsPositive()
-  presentacionCantidad!: number;
+  @IsOptional() @num() @IsNumber() @IsPositive()
+  presentacionCantidad?: number;
 
-  @IsString()
-  @IsNotEmpty()
-  presentacionUnidad!: string;
+  @IsOptional() @IsString()
+  presentacionUnidad?: string;
 
-  @IsString()
-  @IsNotEmpty()
-  unidadUso!: string;
+  @IsOptional() @IsString()
+  unidadUso?: string;
 
-  @IsString()
-  @IsNotEmpty()
-  tipoMaterial!: string;
+  @IsOptional() @IsString()
+  tipoMateria?: string;
 
-  @Type(() => Number)
-  @IsNumber()
-  @IsPositive()
-  factorConversionUso!: number;
+  @IsOptional() @num() @IsNumber() @IsPositive()
+  factorConversionUso?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  stockPresentacion!: number;
+  @IsOptional() @num() @IsNumber() @Min(0)
+  stockPresentacion?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  stockUso!: number;
+  @IsOptional() @num() @IsNumber() @Min(0)
+  stockReservado?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  stockReservado!: number;
+  @IsOptional() @num() @IsNumber() @Min(0)
+  stockMinimo?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  stockMinimo!: number;
+  @IsOptional() @num() @IsNumber() @Min(0)
+  precioUnitarioPresentacion?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @IsPositive()
-  precioUnitarioPresentacion!: number;
+  @IsOptional() @num() @IsNumber() @Min(0)
+  costoAdquisicion?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @IsPositive()
-  precioUnitarioUso!: number;
+  @IsOptional() @num() @IsNumber() @Min(0)
+  valorResidual?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @IsPositive()
-  costoUnitario!: number;
+  @IsOptional() @num() @IsNumber() @Min(0)
+  vidaUtilHoras?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @IsPositive()
-  costoAdquisicion!: number;
+  @IsOptional() @num() @IsNumber() @Min(0)
+  horasUsadas?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  valorInventario!: number;
+  @IsOptional() @num() @IsNumber() @Min(0)
+  depreciacionAcumulada?: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  valorResidual!: number;
-
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  vidaUtilHoras!: number;
-
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  horasUsadas!: number;
-
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  depreciacionAcumulada!: number;
-
-  @Type(() => Number)
-  @IsNumber()
+  @num() @IsInt()
   categoriaId!: number;
 
-  @Type(() => Number)
-  @IsNumber()
+  @num() @IsInt()
   almacenId!: number;
 
-  @Type(() => Number)
-  @IsNumber()
+  @num() @IsInt()
   proveedorId!: number;
-
-  @Type(() => Number)
-  @IsNumber()
-  creadoPorUsuarioId!: number;
 
   @IsEnum(TipoInsumoEnum)
   tipoInsumo!: TipoInsumoEnum;
 
-  @IsEnum(EstadoInsumoEnum)
-  estadoInsumo!: EstadoInsumoEnum;
+  @IsOptional() @IsEnum(EstadoInsumoEnum)
+  estado?: EstadoInsumoEnum;
+
+  @IsOptional() @IsDateString()
+  fechaAdquisicion?: string;
+
+  @IsOptional() @IsDateString()
+  fechaUltimoMantenimiento?: string;
+
+  @IsOptional() @IsDateString()
+  fechaBaja?: string;
 }
+
+export class ActualizarInsumoDto extends PartialType(CrearInsumoDto) {}

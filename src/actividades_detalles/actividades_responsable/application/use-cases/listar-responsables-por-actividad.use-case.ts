@@ -8,7 +8,10 @@ export class ListarActividadResponsablesUseCase {
     private readonly actividadResponsableRepository: ActividadResponsableRepositoryPort,
   ) {}
 
-  async execute(): Promise<ActividadResponsable[]> {
+  async execute(actividadId?: number): Promise<ActividadResponsable[]> {
+    if (actividadId !== undefined) {
+      return await this.actividadResponsableRepository.findByActividadIds([actividadId]);
+    }
     return await this.actividadResponsableRepository.findAll();
   }
 }

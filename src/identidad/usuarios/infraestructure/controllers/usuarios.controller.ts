@@ -10,12 +10,11 @@ import {
   Req,
   UseGuards,
 } from "@nestjs/common";
-import { ListarUsuariosUseCase } from "../../aplication/use-cases/listar-usuarios.usecase";
+import { GestionUsuariosService } from "../../aplication/gestion-usuarios.service";
+import { ActualizarUsuarioAdminDto } from "../../aplication/dto/actualizar-usuario-admin.dto";
+import { AdminGuard } from "../security/admin.guard";
 import { CrearUsuarioUseCase } from "../../aplication/use-cases/crear-usuario.usecase";
-import { ActualizarUsuarioUseCase } from "../../aplication/use-cases/actualizar-usuario.usecase";
-import { EliminarUsuarioUseCase } from "../../aplication/use-cases/eliminar-usuario.usecase";
 import { CreateUsuarioDto } from "../../aplication/dto/create-usuario.dto";
-import { UpdateUsuarioDto } from "../../aplication/dto/update-usuario.dto";
 import { CambiarPasswordDto } from "../../aplication/dto/cambiar-password.dto";
 import { CambiarPasswordUseCase } from "../../aplication/use-cases/cambiar-password.usecase";
 import { JwtAuthGuard } from "../security/jwt-auth.guard";
@@ -24,17 +23,15 @@ import { JwtAuthGuard } from "../security/jwt-auth.guard";
 export class UsuariosController {
   constructor(
     private readonly crearUsuario: CrearUsuarioUseCase,
-    private readonly actualizarUsuario: ActualizarUsuarioUseCase,
-    private readonly eliminarUsuario: EliminarUsuarioUseCase,
     private readonly cambiarPassword: CambiarPasswordUseCase,
-    private readonly listarUsuarios: ListarUsuariosUseCase,
+    private readonly gestion: GestionUsuariosService,
   ) {}
 
   // PROTEGIDO: lista pública de usuarios (para elegir responsables, etc.)
   @UseGuards(JwtAuthGuard)
   @Get()
   list() {
-    return this.listarUsuarios.ejecutar();
+    return this.gestion.listar();
   }
 
   @Post()
@@ -59,14 +56,14 @@ export class UsuariosController {
   // PROTEGIDO: Requiere token JWT
   @UseGuards(JwtAuthGuard)
   @Patch(":id")
-  update(@Param("id", ParseIntPipe) id: number, @Body() dto: UpdateUsuarioDto) {
-    return this.actualizarUsuario.ejecutar(id, dto);
+  update(@Param("id", ParseIntPipe) id: number, @Body() dto: ActualizarUsuarioAdminDto, @Req() req: { user: { userId: number | string } }) {
+    return this.gestion.actualizar(id, dto, Number(req.user.userId));
   }
 
-  // PROTEGIDO: Requiere token JWT
-  @UseGuards(JwtAuthGuard)
+  // PROTEGIDO: solo administrador
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Delete(":id")
-  remove(@Param("id", ParseIntPipe) id: number) {
-    return this.eliminarUsuario.ejecutar(id);
+  remove(@Param("id", ParseIntPipe) id: number, @Req() req: { user: { userId: number | string } }) {
+    return this.gestion.eliminar(id, Number(req.user.userId));
   }
 }

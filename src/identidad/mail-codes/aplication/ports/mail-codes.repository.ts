@@ -6,4 +6,6 @@ export abstract class EmailCodeRepository {
   abstract eliminar(id: number): Promise<void>;
   abstract buscarPorId(id: number): Promise<EmailCode | null>;
   abstract buscarPorCodigo(codigo: string): Promise<EmailCode | null>;
+  /** Código más reciente del usuario para ese tipo. */
+  abstract buscarUltimo(usuarioId: number, tipo: string): Promise<EmailCode | null>;
 }

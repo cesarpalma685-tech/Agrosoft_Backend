@@ -26,7 +26,7 @@ export class SensorAlertasPersistence {
   @DeleteDateColumn()
   deleted_at!: Date | null;
 
-  @Column({ insert: false, update: false })
+  @Column({ type: 'integer' })
   sensor_id!: number;
 
 
@@ -48,18 +48,17 @@ export class SensorAlertasPersistence {
   @Column()
   fecha_alerta!: Date;
 
-  @Column({ insert: false, update: false })
-  lote_id!: number;
+  @Column({ type: 'integer', nullable: true })
+  lote_id!: number | null;
 
-  @ManyToOne(() => LoteOrmEntity, (lote: LoteOrmEntity) => lote.alertas)
+  @ManyToOne(() => LoteOrmEntity, (lote: LoteOrmEntity) => lote.alertas, { nullable: true })
   @JoinColumn({ name: 'lote_id' })
   lote!: LoteOrmEntity;
 
-  @Column({ insert: false, update: false })
-  sub_lote_id!: number;
+  @Column({ type: 'integer', nullable: true })
+  sub_lote_id!: number | null;
 
-
-  @ManyToOne(() => SubloteOrmEntity, (sublote: SubloteOrmEntity) => sublote.alertas)
+  @ManyToOne(() => SubloteOrmEntity, (sublote: SubloteOrmEntity) => sublote.alertas, { nullable: true })
   @JoinColumn({ name: 'sub_lote_id' })
   sublote!: SubloteOrmEntity;
 }

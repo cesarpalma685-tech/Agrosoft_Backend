@@ -8,7 +8,10 @@ export class ListarActividadesHistorialUseCase {
     private readonly actividadHistorialRepository: ActividadHistorialRepositoryPort,
   ) {}
 
-  async execute(): Promise<ActividadHistorial[]> {
+  async execute(actividadId?: number): Promise<ActividadHistorial[]> {
+    if (actividadId !== undefined) {
+      return await this.actividadHistorialRepository.findByActividadIds([actividadId]);
+    }
     return await this.actividadHistorialRepository.findAll();
   }
 }

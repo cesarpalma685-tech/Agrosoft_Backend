@@ -1,3 +1,4 @@
+import { EliminacionTerritorioModule } from "../eliminacion/eliminacion-territorio.module";
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
@@ -14,7 +15,7 @@ import { ListarSublotesUseCase } from "./application/use-cases/listar-sublote.us
 import { ObtenerSublotePorIdUseCase } from "./application/use-cases/obtener-sublote-por-id.use-case";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SubloteOrmEntity])],
+  imports: [TypeOrmModule.forFeature([SubloteOrmEntity]), EliminacionTerritorioModule],
 
   controllers: [SubloteController],
 

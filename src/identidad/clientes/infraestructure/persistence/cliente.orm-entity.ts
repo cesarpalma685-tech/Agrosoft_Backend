@@ -17,6 +17,10 @@ export class ClienteOrmEntity {
   })
   nombre!: string;
 
+  // NIT o CC
+  @Column({ name: "tipo_identificacion", type: "varchar", length: 10, nullable: true })
+  tipoIdentificacion!: string | null;
+
   @Column({
     type: "varchar",
     nullable: true,

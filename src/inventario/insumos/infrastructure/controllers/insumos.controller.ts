@@ -7,9 +7,12 @@ import {
   Put,
   Delete,
   ParseIntPipe,
+  Req,
+  UseGuards,
 } from "@nestjs/common";
+import { JwtAuthGuard } from "../../../../identidad/usuarios/infraestructure/security/jwt-auth.guard";
 import { CrearInsumoUseCase } from "../../application/use-cases/crear-insumo.use-case";
-import { CrearInsumoDto } from "../../application/dto/crear-insumo.dto";
+import { ActualizarInsumoDto, CrearInsumoDto } from "../../application/dto/crear-insumo.dto";
 import { ListarInsumosUseCase } from "../../application/use-cases/listar-insumos.use-case";
 import { ObtenerInsumoPorIdUseCase } from "../../application/use-cases/obtener-insumo.use-case";
 import { ActualizarInsumoUseCase } from "../../application/use-cases/actualizar-insumo.use-case";
@@ -25,9 +28,14 @@ export class InsumoController {
   ) {}
 
   // 1. Crear
+  // PROTEGIDO: el token dice quién registró el insumo
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async crear(@Body() dto: CrearInsumoDto) {
-    return await this.crearInsumoUseCase.execute(dto);
+  async crear(
+    @Body() dto: CrearInsumoDto,
+    @Req() req: { user: { userId: number | string } },
+  ) {
+    return await this.crearInsumoUseCase.execute(dto, Number(req.user.userId));
   }
 
   // 2. Obtener Todos
@@ -46,7 +54,7 @@ export class InsumoController {
   @Put(":id")
   async actualizar(
     @Param("id", ParseIntPipe) id: number,
-    @Body() dto: Partial<CrearInsumoDto>,
+    @Body() dto: ActualizarInsumoDto,
   ) {
     return await this.actualizarInsumoUseCase.execute(id, dto);
   }

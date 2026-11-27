@@ -57,6 +57,7 @@ export class ProductosAgroRepository implements ProductosAgroRepositoryPort {
   private toDomain(producto: ProductosAgroPersistence): ProductosAgroDto {
     const domain = new ProductosAgroDto();
 
+    domain.id = producto.id;
     domain.nombre = producto.nombre;
     domain.unidadBase = producto.unidadBase;
     domain.descripcion = producto.descripcion;

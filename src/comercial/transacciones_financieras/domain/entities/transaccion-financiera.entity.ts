@@ -4,6 +4,8 @@ export class TransaccionFinanciera {
   categoria!: string;
   monto!: number;
   descripcion?: string;
+  origen!: string;
+  referencia?: string;
   fecha!: Date;
   actividadId?: number;
   insumoId?: number;

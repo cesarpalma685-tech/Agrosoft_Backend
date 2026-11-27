@@ -5,7 +5,10 @@ import {
   Body,
   Param,
   ParseIntPipe,
+  Req,
+  UseGuards,
 } from "@nestjs/common";
+import { JwtAuthGuard } from "../../../../identidad/usuarios/infraestructure/security/jwt-auth.guard";
 import { RegistrarMovimientoInsumoUseCase } from "../../application/use-cases/crear-movimiento-insumo.use-case";
 import { MovimientoInsumoRepositoryPort } from "../../application/ports/crear-movimiento-insumo.repository.port";
 import { CrearMovimientoIsumoDto } from "../../application/dto/crear-movimiento-insumo.dto";
@@ -16,9 +19,14 @@ export class MovimientoInsumoController {
     private readonly movimientoRepository: MovimientoInsumoRepositoryPort,
   ) {}
 
+  // PROTEGIDO: el token dice quién registró el movimiento
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async registrar(@Body() dto: CrearMovimientoIsumoDto) {
-    return await this.registrarMovimientoUseCase.execute(dto);
+  async registrar(
+    @Body() dto: CrearMovimientoIsumoDto,
+    @Req() req: { user: { userId: number | string } },
+  ) {
+    return await this.registrarMovimientoUseCase.execute(dto, Number(req.user.userId));
   }
 
   @Get()

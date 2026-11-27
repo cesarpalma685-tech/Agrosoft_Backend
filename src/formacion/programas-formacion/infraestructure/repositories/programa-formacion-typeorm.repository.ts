@@ -33,6 +33,11 @@ export class ProgramaFormacionTypeOrmRepository extends ProgramaFormacionReposit
     await this.repo.delete(id);
   }
 
+  async listar(): Promise<ProgramaFormacion[]> {
+    const filas = await this.repo.find({ order: { id: "DESC" } });
+    return filas.map((f) => this.aDominio(f));
+  }
+
   async buscarPorId(id: number): Promise<ProgramaFormacion | null> {
     const programa = await this.repo.findOne({
       where: { id },

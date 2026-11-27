@@ -7,7 +7,8 @@ export class ListarActividadEvidenciasUseCase {
     private readonly actividadEvidenciaRepository: ActividadEvidenciaRepositoryPort,
   ) {}
 
-  async execute(): Promise<ActividadEvidencia[]> {
+  async execute(actividadId?: number): Promise<ActividadEvidencia[]> {
+    if (actividadId !== undefined) return await this.actividadEvidenciaRepository.findByActividadId(actividadId);
     return await this.actividadEvidenciaRepository.findAll();
   }
 }

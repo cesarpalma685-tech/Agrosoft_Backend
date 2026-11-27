@@ -41,33 +41,34 @@ export class IotGlobalConfigPersistence {
   @Column()
   protocol!: string;
 
-  @Column()
+  @Column({ default: '' })
   topic_prefix!: string;
 
-  @Column()
+  @Column({ type: 'text', default: '' })
   default_topics!: string;
 
-  @Column()
+  @Column({ type: 'text', default: '' })
   custom_topics!: string;
 
-  @Column({ insert: false, update: false })
-  lote_id!: number;
+  @Column({ type: 'integer', nullable: true })
+  lote_id!: number | null;
 
-  @ManyToOne(() => LoteOrmEntity, (lote) => lote.iotConfigs)
+  @ManyToOne(() => LoteOrmEntity, (lote) => lote.iotConfigs, { nullable: true })
   @JoinColumn({ name: 'lote_id' })
   lote!: LoteOrmEntity;
 
-  @Column({ insert: false, update: false })
-  sub_lote_id!: number;
+  @Column({ type: 'integer', nullable: true })
+  sub_lote_id!: number | null;
 
-  @ManyToOne(() => SubloteOrmEntity, (sublote) => sublote.iotConfigs)
+  @ManyToOne(() => SubloteOrmEntity, (sublote) => sublote.iotConfigs, { nullable: true })
   @JoinColumn({ name: 'sub_lote_id' })
   sublote!: SubloteOrmEntity;
 
-  @Column()
+  @Column({ default: '' })
   username!: string;
 
-  @Column()
+  // Cifrada (AES-256-GCM): el broker la necesita en claro, por eso no es un hash. Nunca sale en las respuestas.
+  @Column({ type: 'text', default: '' })
   password!: string;
 
   @Column({ default: true })

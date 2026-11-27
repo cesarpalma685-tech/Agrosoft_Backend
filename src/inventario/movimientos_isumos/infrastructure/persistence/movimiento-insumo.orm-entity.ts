@@ -92,7 +92,7 @@ export class MovimientoInsumoOrmEntity {
   almacenDestino!: AlmacenOrmEntity;
 
   @ManyToOne(() => InsumoOrmEntity, { onDelete: "RESTRICT" })
-  @JoinColumn({ name: "insumo_id" })
+  @JoinColumn({ name: "insumoId" })
   insumo!: InsumoOrmEntity;
 
   @ManyToOne(() => UsuarioOrmEntity, (usuario) => usuario.movimientosInsumos, {

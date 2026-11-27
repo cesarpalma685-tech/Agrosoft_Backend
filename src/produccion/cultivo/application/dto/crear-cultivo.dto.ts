@@ -27,6 +27,10 @@ export class CrearCultivoDto {
   @IsOptional()
   subloteId?: number;
 
+  @IsInt()
+  @IsOptional()
+  encargadoId?: number;
+
   @IsString()
   @IsOptional()
   imgCultivo?: string;

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 
 import { ActividadInsumoUsoRepositoryPort } from "../../application/ports/actividad-insumo-uso.repository.port";
 import { ActividadInsumoUso } from "../../domain/entities/actividad-insumo-uso.entity";
@@ -18,6 +18,11 @@ export class ActividadInsumoUsoTypeOrmRepository extends ActividadInsumoUsoRepos
   async save(uso: ActividadInsumoUso): Promise<ActividadInsumoUso> {
     const entity = this.actividadInsumoUsoRepository.create({ ...uso });
     return await this.actividadInsumoUsoRepository.save(entity);
+  }
+
+  async findByActividadIds(ids: number[]): Promise<ActividadInsumoUso[]> {
+    if (ids.length === 0) return [];
+    return await this.actividadInsumoUsoRepository.find({ where: { actividadId: In(ids) }, order: { id: "ASC" } });
   }
 
   async findAll(): Promise<ActividadInsumoUso[]> {

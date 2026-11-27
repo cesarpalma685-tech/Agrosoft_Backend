@@ -9,8 +9,6 @@ export class TiposSensores {
 
   descripcion!: string | null;
 
-  imagen!: string | null;
-
   ttl_minutos!: number;
 
   created_at!: Date;

@@ -34,6 +34,14 @@ export class TransaccionFinancieraTypeOrmRepository extends TransaccionFinancier
     return entities;
   }
 
+  async findAllConUsuario() {
+    const filas = await this.repository.find({ relations: { usuario: true }, order: { fecha: "DESC", id: "DESC" } });
+    return filas.map(({ usuario, ...fila }) => ({
+      ...fila,
+      usuarioNombre: usuario ? `${usuario.nombre} ${usuario.apellido}`.trim() : "",
+    })) as unknown as (TransaccionFinanciera & { usuarioNombre: string })[];
+  }
+
   async findByVentaId(ventaId: number): Promise<TransaccionFinanciera[]> {
     const entities = await this.repository.find({ where: { ventaId } });
     return entities;

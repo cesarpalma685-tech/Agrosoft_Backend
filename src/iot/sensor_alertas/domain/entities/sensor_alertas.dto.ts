@@ -9,7 +9,7 @@ export class SensorAlertas {
     public readonly umbral: number,
     public readonly tipo: string,
     public readonly fecha_alerta: Date,
-    public readonly lote_id: number,
-    public readonly sub_lote_id: number,
+    public readonly lote_id: number | null,
+    public readonly sub_lote_id: number | null,
   ) {}
 }

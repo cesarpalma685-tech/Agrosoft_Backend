@@ -36,6 +36,15 @@ export class CultivoTypeOrmRepository extends CultivoRepositoryPort {
     return row ? this.toDomain(row) : null;
   }
 
+  async update(id: number, cambios: Partial<Cultivo>): Promise<Cultivo | null> {
+    const { costoTotal, ...resto } = cambios;
+    await this.repository.update(id, {
+      ...resto,
+      ...(costoTotal != null ? { costoTotal: costoTotal.toFixed(2) } : {}),
+    } as Partial<CultivoOrmEntity>);
+    return await this.findById(id);
+  }
+
   private toDomain(row: CultivoOrmEntity): Cultivo {
     return {
       ...row,

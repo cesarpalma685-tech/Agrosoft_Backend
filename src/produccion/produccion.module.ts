@@ -6,8 +6,11 @@ import { EpaModule } from "./epa/epa.module";
 import { LoteProduccionModule } from "./lote-produccion/lote-produccion.module";
 import { MovimientoProduccionModule } from "./movimiento-produccion/movimiento-produccion.module";
 
+import { ControlFitosanitarioModule } from "./control_fitosanitario/control-fitosanitario.module";
+
 @Module({
   imports: [
+    ControlFitosanitarioModule,
     ActividadModule,
     CultivoModule,
     CultivoHistorialModule,

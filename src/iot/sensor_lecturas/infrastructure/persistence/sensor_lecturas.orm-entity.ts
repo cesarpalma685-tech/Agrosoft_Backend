@@ -18,7 +18,7 @@ export class SensorLecturasOrmEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ insert: false, update: false })
+  @Column({ type: 'integer' })
   sensor_id!: number;
 
   @ManyToOne(() => SensorOrmEntity, (sensor: SensorOrmEntity) => sensor.lecturas)

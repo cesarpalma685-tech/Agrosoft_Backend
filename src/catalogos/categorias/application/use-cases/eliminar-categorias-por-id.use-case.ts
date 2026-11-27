@@ -1,5 +1,7 @@
+import { Injectable } from "@nestjs/common";
 import { CategoriasRepositoryPort } from "../ports/categorias-repository.port";
 
+@Injectable()
 export class EliminarCategoriaUseCase {
   constructor(
     private readonly categoriasRepository: CategoriasRepositoryPort,

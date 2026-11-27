@@ -6,6 +6,7 @@ import { ClienteTypeOrmRepository } from "./infraestructure/repositories/cliente
 
 import { ClienteRepository } from "./aplication/ports/cliente.repository";
 
+import { ListarClientesUseCase } from "./aplication/use-cases/listar-clientes.usecase";
 import { ClientesController } from "./infraestructure/controllers/clientes.controller";
 
 import { CrearClienteUseCase } from "./aplication/use-cases/crear-cliente.usecase";
@@ -19,6 +20,7 @@ import { EliminarClienteUseCase } from "./aplication/use-cases/eliminar-cliente.
     CrearClienteUseCase,
     ActualizarClienteUseCase,
     EliminarClienteUseCase,
+    ListarClientesUseCase,
     {
       provide: ClienteRepository,
       useClass: ClienteTypeOrmRepository,

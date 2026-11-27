@@ -29,9 +29,6 @@ export class TiposSensoresOrmEntity {
   @Column({ type: "text", nullable: true })
   descripcion!: string | null;
 
-  @Column({ type: "varchar", nullable: true })
-  imagen!: string | null;
-
   @Column({ type: "integer" })
   ttl_minutos!: number;
 

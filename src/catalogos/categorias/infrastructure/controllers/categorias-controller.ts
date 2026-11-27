@@ -1,5 +1,6 @@
 import {
   Body,
+  ConflictException,
   Controller,
   Delete,
   Get,
@@ -10,6 +11,7 @@ import {
 } from "@nestjs/common";
 
 import { CategoriasDto } from "../../domain/entities/categorias.dto";
+import { ActualizarCategoriasDto, CrearCategoriasDto } from "../../application/dto/crear-categorias.dto";
 
 import { CrearCategoriasUseCase } from "../../application/use-cases/crear-categorias.use-case";
 import { ListarCategoriasUseCase } from "../../application/use-cases/listar-categorias.use-case";
@@ -28,8 +30,8 @@ export class CategoriasController {
   ) {}
 
   @Post()
-  async crear(@Body() datos: CategoriasDto): Promise<CategoriasDto> {
-    return await this.crearCategoriasUseCase.ejecutar(datos);
+  async crear(@Body() datos: CrearCategoriasDto): Promise<CategoriasDto> {
+    return await this.crearCategoriasUseCase.ejecutar({ ...datos, descripcion: datos.descripcion ?? "" } as CategoriasDto);
   }
 
   @Get()
@@ -47,13 +49,18 @@ export class CategoriasController {
   @Patch(":id")
   async actualizar(
     @Param("id", ParseIntPipe) id: number,
-    @Body() datos: Partial<CategoriasDto>,
+    @Body() datos: ActualizarCategoriasDto,
   ): Promise<CategoriasDto | null> {
     return await this.actualizarCategoriasUseCase.ejecutar(id, datos);
   }
 
   @Delete(":id")
   async eliminar(@Param("id", ParseIntPipe) id: number): Promise<boolean> {
-    return await this.eliminarCategoriasUseCase.ejecutar(id);
+    try {
+      return await this.eliminarCategoriasUseCase.ejecutar(id);
+    } catch {
+      // La categoría la usan insumos o herramientas (llave foránea)
+      throw new ConflictException("No se puede eliminar: hay productos que usan esta categoría");
+    }
   }
 }

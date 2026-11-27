@@ -4,9 +4,14 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
 } from "@nestjs/common";
+import { JwtAuthGuard } from "../../../../identidad/usuarios/infraestructure/security/jwt-auth.guard";
+import { AdminGuard } from "../../../../identidad/usuarios/infraestructure/security/admin.guard";
+import { EliminacionTerritorioService } from "../../../eliminacion/eliminacion-territorio.service";
 
 import { CrearLoteDto } from "../../application/dto/crear-lote.dto";
 import { ActualizarLoteDto } from "../../application/dto/actualizar-lote.dto";
@@ -25,6 +30,7 @@ export class LoteController {
     private readonly obtenerLotePorIdUseCase: ObtenerLotePorIdUseCase,
     private readonly actualizarLoteUseCase: ActualizarLoteUseCase,
     private readonly eliminarLoteUseCase: EliminarLoteUseCase,
+    private readonly eliminacion: EliminacionTerritorioService,
   ) {}
 
   @Post()
@@ -47,8 +53,10 @@ export class LoteController {
     return this.actualizarLoteUseCase.execute(Number(id), dto);
   }
 
+  // Solo el administrador; no se elimina un lote con sublotes, cultivos o sensores
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Delete(":id")
-  eliminar(@Param("id") id: string) {
-    return this.eliminarLoteUseCase.execute(Number(id));
+  eliminar(@Param("id", ParseIntPipe) id: number) {
+    return this.eliminacion.eliminar("lote", id);
   }
 }

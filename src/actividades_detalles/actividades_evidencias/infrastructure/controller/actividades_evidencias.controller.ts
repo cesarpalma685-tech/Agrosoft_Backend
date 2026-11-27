@@ -5,7 +5,9 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  UseGuards,
 } from "@nestjs/common";
+import { JwtAuthGuard } from "../../../../identidad/usuarios/infraestructure/security/jwt-auth.guard";
 import { CrearActividadEvidenciaUseCase } from "../../application/use-cases/registrar-evidencia.use-case";
 import { ListarActividadEvidenciasUseCase } from "../../application/use-cases/listar-evidencias-por-actividad.use-case";
 import { CrearActividadEvidenciaDto } from "../../application/dto/actividad_evidencia.dto";
@@ -17,6 +19,8 @@ export class ActividadEvidenciaController {
     private readonly listarUseCase: ListarActividadEvidenciasUseCase,
   ) {}
 
+  // PROTEGIDO: solo usuarios con sesión adjuntan evidencias
+  @UseGuards(JwtAuthGuard)
   @Post()
   async save(
     @Param("actividadId", ParseIntPipe) actividadId: number,
@@ -27,7 +31,7 @@ export class ActividadEvidenciaController {
   }
 
   @Get()
-  async obtenerTodos() {
-    return await this.listarUseCase.execute();
+  async obtenerTodos(@Param("actividadId", ParseIntPipe) actividadId: number) {
+    return await this.listarUseCase.execute(actividadId);
   }
 }

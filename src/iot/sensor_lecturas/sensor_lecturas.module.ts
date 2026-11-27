@@ -1,8 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { SensorLecturasController } from "./infrastructure/controllers/sensor_lecturas.controller";
-
 import { SensorLecturasOrmEntity } from "./infrastructure/persistence/sensor_lecturas.orm-entity";
 
 import { SensorLecturasTypeormRepository } from "./infrastructure/repositories/sensor_lecturas.typeorm.repository";
@@ -17,7 +15,6 @@ import { ObtenerSensorLecturasPorIdUseCase } from "./application/use-cases/obten
 @Module({
   imports: [TypeOrmModule.forFeature([SensorLecturasOrmEntity])],
 
-  controllers: [SensorLecturasController],
 
   providers: [
     CrearSensorLecturasUseCase,

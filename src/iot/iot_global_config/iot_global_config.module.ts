@@ -1,8 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { IotGlobalConfigController } from "./infrastructure/controllers/iot_global_config.controller";
-
 import { IotGlobalConfigPersistence } from "./infrastructure/persistence/iot_global_config.orm-entity";
 
 import { IotGlobalConfigRepository } from "./infrastructure/repositories/iot_global_config.typeorm.repository";
@@ -18,7 +16,6 @@ import { EliminarIotGlobalConfigUseCase } from "./application/use-cases/eliminar
 @Module({
   imports: [TypeOrmModule.forFeature([IotGlobalConfigPersistence])],
 
-  controllers: [IotGlobalConfigController],
 
   providers: [
     CrearIotGlobalConfigUseCase,

@@ -18,8 +18,9 @@ export class ActividadServicioOrmEntity {
   @Column({ name: "actividadId", type: "integer" })
   actividadId!: number;
 
-  @Column({ name: "maquinariaId", type: "integer" })
-  maquinariaId!: number;
+  // Opcional: un servicio puede no usar maquinaria propia (p. ej. un contratista)
+  @Column({ name: "maquinariaId", type: "integer", nullable: true })
+  maquinariaId!: number | null;
 
   @Column({ name: "nombreServicio", type: "varchar" })
   nombreServicio!: string;

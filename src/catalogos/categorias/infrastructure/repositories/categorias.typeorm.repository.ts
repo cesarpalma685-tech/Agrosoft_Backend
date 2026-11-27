@@ -60,6 +60,7 @@ export class CategoriaRepository implements CategoriasRepositoryPort {
     domain.id = categoria.id;
     domain.nombre = categoria.nombre;
     domain.descripcion = categoria.descripcion;
+    domain.tipo = categoria.tipo;
 
     return domain;
   }

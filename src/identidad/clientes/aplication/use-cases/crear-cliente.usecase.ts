@@ -9,6 +9,7 @@ export interface CrearClienteInput {
   email?: string;
   direccion?: string;
   notas?: string;
+  tipoIdentificacion?: string;
 }
 
 @Injectable()
@@ -25,6 +26,7 @@ export class CrearClienteUseCase {
       datos.direccion,
       datos.notas,
       new Date(),
+      datos.tipoIdentificacion,
     );
 
     return this.repository.crear(cliente);

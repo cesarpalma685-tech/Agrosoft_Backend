@@ -34,6 +34,15 @@ export class LoginUseCase {
       throw new UnauthorizedException("Credenciales inválidas");
     }
 
+    if (usuario.estado === "pendiente") {
+      throw new UnauthorizedException("Debes verificar tu correo con el código que te enviamos antes de iniciar sesión.");
+    }
+    if (usuario.estado !== "activo") {
+      throw new UnauthorizedException("Tu cuenta está inactiva. Contacta al administrador.");
+    }
+    usuario.lastLoginAt = new Date();
+    await this.usuarioRepository.actualizar(usuario);
+
     // 2. Pasamos correo y convertimos id a string
     const token = this.authService.generateToken({
       id: String(usuario.id),

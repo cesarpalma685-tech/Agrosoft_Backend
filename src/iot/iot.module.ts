@@ -5,6 +5,8 @@ import { SensorLecturasModule } from "./sensor_lecturas/sensor_lecturas.module";
 import { TiposSensoresModule } from "./tipos_sensores/tipos_sensores.module";
 import { SensoresModule } from "./sensores/sensores.module";
 
+import { MonitoreoIotModule } from "./monitoreo/monitoreo.module";
+
 @Module({
   imports: [
     IotGlobalConfigModule,
@@ -12,6 +14,7 @@ import { SensoresModule } from "./sensores/sensores.module";
     SensorLecturasModule,
     TiposSensoresModule,
     SensoresModule,
+    MonitoreoIotModule,
   ],
 })
 export class IotModule {}

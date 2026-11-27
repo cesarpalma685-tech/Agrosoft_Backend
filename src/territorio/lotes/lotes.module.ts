@@ -1,3 +1,4 @@
+import { EliminacionTerritorioModule } from "../eliminacion/eliminacion-territorio.module";
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
@@ -15,7 +16,7 @@ import { LoteTypeormRepository } from "./infrastructure/repositories/lote.typeor
 import { LoteOrmEntity } from "./infrastructure/persistence/lote.orm-entity";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([LoteOrmEntity])],
+  imports: [TypeOrmModule.forFeature([LoteOrmEntity]), EliminacionTerritorioModule],
 
   controllers: [LoteController],
 

@@ -4,4 +4,5 @@ export abstract class ActividadEvidenciaRepositoryPort {
   abstract save(evidencia: ActividadEvidencia): Promise<ActividadEvidencia>;
 
   abstract findAll(): Promise<ActividadEvidencia[]>;
+  abstract findByActividadId(actividadId: number): Promise<ActividadEvidencia[]>;
 }

@@ -1,28 +1,30 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { TransaccionFinancieraOrmEntity } from "./infrastructure/persistence/transaccion-financiera.orm-entity";
 import { TransaccionFinancieraController } from "./infrastructure/controller/transaccion-financiera.controller";
-import { CrearTransaccionFinancieraUseCase } from "./application/use-cases/crear-transaccion-financiera.use-case";
-import { ListarTransaccionesFinancierasUseCase } from "./application/use-cases/listar-transacciones-financieras.use-case";
-import { ObtenerTransaccionFinancieraPorIdUseCase } from "./application/use-cases/obtener-transaccion-financiera.use-case";
-import { ActualizarTransaccionFinancieraUseCase } from "./application/use-cases/actualizar-transaccion-financiera.use-case";
-import { EliminarTransaccionFinancieraUseCase } from "./application/use-cases/eliminar-transaccion-financiera.use-case";
+import { TransaccionFinancieraOrmEntity } from "./infrastructure/persistence/transaccion-financiera.orm-entity";
 import { TransaccionFinancieraRepositoryPort } from "./application/ports/crear-transaccion-financiera.repository.port";
 import { TransaccionFinancieraTypeOrmRepository } from "./infrastructure/repositories/transaccion-financiera.typeorm.repository";
+import { ListarTransaccionesUseCase, RegistrarTransaccionManualUseCase } from "./application/use-cases/transacciones.use-cases";
+import { GenerarTransaccionesUseCase } from "./application/use-cases/generar-transacciones.use-case";
+import { VentasModule } from "../ventas/ventas.module";
+import { MovimientoInsumoModule } from "../../inventario/movimientos_isumos/movimientos_isumos.module";
+import { InsumoModule } from "../../inventario/insumos/insumos.module";
+import { ActividadModule } from "../../produccion/actividad/actividad.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TransaccionFinancieraOrmEntity])],
+  imports: [
+    TypeOrmModule.forFeature([TransaccionFinancieraOrmEntity]),
+    VentasModule,
+    MovimientoInsumoModule,
+    InsumoModule,
+    ActividadModule,
+  ],
   controllers: [TransaccionFinancieraController],
   providers: [
-    CrearTransaccionFinancieraUseCase,
-    ListarTransaccionesFinancierasUseCase,
-    ObtenerTransaccionFinancieraPorIdUseCase,
-    ActualizarTransaccionFinancieraUseCase,
-    EliminarTransaccionFinancieraUseCase,
-    {
-      provide: TransaccionFinancieraRepositoryPort,
-      useClass: TransaccionFinancieraTypeOrmRepository,
-    },
+    ListarTransaccionesUseCase,
+    RegistrarTransaccionManualUseCase,
+    GenerarTransaccionesUseCase,
+    { provide: TransaccionFinancieraRepositoryPort, useClass: TransaccionFinancieraTypeOrmRepository },
   ],
   exports: [TransaccionFinancieraRepositoryPort],
 })

@@ -1,5 +1,9 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { RolOrmEntity } from "../roles/infraestructure/persistence/rol.orm-entity";
+import { GestionUsuariosService } from "./aplication/gestion-usuarios.service";
+import { VerificacionCorreoService } from "./aplication/verificacion-correo.service";
+import { AdminGuard } from "./infraestructure/security/admin.guard";
 import { UsuarioOrmEntity } from "./infraestructure/persistence/usuario.orm-entity";
 import { UsuarioTypeOrmRepository } from "./infraestructure/repositories/usuario-typeorm.repository";
 import { USUARIO_REPOSITORY } from "./aplication/ports/usuario.repository";
@@ -29,7 +33,7 @@ import { NodemailerEmailService } from "./infraestructure/mail/nodemailer-email.
     PassportModule,
     RolModule,
     EmailCodeModule,
-    TypeOrmModule.forFeature([UsuarioOrmEntity]),
+    TypeOrmModule.forFeature([UsuarioOrmEntity, RolOrmEntity]),
     // registerAsync: el secreto se lee cuando ConfigModule ya cargó el .env.
     // Con register() se leía al importar el archivo (antes del .env), así que
     // el token se firmaba con el valor por defecto y JwtStrategy lo rechazaba (401).
@@ -52,6 +56,9 @@ import { NodemailerEmailService } from "./infraestructure/mail/nodemailer-email.
     RestablecerPasswordUseCase,
     { provide: EMAIL_SENDER_PORT, useClass: NodemailerEmailService },
     JwtStrategy,
+    GestionUsuariosService,
+    VerificacionCorreoService,
+    AdminGuard,
     AdminSeeder,
     {
       provide: AUTH_SERVICE_PORT,

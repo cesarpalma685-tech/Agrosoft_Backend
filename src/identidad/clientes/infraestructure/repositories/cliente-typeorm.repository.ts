@@ -40,6 +40,11 @@ export class ClienteTypeOrmRepository extends ClienteRepository {
     return cliente ? this.aDominio(cliente) : null;
   }
 
+  async listar(): Promise<Cliente[]> {
+    const filas = await this.repo.find({ order: { nombre: "ASC" } });
+    return filas.map((f) => this.aDominio(f));
+  }
+
   private aDominio(orm: ClienteOrmEntity): Cliente {
     return new Cliente(
       orm.id,
@@ -50,6 +55,7 @@ export class ClienteTypeOrmRepository extends ClienteRepository {
       orm.direccion ?? undefined,
       orm.notas ?? undefined,
       orm.created_at,
+      orm.tipoIdentificacion ?? undefined,
     );
   }
 
@@ -57,6 +63,7 @@ export class ClienteTypeOrmRepository extends ClienteRepository {
     return {
       id: cliente.id ?? undefined,
       nombre: cliente.nombre,
+      tipoIdentificacion: cliente.tipoIdentificacion ?? null,
       identificacion: cliente.identificacion ?? null,
       telefono: cliente.telefono ?? null,
       email: cliente.email ?? null,

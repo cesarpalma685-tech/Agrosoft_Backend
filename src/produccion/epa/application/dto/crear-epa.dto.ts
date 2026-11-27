@@ -1,62 +1,49 @@
-import {
-  IsString,
-  IsOptional,
-  IsNotEmpty,
-  IsArray,
-  IsInt,
-} from "class-validator";
+import { PartialType } from "@nestjs/mapped-types";
+import { Type } from "class-transformer";
+import { ArrayMaxSize, IsArray, IsInt, IsNotEmpty, IsOptional, IsString, Matches, Max, MaxLength, Min } from "class-validator";
+
+const IMAGEN = /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/;
 
 export class CrearEpaDto {
-  @IsString()
-  @IsNotEmpty()
+  @IsString() @IsNotEmpty()
   nombre!: string;
 
-  @IsString()
-  @IsNotEmpty()
+  // Nombre de un tipo del catálogo de tipos de EPA (plaga, enfermedad…)
+  @IsString() @IsNotEmpty()
   tipoEpa!: string;
 
-  @IsString()
-  @IsOptional()
+  @IsOptional() @IsString()
   descripcion?: string;
 
-  @IsString()
-  @IsOptional()
+  @IsOptional() @IsString()
   sintomas?: string;
 
-  @IsString()
-  @IsOptional()
+  @IsOptional() @IsString()
   manejoYControl?: string;
 
-  @IsArray()
-  @IsInt({ each: true })
-  @IsOptional()
+  // Meses del año en que es probable (1 a 12)
+  @IsOptional() @IsArray() @ArrayMaxSize(12) @Type(() => Number) @IsInt({ each: true }) @Min(1, { each: true }) @Max(12, { each: true })
   mesesProbables?: number[];
 
-  @IsArray()
-  @IsString({ each: true })
-  @IsOptional()
+  @IsOptional() @IsArray() @ArrayMaxSize(6) @IsString({ each: true })
   temporadas?: string[];
 
-  @IsString()
-  @IsOptional()
+  @IsOptional() @IsString()
   notasEstacionalidad?: string;
 
-  @IsArray()
-  @IsString({ each: true })
-  @IsOptional()
+  // Fotografías en base64 (JPEG, PNG o WEBP): hasta 4 de síntomas y 4 generales
+  @IsOptional() @IsArray() @ArrayMaxSize(4) @IsString({ each: true }) @Matches(IMAGEN, { each: true, message: "Cada foto debe ser JPEG, PNG o WEBP en base64" }) @MaxLength(600_000, { each: true, message: "Una foto es demasiado grande" })
   fotosSintomas?: string[];
 
-  @IsArray()
-  @IsString({ each: true })
-  @IsOptional()
+  @IsOptional() @IsArray() @ArrayMaxSize(4) @IsString({ each: true }) @Matches(IMAGEN, { each: true, message: "Cada foto debe ser JPEG, PNG o WEBP en base64" }) @MaxLength(600_000, { each: true, message: "Una foto es demasiado grande" })
   fotosGenerales?: string[];
 
-  @IsArray()
-  @IsString({ each: true })
-  @IsOptional()
+  @IsOptional() @IsArray() @ArrayMaxSize(20) @IsString({ each: true })
   tags?: string[];
 
-  @IsInt()
-  @IsOptional()
-  creadoPorUsuarioId?: number;
+  // Tipos de cultivo que afecta (catálogo de la wiki)
+  @IsOptional() @IsArray() @Type(() => Number) @IsInt({ each: true })
+  tiposCultivoIds?: number[];
 }
+
+export class ActualizarEpaDto extends PartialType(CrearEpaDto) {}

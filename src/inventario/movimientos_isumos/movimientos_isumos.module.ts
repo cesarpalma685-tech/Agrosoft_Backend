@@ -9,8 +9,10 @@ import { ListarMovimientosInsumosUseCase } from "./application/use-cases/listar-
 import { ObtenerMovimientoInsumoPorIdUseCase } from "./application/use-cases/obtener-movimiento-insumo-por-id.use-case";
 import { ActualizarMovimientoInsumoUseCase } from "./application/use-cases/actualizar-movimiento-insumo.use-case";
 import { EliminarMovimientoInsumoUseCase } from "./application/use-cases/eliminar-movimiento-insumo.use-case";
+import { InsumoModule } from "../insumos/insumos.module";
+
 @Module({
-  imports: [TypeOrmModule.forFeature([MovimientoInsumoOrmEntity])],
+  imports: [TypeOrmModule.forFeature([MovimientoInsumoOrmEntity]), InsumoModule],
   controllers: [MovimientoInsumoController],
   providers: [
     RegistrarMovimientoInsumoUseCase,

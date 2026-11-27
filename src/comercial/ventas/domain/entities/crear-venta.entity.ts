@@ -10,6 +10,7 @@ export class Venta {
   usuarioId!: number;
   anuladaPorUsuarioId?: number;
   fechaAnulacion?: Date;
+  motivoAnulacion?: string;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;

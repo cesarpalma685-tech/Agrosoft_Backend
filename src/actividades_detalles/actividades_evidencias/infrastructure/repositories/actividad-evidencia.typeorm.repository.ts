@@ -25,6 +25,10 @@ export class ActividadEvidenciaTypeOrmRepository extends ActividadEvidenciaRepos
     return saved;
   }
 
+  async findByActividadId(actividadId: number): Promise<ActividadEvidencia[]> {
+    return await this.actividadEvidenciaRepository.find({ where: { actividadId }, order: { createdAt: "DESC" } });
+  }
+
   async findAll(): Promise<ActividadEvidencia[]> {
     const entities = await this.actividadEvidenciaRepository.find({
       order: {

@@ -1,56 +1,35 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
-  Body,
-  Param,
-  Query,
-  ParseIntPipe,
-} from "@nestjs/common";
-import { CrearTransaccionFinancieraUseCase } from "../../application/use-cases/crear-transaccion-financiera.use-case";
-import { ListarTransaccionesFinancierasUseCase } from "../../application/use-cases/listar-transacciones-financieras.use-case";
-import { ActualizarTransaccionFinancieraUseCase } from "../../application/use-cases/actualizar-transaccion-financiera.use-case";
-import { EliminarTransaccionFinancieraUseCase } from "../../application/use-cases/eliminar-transaccion-financiera.use-case";
+import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
+import { ListarTransaccionesUseCase, RegistrarTransaccionManualUseCase } from "../../application/use-cases/transacciones.use-cases";
+import { GenerarTransaccionesUseCase } from "../../application/use-cases/generar-transacciones.use-case";
 import { CrearTransaccionFinancieraDto } from "../../application/dto/crear-transaccion-financiera.dto";
-import { ObtenerTransaccionFinancieraPorIdUseCase } from "../../application/use-cases/obtener-transaccion-financiera.use-case";
+import { JwtAuthGuard } from "../../../../identidad/usuarios/infraestructure/security/jwt-auth.guard";
+
+type ReqUsuario = { user: { userId: number | string } };
 
 @Controller("transacciones-financieras")
 export class TransaccionFinancieraController {
   constructor(
-    private readonly crearUseCase: CrearTransaccionFinancieraUseCase,
-    private readonly listarUseCase: ListarTransaccionesFinancierasUseCase,
-    private readonly obtenerPorIdUseCase: ObtenerTransaccionFinancieraPorIdUseCase,
-    private readonly actualizarUseCase: ActualizarTransaccionFinancieraUseCase,
-    private readonly eliminarUseCase: EliminarTransaccionFinancieraUseCase,
+    private readonly listar: ListarTransaccionesUseCase,
+    private readonly registrarManual: RegistrarTransaccionManualUseCase,
+    private readonly generar: GenerarTransaccionesUseCase,
   ) {}
 
-  @Post()
-  async crear(@Body() dto: CrearTransaccionFinancieraDto) {
-    return await this.crearUseCase.execute(dto);
-  }
-
   @Get()
-  async obtenerTodas() {
-    return await this.listarUseCase.execute();
+  obtenerTodas() {
+    return this.listar.execute();
   }
 
-  @Get(":id")
-  async obtenerPorId(@Param("id", ParseIntPipe) id: number) {
-    return await this.obtenerPorIdUseCase.execute(id);
+  // PROTEGIDO: el token dice quién registró la transacción
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  crear(@Body() dto: CrearTransaccionFinancieraDto, @Req() req: ReqUsuario) {
+    return this.registrarManual.execute(dto, Number(req.user.userId));
   }
 
-  @Put(":id")
-  async actualizar(
-    @Param("id", ParseIntPipe) id: number,
-    @Body() dto: Partial<CrearTransaccionFinancieraDto>,
-  ) {
-    return await this.actualizarUseCase.execute(id, dto);
-  }
-
-  @Delete(":id")
-  async eliminar(@Param("id", ParseIntPipe) id: number) {
-    return await this.eliminarUseCase.execute(id);
+  // PROTEGIDO: genera las transacciones de ventas, compras y actividades sin duplicar las que ya existen
+  @UseGuards(JwtAuthGuard)
+  @Post("generar")
+  generarAutomaticas(@Req() req: ReqUsuario) {
+    return this.generar.execute(Number(req.user.userId));
   }
 }
